@@ -28,22 +28,9 @@ Project File Date:  11/25/2024
 *** Using Compiler 'V6.18', folder: 'C:\Keil_v5\ARM\ARMCLANG\Bin'
 Build target 'Target 1'
 compiling blinky5.c...
-blinky4.c(7): warning: result of comparison of constant 1000000000000000000 with expression of type 'volatile unsigned int' is always true [-Wtautological-constant-out-of-range-compare]
-        for (i=0; i<1000000000000000000; i++);          //WAIT count to 1 million 
-                  ~^~~~~~~~~~~~~~~~~~~~
-1 warning generated.
-compiling blinky4.c...
 linking...
-.\Objects\test.axf: Error: L6200E: Symbol main multiply defined (by blinky4.o and blinky5.o).
-.\Objects\test.axf: Error: L6200E: Symbol LED_OFF multiply defined (by blinky4.o and blinky5.o).
-.\Objects\test.axf: Error: L6200E: Symbol LED_ON multiply defined (by blinky4.o and blinky5.o).
-.\Objects\test.axf: Error: L6200E: Symbol __ARM_use_no_argv multiply defined (by blinky4.o and blinky5.o).
-.\Objects\test.axf: Error: L6200E: Symbol delay multiply defined (by blinky4.o and blinky5.o).
-.\Objects\test.axf: Error: L6200E: Symbol LED_INIT multiply defined (by blinky4.o and blinky5.o).
-Not enough information to list image symbols.
-Not enough information to list load addresses in the image map.
-Finished: 2 information, 0 warning and 6 error messages.
-".\Objects\test.axf" - 6 Error(s), 1 Warning(s).
+Program Size: Code=1182 RO-data=478 RW-data=4 ZI-data=1632  
+".\Objects\test.axf" - 0 Error(s), 0 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -69,13 +56,12 @@ Package Vendor: Keil
    * Component: ARM::CMSIS:CORE:5.6.0
 
    * Component: Keil::Device:Startup:2.6.3
+      Source file:   MDK/Device/Source/ARM/STM32F42xxx_43xxx_OPT.s
       Source file:   MDK/Device/Source/ARM/STM32F4xx_OTP.s
       Include file:  Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h
       Source file:   Drivers/CMSIS/Device/ST/STM32F4xx/Source/Templates/arm/startup_stm32f429xx.s
-      Source file:   MDK/Device/Source/ARM/STM32F42xxx_43xxx_OPT.s
       Source file:   Drivers/CMSIS/Device/ST/STM32F4xx/Source/Templates/system_stm32f4xx.c
-Target not created.
-Build Time Elapsed:  00:00:01
+Build Time Elapsed:  00:00:00
 </pre>
 </body>
 </html>

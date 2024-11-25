@@ -20,8 +20,8 @@ void delay_100ms_blocking(void)
 void LED_INIT (void)
 {
 	//ENABLE PORT(S)
-	RCC->AHB1ENR |= 0x02;						//use label defined in stm32f4.h instead of hex value: easier to read and change
-	//RCC->AHB1ENR |= RCC_AHB1ENR_GPIOBEN;	//ONLY GPIO B clock enable
+	//RCC->AHB1ENR |= 0x02;						//use label defined in stm32f4.h instead of hex value: easier to read and change
+	RCC->AHB1ENR |= RCC_AHB1ENR_GPIOBEN;	//ONLY GPIO B clock enable
 	
 	
 	//CONFIGURE PORT:GPIOB  PIN:0 TO OUTPUT for LED1
@@ -46,7 +46,7 @@ void LED_INIT (void)
 
 void LED_ON (void)
 {
-			GPIOB->ODR |= 01;							//ONLY TURN LED ON
+			GPIOB->ODR |= 1;							//ONLY TURN LED ON
 
 }
 

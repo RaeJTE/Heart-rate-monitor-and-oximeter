@@ -389,11 +389,6 @@
               <FileType>1</FileType>
               <FilePath>.\blinky5.c</FilePath>
             </File>
-            <File>
-              <FileName>blinky4.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\blinky4.c</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
