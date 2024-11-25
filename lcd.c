@@ -11,7 +11,18 @@ void lcd_delayus(unsigned int us)		//blocking delay for LCD, argument is approxi
 
 void WaitLcdBusy(void)
 {
-	lcd_delayus(3000);		//3ms blocking delay
+	set_LCD_bus_input(); //So LCD bus receives inputs
+	set_LCD_RW();	//So microcontroller looking to read from LCD not write to it
+	clr_LCD_RS();
+	int port = 1;
+	while(port)	//So code loops until bit 7 (indicating LCD busy) clears
+	{
+		set_LCD_E();
+		port = LCD_PORT->IDR & (0b1<<7);
+		clr_LCD_E();
+	}
+	set_LCD_bus_output(); //So LCD can be updated again
+	
 }
 
 void set_LCD_data(unsigned char d)

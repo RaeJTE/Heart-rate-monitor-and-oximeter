@@ -6,6 +6,7 @@ int main(void)
 	cmdLCD(LCD_LINE1);
 	putLCD('J');
 	putLCD('a');
+	putLCD('c');
 	
 	while(1);
 }
