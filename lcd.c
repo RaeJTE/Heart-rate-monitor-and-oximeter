@@ -115,3 +115,4 @@ void show(char text[], int length) //To print strings on LCD, length must be cal
 	
 }
 
+

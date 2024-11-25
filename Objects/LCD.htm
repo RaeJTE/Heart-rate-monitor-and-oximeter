@@ -3,9 +3,9 @@
 <title>Static Call Graph - [.\Objects\LCD.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\LCD.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6180002: Last Updated: Mon Nov 25 16:32:25 2024
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6180002: Last Updated: Mon Nov 25 16:47:02 2024
 <BR><P>
-<H3>Maximum Stack Usage =        104 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
+<H3>Maximum Stack Usage =        112 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
 __rt_entry_main &rArr; main &rArr; show &rArr; putLCD &rArr; LCD_strobe &rArr; lcd_delayus
 <P>
@@ -255,7 +255,7 @@ Global Symbols
 <P><STRONG><a name="[a3]"></a>__rt_entry_postsh_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __rtentry2.o(.ARM.Collect$$rtentry$$00000009))
 
 <P><STRONG><a name="[71]"></a>__rt_entry_main</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __rtentry2.o(.ARM.Collect$$rtentry$$0000000D))
-<BR><BR>[Stack]<UL><LI>Max Depth = 104 + Unknown Stack Size
+<BR><BR>[Stack]<UL><LI>Max Depth = 112 + Unknown Stack Size
 <LI>Call Chain = __rt_entry_main &rArr; main &rArr; show &rArr; putLCD &rArr; LCD_strobe &rArr; lcd_delayus
 </UL>
 <BR>[Calls]<UL><LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;exit
@@ -720,10 +720,11 @@ Global Symbols
 <LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[72]"></a>main</STRONG> (Thumb, 106 bytes, Stack size 40 bytes, main.o(.text.main))
-<BR><BR>[Stack]<UL><LI>Max Depth = 104<LI>Call Chain = main &rArr; show &rArr; putLCD &rArr; LCD_strobe &rArr; lcd_delayus
+<P><STRONG><a name="[72]"></a>main</STRONG> (Thumb, 144 bytes, Stack size 48 bytes, main.o(.text.main))
+<BR><BR>[Stack]<UL><LI>Max Depth = 112<LI>Call Chain = main &rArr; show &rArr; putLCD &rArr; LCD_strobe &rArr; lcd_delayus
 </UL>
-<BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lcd_delayus
+<BR>[Calls]<UL><LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;putLCD
+<LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lcd_delayus
 <LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;show
 <LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cmdLCD
 <LI><a href="#[7f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initLCD
@@ -739,6 +740,7 @@ Global Symbols
 <LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WaitLcdBusy
 </UL>
 <BR>[Called By]<UL><LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;show
+<LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
 <P><STRONG><a name="[7e]"></a>set_LCD_data</STRONG> (Thumb, 30 bytes, Stack size 4 bytes, lcd.o(.text.set_LCD_data))
