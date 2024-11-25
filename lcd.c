@@ -104,3 +104,14 @@ void initLCD(void)
 	cmdLCD(0x01);	//Clear LCD
 	cmdLCD(0x06);	//Entry mode, auto increment with no shift
 }
+
+void show(char text[], int length) //To print strings on LCD, length must be calculated before as array decays into pointer to array when passed into function
+{
+	LCD_CLR();
+	for(int i=0; i<length-1; i++)
+	{
+		putLCD(text[i]);
+	}
+	
+}
+

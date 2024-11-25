@@ -33,6 +33,6 @@ void LCD_strobe(void);
 void cmdLCD(unsigned char cmd);
 void putLCD(unsigned char put);
 void initLCD(void);
-void stringLCD (char text[]);
+void show(char text[], int length);
 
 #endif
