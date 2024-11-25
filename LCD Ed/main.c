@@ -4,7 +4,7 @@ int main(void)
 {
 	initLCD();
 	cmdLCD(LCD_LINE1);
-	putLCD('c');
+	putLCD('h');
 	
 	while(1);
 }
