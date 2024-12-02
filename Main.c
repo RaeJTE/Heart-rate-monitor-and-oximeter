@@ -1,5 +1,7 @@
 //Includes
 #include "lcd.h"
+//Definitions
+#define name "Jacob Theodore Eliott Rae"
 
 int main(void)
 {
@@ -9,15 +11,16 @@ int main(void)
 	
 	LCD_CLR();
 	
-	char name[] = "Example";
+	
+	
+	stringLCD(varString, varLen+1, 0, 0);
+	
+	char example[] = "Proj200 with guest number: ";
 	//stringLCD(name, sizeof(name)/sizeof(name[0]), 0, 0);
-	stringLCD(name, sizeof(name)/sizeof(name[0]), 1, 2);	//Command to display name as defined at top of file, needs string length
+	//stringLCD(example, sizeof(example)/sizeof(example[0]), 1, 2);	//Command to display name as defined at top of file, needs string length
 	
-	//putLCD('A');
-	//putLCD('a');
+	//endlessScrollLCD();
 	
-	//cmdLCD(0b10100);
 	
-	//putLCD('B');
 	while(1);
 }

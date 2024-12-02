@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "lcd.h"
 
 void lcd_delayus(unsigned int us)		//blocking delay for LCD, argument is approximate number of micro-seconds to delay
@@ -82,6 +83,33 @@ void stringLCD(char text[], int length, int line, int pos) //To print strings on
 		putLCD(text[i]);
 	}
 	
+}
+
+void scrollLCD(int time)
+{
+	for(int i = 0; i<time; i++)
+	{
+		lcd_delayus(30000);
+		cmdLCD(0b11000);
+	}
+}
+
+void endlessScrollLCD(void)
+{
+	while(1)
+	{
+		lcd_delayus(30000);
+		cmdLCD(0b11000);
+	}
+}
+
+//Try using sprintf?? and snprintf
+char toArray(int var)
+{
+	int varLen =  floor(log10(abs(var))) + 1;
+	char varString[varLen];
+	sprintf(varString, "%d", var);
+	return varString;
 }
 
 void initLCD4(void)
