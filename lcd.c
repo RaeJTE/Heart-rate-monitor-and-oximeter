@@ -9,7 +9,7 @@ void lcd_delayus(unsigned int us)		//blocking delay for LCD, argument is approxi
 	}
 }
 
-void WaitLcdBusy(void)
+void WaitLCDBusy(void)
 {
 	set_LCD_bus_input(); //So LCD bus receives inputs
 	set_LCD_RW();	//So microcontroller looking to read from LCD not write to it
@@ -42,7 +42,7 @@ void LCD_strobe(void)		//10us high pulse on LCD enable line
 
 void cmdLCD(unsigned char cmd)		//sends a byte to the LCD control register
 {
-	WaitLcdBusy();				//wait for LCD to be not busy
+	WaitLCDBusy();				//wait for LCD to be not busy
 	clr_LCD_RS();					//control command
 	clr_LCD_RW();					//write command
 	set_LCD_data(cmd);		//set data on bus
@@ -51,22 +51,10 @@ void cmdLCD(unsigned char cmd)		//sends a byte to the LCD control register
 
 void putLCD(unsigned char put)	//sends a char to the LCD display
 {
-	WaitLcdBusy();				//wait for LCD to be not busy
+	WaitLCDBusy();				//wait for LCD to be not busy
 	set_LCD_RS();					//text command
 	clr_LCD_RW();					//write command
 	set_LCD_data(put);		//set data on bus
-	LCD_strobe();					//apply command
-}
-
-void stringLCD (char text[])
-{
-	WaitLcdBusy();				//wait for LCD to be not busy
-	set_LCD_RS();					//text command
-	clr_LCD_RW();					//write command
-	for (int i = 0; i<40; i++)
-	{
-		set_LCD_data(text[i]);		//set data on bus
-	}
 	LCD_strobe();					//apply command
 }
 
@@ -98,18 +86,26 @@ void initLCD(void)
 	clr_LCD_RW();
 	clr_LCD_E();
 	
-	lcd_delayus(25000);		//25ms startup delay
-	cmdLCD(0x38);	//Function set: 2 Line, 8-bit, 5x7 dots
-	cmdLCD(0x0c);	//Display on, Cursor blinking command
-	cmdLCD(0x01);	//Clear LCD
-	cmdLCD(0x06);	//Entry mode, auto increment with no shift
+	lcd_delayus(40000);		//40ms startup delay
+	cmdLCD(0b0011<<4);
+	lcd_delayus(50);
+	cmdLCD(0b0010<<4);	//Function set: 2 Line, 4-bit, 5x7 dots
+	cmdLCD(0b1000<<4);
+	lcd_delayus(50);
+	cmdLCD(0b1100<<4);	//Display on, Cursor blinking command
+	lcd_delayus(40);
+	cmdLCD(0b0001<<4);	//Clear LCD
+	lcd_delayus(1540);
+	cmdLCD(0b0110<<4);	//Entry mode, auto increment with no shift
 }
 
-void show(char text[], int length) //To print strings on LCD, length must be calculated before as array decays into pointer to array when passed into function
+void stringLCD(char text[], int length) //To print strings on LCD, length must be calculated before as array decays into pointer to array when passed into function
 {
+	WaitLCDBusy();				//wait for LCD to be not busy
 	LCD_CLR();
 	for(int i=0; i<length-1; i++)
 	{
+		WaitLCDBusy();				//wait for LCD to be not busy
 		putLCD(text[i]);
 	}
 	

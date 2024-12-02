@@ -26,13 +26,13 @@
 
 #include <stm32f4xx.h>
 
-void lcd_delayus(unsigned int us);
-void WaitLcdBusy(void);
-void set_LCD_data(unsigned char d);
-void LCD_strobe(void);
-void cmdLCD(unsigned char cmd);
-void putLCD(unsigned char put);
-void initLCD(void);
-void show(char text[], int length);
+void lcd_delayus(unsigned int us); //Wait defined time
+void WaitLCDBusy(void); //Wait until LCD is available
+void set_LCD_data(unsigned char d);  //Clears and sets data lines on LCD
+void LCD_strobe(void); //10us high pulse on LCD enable line
+void cmdLCD(unsigned char cmd); //sends a byte to the LCD control register
+void putLCD(unsigned char put); //Prints character to LCD
+void initLCD(void); //Initialises LCD
+void stringLCD(char text[], int length); //Prints string to LCD
 
 #endif

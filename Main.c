@@ -1,22 +1,26 @@
+//Includes
 #include "lcd.h"
 
 int main(void)
 {
+	//Initialisation
 	initLCD();
 	cmdLCD(LCD_LINE1);
 	
-	char name[] = "Jacob Rae"; //Phrase to display
-	show(name, sizeof(name)/sizeof(name[0]));	//Command to display phrase called "name"
+	char name[] = "Example";
+	stringLCD(name, sizeof(name)/sizeof(name[0]));	//Command to display name as defined at top of file, needs string length
 	
-	lcd_delayus(100000);
+/*	lcd_delayus(300000);
 	
-	char greeting[] = "Hello world"; //Phrase to display
-	show(greeting, sizeof(greeting)/sizeof(greeting[0])); //Command to display phrase called "greeting"
-	
-	for(int i = 0; i<41-sizeof(greeting)/sizeof(greeting[0]); i++){
+	//Moving cursor
+	for(int i = 0; i<41-sizeof(name)/sizeof(name[0]); i++){
 		cmdLCD(0b10100);
 	}
-	putLCD('A');
-
+	
+	char project[] = "Proj200";
+	stringLCD(project, sizeof(project)/sizeof(project[0]));
+*/
+	
+	
 	while(1);
 }
