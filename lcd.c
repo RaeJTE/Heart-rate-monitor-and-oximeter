@@ -39,6 +39,10 @@ void LCD_strobe(void)		//10us high pulse on LCD enable line
 	clr_LCD_E();
 }
 
+void LCD_home (void)
+{
+	cmdLCD(0b10);
+}
 
 void cmdLCD(unsigned char cmd)		//sends a byte to the LCD control register
 {
@@ -61,7 +65,7 @@ void putLCD(unsigned char put)	//sends a char to the LCD display
 void stringLCD(char text[], int length, int line, int pos) //To print strings on LCD, length must be calculated before as array decays into pointer to array when passed into function
 {
 	WaitLCDBusy();				//wait for LCD to be not busy
-	LCD_CLR();
+	LCD_home();
 	if(line == 1)
 	{	//Moves to second line if told to do so via line variable
 		for(int i = 0; i<(40); i++)
@@ -80,7 +84,54 @@ void stringLCD(char text[], int length, int line, int pos) //To print strings on
 	
 }
 
-void initLCD(void)
+void initLCD4(void)
+{
+		SystemCoreClockUpdate();
+		RCC->AHB1ENR|=RCC_AHB1ENR_GPIODEN;	//enable LCD port clock
+	
+	
+			//CONFIG LCD GPIO PINS
+		LCD_PORT->MODER&=~(					//clear pin direction settings
+			(3u<<(2*LCD_RS_pin))
+			|(3u<<(2*LCD_RW_pin))
+			|(3u<<(2*LCD_E_pin))
+			|(0xffff<<(2*LCD_D0_pin))
+			);
+	
+	
+	LCD_PORT->MODER|=(				//reset pin direction settings to digital outputs
+			(1u<<(2*LCD_RS_pin))
+			|(1u<<(2*LCD_RW_pin))
+			|(1u<<(2*LCD_E_pin))
+			|(0x5555<<(2*LCD_D0_pin)) //0x5555 = 0b 0101 0101 0101 0101
+		);
+
+	
+			//LCD INIT COMMANDS
+	clr_LCD_RS();				//all lines default low
+	clr_LCD_RW();
+	clr_LCD_E();
+	
+	lcd_delayus(25000);		//25ms startup delay
+	cmdLCD(0b0011);	//Function set: 4-bit, this requires all other instructions to be sent in 2 lines (see page 42 of HD44780U datasheet)
+	lcd_delayus(5000);
+	
+	cmdLCD(0b0010); //Function set 2: This pair of lines sets 4-bit operation, 2-line display, 5x8 dot character display
+	cmdLCD(0b0010);
+	
+	cmdLCD(0b0000);	//Display on
+	cmdLCD(0b1110);
+	
+	cmdLCD(0b0000);	//Clear LCD
+	cmdLCD(0b0001);
+	
+	lcd_delayus(2000); //2ms delay
+	
+	cmdLCD(0b0000);	//Entry mode: auto increment with no shift
+	cmdLCD(0b0101);
+}
+
+void initLCD8(void)
 {
 		SystemCoreClockUpdate();
 		RCC->AHB1ENR|=RCC_AHB1ENR_GPIODEN;	//enable LCD port clock
@@ -114,6 +165,4 @@ void initLCD(void)
 	cmdLCD(0x01);	//Clear LCD
 	cmdLCD(0x06);	//Entry mode, auto increment with no shift
 }
-
-
 
