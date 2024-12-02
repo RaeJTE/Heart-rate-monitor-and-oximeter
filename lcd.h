@@ -32,7 +32,7 @@ void set_LCD_data(unsigned char d);  //Clears and sets data lines on LCD
 void LCD_strobe(void); //10us high pulse on LCD enable line
 void cmdLCD(unsigned char cmd); //sends a byte to the LCD control register
 void putLCD(unsigned char put); //Prints character to LCD
+void stringLCD(char text[], int length,int line, int pos); //Prints string to LCD
 void initLCD(void); //Initialises LCD
-void stringLCD(char text[], int length); //Prints string to LCD
 
 #endif

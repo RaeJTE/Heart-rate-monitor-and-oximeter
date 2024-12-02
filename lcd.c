@@ -58,6 +58,28 @@ void putLCD(unsigned char put)	//sends a char to the LCD display
 	LCD_strobe();					//apply command
 }
 
+void stringLCD(char text[], int length, int line, int pos) //To print strings on LCD, length must be calculated before as array decays into pointer to array when passed into function
+{
+	WaitLCDBusy();				//wait for LCD to be not busy
+	LCD_CLR();
+	if(line == 1)
+	{	//Moves to second line if told to do so via line variable
+		for(int i = 0; i<(40); i++)
+		{
+		cmdLCD(0b10100);
+		}
+	}
+	for(int i = 0; i<(pos); i++)
+	{
+		cmdLCD(0b10100);
+	}
+	for(int i=0; i<length-1; i++)
+	{
+		putLCD(text[i]);
+	}
+	
+}
+
 void initLCD(void)
 {
 		SystemCoreClockUpdate();
@@ -82,33 +104,16 @@ void initLCD(void)
 
 	
 			//LCD INIT COMMANDS
-	clr_LCD_RS();					//all lines default low
+	clr_LCD_RS();				//all lines default low
 	clr_LCD_RW();
 	clr_LCD_E();
 	
-	lcd_delayus(40000);		//40ms startup delay
-	cmdLCD(0b0011<<4);
-	lcd_delayus(50);
-	cmdLCD(0b0010<<4);	//Function set: 2 Line, 4-bit, 5x7 dots
-	cmdLCD(0b1000<<4);
-	lcd_delayus(50);
-	cmdLCD(0b1100<<4);	//Display on, Cursor blinking command
-	lcd_delayus(40);
-	cmdLCD(0b0001<<4);	//Clear LCD
-	lcd_delayus(1540);
-	cmdLCD(0b0110<<4);	//Entry mode, auto increment with no shift
+	lcd_delayus(25000);		//25ms startup delay
+	cmdLCD(0x38);	//Function set: 2 Line, 8-bit, 5x7 dots
+	cmdLCD(0x0c);	//Display on, Cursor blinking command
+	cmdLCD(0x01);	//Clear LCD
+	cmdLCD(0x06);	//Entry mode, auto increment with no shift
 }
 
-void stringLCD(char text[], int length) //To print strings on LCD, length must be calculated before as array decays into pointer to array when passed into function
-{
-	WaitLCDBusy();				//wait for LCD to be not busy
-	LCD_CLR();
-	for(int i=0; i<length-1; i++)
-	{
-		WaitLCDBusy();				//wait for LCD to be not busy
-		putLCD(text[i]);
-	}
-	
-}
 
 
