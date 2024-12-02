@@ -62,11 +62,35 @@ void putLCD(unsigned char put)	//sends a char to the LCD display
 	LCD_strobe();					//apply command
 }
 
-void stringLCD(char text[], int length, int line, int pos) //To print strings on LCD, length must be calculated before as array decays into pointer to array when passed into function
+void stringLCD4(char text[], int length, int line, int pos) //To print strings on LCD, length must be calculated before as array decays into pointer to array when passed into function
 {
 	WaitLCDBusy();				//wait for LCD to be not busy
 	LCD_home();
 	if(line == 1)
+	{	//Moves to second line if told to do so via line variable
+		for(int i = 0; i<(40); i++)
+		{
+		cmdLCD(0b0001);
+		cmdLCD(0b0100);
+		}
+	}
+	for(int i = 0; i<(pos); i++)
+	{
+		cmdLCD(0b0001);
+		cmdLCD(0b0100);
+	}
+	for(int i=0; i<=length; i++)
+	{
+		putLCD(text[i]);
+	}
+	
+}
+
+void stringLCD8(char text[], int length, int line, int pos) //To print strings on LCD, length must be calculated before as array decays into pointer to array when passed into function
+{
+	WaitLCDBusy();				//wait for LCD to be not busy
+	LCD_home();
+	/*if(line == 1)
 	{	//Moves to second line if told to do so via line variable
 		for(int i = 0; i<(40); i++)
 		{
@@ -76,7 +100,7 @@ void stringLCD(char text[], int length, int line, int pos) //To print strings on
 	for(int i = 0; i<(pos); i++)
 	{
 		cmdLCD(0b10100);
-	}
+	}*/
 	for(int i=0; i<length-1; i++)
 	{
 		putLCD(text[i]);
@@ -112,23 +136,29 @@ void initLCD4(void)
 	clr_LCD_RW();
 	clr_LCD_E();
 	
-	lcd_delayus(25000);		//25ms startup delay
-	cmdLCD(0b0011);	//Function set: 4-bit, this requires all other instructions to be sent in 2 lines (see page 42 of HD44780U datasheet)
-	lcd_delayus(5000);
+	lcd_delayus(41000);		//41ms startup delay
+	cmdLCD(0b0011);	//Function set 1: 4-bit, this requires all other instructions to be sent in 2 lines (see page 42 of HD44780U datasheet)
+	lcd_delayus(41);
 	
-	cmdLCD(0b0010); //Function set 2: This pair of lines sets 4-bit operation, 2-line display, 5x8 dot character display
-	cmdLCD(0b0010);
+	cmdLCD(0b0010); //Function set 2: These lines sets 4-bit operation, 2-line display, 5x8 dot character display
+	cmdLCD(0b1000);
+	lcd_delayus(41);
+	
+	cmdLCD(0b0010); //Function set 3: These lines sets 4-bit operation, 2-line display, 5x8 dot character display
+	cmdLCD(0b1000);
+	lcd_delayus(41);
 	
 	cmdLCD(0b0000);	//Display on
 	cmdLCD(0b1110);
 	
+	lcd_delayus(41);
 	cmdLCD(0b0000);	//Clear LCD
 	cmdLCD(0b0001);
 	
-	lcd_delayus(2000); //2ms delay
+	lcd_delayus(2000);
 	
 	cmdLCD(0b0000);	//Entry mode: auto increment with no shift
-	cmdLCD(0b0101);
+	cmdLCD(0b0100);
 }
 
 void initLCD8(void)
@@ -159,7 +189,7 @@ void initLCD8(void)
 	clr_LCD_RW();
 	clr_LCD_E();
 	
-	lcd_delayus(25000);		//25ms startup delay
+	lcd_delayus(41000);		//41ms startup delay
 	cmdLCD(0x38);	//Function set: 2 Line, 8-bit, 5x7 dots
 	cmdLCD(0x0c);	//Display on, Cursor blinking command
 	cmdLCD(0x01);	//Clear LCD

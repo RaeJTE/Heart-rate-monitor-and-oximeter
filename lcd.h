@@ -33,7 +33,8 @@ void LCD_strobe(void); //10us high pulse on LCD enable line
 void LCD_home(void); //Moves cursor to 0,0
 void cmdLCD(unsigned char cmd); //sends a byte to the LCD control register
 void putLCD(unsigned char put); //Prints character to LCD
-void stringLCD(char text[], int length,int line, int pos); //Prints string to LCD
+void stringLCD4(char text[], int length,int line, int pos); //Prints string to LCD using 4-bit instructions
+void stringLCD8(char text[], int length,int line, int pos); //Prints string to LCD using 8-bit instructions
 void initLCD4(void); //Initialises LCD in 4-bit mode
 void initLCD8(void); //Initialises LCD in 8-bit mode
 

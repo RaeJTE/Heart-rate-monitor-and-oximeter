@@ -10,14 +10,14 @@ int main(void)
 	LCD_CLR();
 	
 	char name[] = "Example";
-	//stringLCD(name, sizeof(name)/sizeof(name[0]), 0, 0);
-	//stringLCD(name, sizeof(name)/sizeof(name[0]), 1, 2);	//Command to display name as defined at top of file, needs string length
+	//stringLCD8(name, sizeof(name)/sizeof(name[0]), 0, 0);
+	stringLCD8(name, sizeof(name)/sizeof(name[0]), 1, 2);	//Command to display name as defined at top of file, needs string length
 	
-	putLCD('A');
-	putLCD('a');
+	//putLCD('A');
+	//putLCD('a');
 	
-	cmdLCD(0b10100);
+	//cmdLCD(0b10100);
 	
-	putLCD('B');
+	//putLCD('B');
 	while(1);
 }
