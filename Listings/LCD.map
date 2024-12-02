@@ -31,6 +31,7 @@ Section Cross References
     lcd.o(.ARM.exidx.text.stringLCD4) refers to lcd.o(.text.stringLCD4) for [Anonymous Symbol]
     lcd.o(.text.stringLCD8) refers to lcd.o(.text.WaitLCDBusy) for WaitLCDBusy
     lcd.o(.text.stringLCD8) refers to lcd.o(.text.LCD_home) for LCD_home
+    lcd.o(.text.stringLCD8) refers to lcd.o(.text.cmdLCD) for cmdLCD
     lcd.o(.text.stringLCD8) refers to lcd.o(.text.putLCD) for putLCD
     lcd.o(.ARM.exidx.text.stringLCD8) refers to lcd.o(.text.stringLCD8) for [Anonymous Symbol]
     lcd.o(.text.initLCD4) refers to system_stm32f4xx.o(.text.SystemCoreClockUpdate) for SystemCoreClockUpdate
@@ -323,8 +324,8 @@ Image Symbol Table
     [Anonymous Symbol]                       0x080006e0   Section        0  lcd.o(.text.putLCD)
     [Anonymous Symbol]                       0x08000710   Section        0  lcd.o(.text.set_LCD_data)
     [Anonymous Symbol]                       0x08000730   Section        0  lcd.o(.text.stringLCD8)
-    $v0                                      0x0800076e   Number         0  fpinit.o(x$fpl$fpinit)
-    x$fpl$fpinit                             0x0800076e   Section       26  fpinit.o(x$fpl$fpinit)
+    $v0                                      0x080007b6   Number         0  fpinit.o(x$fpl$fpinit)
+    x$fpl$fpinit                             0x080007b6   Section       26  fpinit.o(x$fpl$fpinit)
     .bss                                     0x20000008   Section       96  libspace.o(.bss)
     Heap_Mem                                 0x20000068   Data         512  startup_stm32f429xx.o(HEAP)
     HEAP                                     0x20000068   Section      512  startup_stm32f429xx.o(HEAP)
@@ -542,13 +543,13 @@ Image Symbol Table
     main                                     0x080006a1   Thumb Code    62  main.o(.text.main)
     putLCD                                   0x080006e1   Thumb Code    48  lcd.o(.text.putLCD)
     set_LCD_data                             0x08000711   Thumb Code    30  lcd.o(.text.set_LCD_data)
-    stringLCD8                               0x08000731   Thumb Code    62  lcd.o(.text.stringLCD8)
-    _fp_init                                 0x0800076f   Thumb Code    26  fpinit.o(x$fpl$fpinit)
-    __fplib_config_fpu_vfp                   0x08000787   Thumb Code     0  fpinit.o(x$fpl$fpinit)
-    __fplib_config_pureend_doubles           0x08000787   Thumb Code     0  fpinit.o(x$fpl$fpinit)
-    AHBPrescTable                            0x08000788   Data          16  system_stm32f4xx.o(.rodata.AHBPrescTable)
-    Region$$Table$$Base                      0x08000798   Number         0  anon$$obj.o(Region$$Table)
-    Region$$Table$$Limit                     0x080007b8   Number         0  anon$$obj.o(Region$$Table)
+    stringLCD8                               0x08000731   Thumb Code   134  lcd.o(.text.stringLCD8)
+    _fp_init                                 0x080007b7   Thumb Code    26  fpinit.o(x$fpl$fpinit)
+    __fplib_config_fpu_vfp                   0x080007cf   Thumb Code     0  fpinit.o(x$fpl$fpinit)
+    __fplib_config_pureend_doubles           0x080007cf   Thumb Code     0  fpinit.o(x$fpl$fpinit)
+    AHBPrescTable                            0x080007d0   Data          16  system_stm32f4xx.o(.rodata.AHBPrescTable)
+    Region$$Table$$Base                      0x080007e0   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x08000800   Number         0  anon$$obj.o(Region$$Table)
     SystemCoreClock                          0x20000000   Data           4  system_stm32f4xx.o(.data.SystemCoreClock)
     __libspace_start                         0x20000008   Data          96  libspace.o(.bss)
     __temporary_stack_top$libspace           0x20000068   Data           0  libspace.o(.bss)
@@ -561,9 +562,9 @@ Memory Map of the image
 
   Image Entry point : 0x0800024d
 
-  Load Region LR_1 (Base: 0x08000000, Size: 0x000007bc, Max: 0xffffffff, ABSOLUTE)
+  Load Region LR_1 (Base: 0x08000000, Size: 0x00000804, Max: 0xffffffff, ABSOLUTE)
 
-    Execution Region ER_RO (Exec base: 0x08000000, Load base: 0x08000000, Size: 0x000007b8, Max: 0xffffffff, ABSOLUTE)
+    Execution Region ER_RO (Exec base: 0x08000000, Load base: 0x08000000, Size: 0x00000800, Max: 0xffffffff, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
@@ -644,20 +645,20 @@ Memory Map of the image
     0x080006e0   0x080006e0   0x00000030   Code   RO           24    .text.putLCD        lcd.o
     0x08000710   0x08000710   0x0000001e   Code   RO           16    .text.set_LCD_data  lcd.o
     0x0800072e   0x0800072e   0x00000002   PAD
-    0x08000730   0x08000730   0x0000003e   Code   RO           28    .text.stringLCD8    lcd.o
-    0x0800076e   0x0800076e   0x0000001a   Code   RO          155    x$fpl$fpinit        fz_wm.l(fpinit.o)
-    0x08000788   0x08000788   0x00000010   Data   RO           55    .rodata.AHBPrescTable  system_stm32f4xx.o
-    0x08000798   0x08000798   0x00000020   Data   RO          230    Region$$Table       anon$$obj.o
+    0x08000730   0x08000730   0x00000086   Code   RO           28    .text.stringLCD8    lcd.o
+    0x080007b6   0x080007b6   0x0000001a   Code   RO          155    x$fpl$fpinit        fz_wm.l(fpinit.o)
+    0x080007d0   0x080007d0   0x00000010   Data   RO           55    .rodata.AHBPrescTable  system_stm32f4xx.o
+    0x080007e0   0x080007e0   0x00000020   Data   RO          230    Region$$Table       anon$$obj.o
 
 
-    Execution Region ER_RW (Exec base: 0x20000000, Load base: 0x080007b8, Size: 0x00000004, Max: 0xffffffff, ABSOLUTE)
+    Execution Region ER_RW (Exec base: 0x20000000, Load base: 0x08000800, Size: 0x00000004, Max: 0xffffffff, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x20000000   0x080007b8   0x00000004   Data   RW           54    .data.SystemCoreClock  system_stm32f4xx.o
+    0x20000000   0x08000800   0x00000004   Data   RW           54    .data.SystemCoreClock  system_stm32f4xx.o
 
 
-    Execution Region ER_ZI (Exec base: 0x20000008, Load base: 0x080007bc, Size: 0x00000660, Max: 0xffffffff, ABSOLUTE)
+    Execution Region ER_ZI (Exec base: 0x20000008, Load base: 0x08000804, Size: 0x00000660, Max: 0xffffffff, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
@@ -673,13 +674,13 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
 
-       638          0          0          0          0       3326   lcd.o
+       710          0          0          0          0       3473   lcd.o
         62          0          0          0          0        499   main.o
         64         26        428          0       1536        912   startup_stm32f429xx.o
        412          0         16          4          0       2656   system_stm32f4xx.o
 
     ----------------------------------------------------------------------
-      1190         26        476          4       1536       7393   Object Totals
+      1262         26        476          4       1536       7540   Object Totals
          0          0         32          0          0          0   (incl. Generated)
         14          0          0          0          0          0   (incl. Padding)
 
@@ -730,15 +731,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-      1500         42        476          4       1632       7897   Grand Totals
-      1500         42        476          4       1632       7897   ELF Image Totals
-      1500         42        476          4          0          0   ROM Totals
+      1572         42        476          4       1632       8044   Grand Totals
+      1572         42        476          4       1632       8044   ELF Image Totals
+      1572         42        476          4          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                 1976 (   1.93kB)
+    Total RO  Size (Code + RO Data)                 2048 (   2.00kB)
     Total RW  Size (RW Data + ZI Data)              1636 (   1.60kB)
-    Total ROM Size (Code + RO Data + RW Data)       1980 (   1.93kB)
+    Total ROM Size (Code + RO Data + RW Data)       2052 (   2.00kB)
 
 ==============================================================================
 

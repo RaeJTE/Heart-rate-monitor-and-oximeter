@@ -62,7 +62,7 @@ void putLCD(unsigned char put)	//sends a char to the LCD display
 	LCD_strobe();					//apply command
 }
 
-void stringLCD4(char text[], int length, int line, int pos) //To print strings on LCD, length must be calculated before as array decays into pointer to array when passed into function
+void stringLCD(char text[], int length, int line, int pos) //To print strings on LCD, length must be calculated before as array decays into pointer to array when passed into function
 {
 	WaitLCDBusy();				//wait for LCD to be not busy
 	LCD_home();
@@ -70,37 +70,13 @@ void stringLCD4(char text[], int length, int line, int pos) //To print strings o
 	{	//Moves to second line if told to do so via line variable
 		for(int i = 0; i<(40); i++)
 		{
-		cmdLCD(0b0001);
-		cmdLCD(0b0100);
-		}
-	}
-	for(int i = 0; i<(pos); i++)
-	{
-		cmdLCD(0b0001);
-		cmdLCD(0b0100);
-	}
-	for(int i=0; i<=length; i++)
-	{
-		putLCD(text[i]);
-	}
-	
-}
-
-void stringLCD8(char text[], int length, int line, int pos) //To print strings on LCD, length must be calculated before as array decays into pointer to array when passed into function
-{
-	WaitLCDBusy();				//wait for LCD to be not busy
-	LCD_home();
-	/*if(line == 1)
-	{	//Moves to second line if told to do so via line variable
-		for(int i = 0; i<(40); i++)
-		{
 		cmdLCD(0b10100);
 		}
 	}
 	for(int i = 0; i<(pos); i++)
 	{
 		cmdLCD(0b10100);
-	}*/
+	}
 	for(int i=0; i<length-1; i++)
 	{
 		putLCD(text[i]);

@@ -3,9 +3,9 @@
 <title>Static Call Graph - [.\Objects\LCD.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\LCD.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6180002: Last Updated: Mon Dec  2 15:56:18 2024
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6180002: Last Updated: Mon Dec  2 15:57:11 2024
 <BR><P>
-<H3>Maximum Stack Usage =        104 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
+<H3>Maximum Stack Usage =        112 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
 __rt_entry_main &rArr; main &rArr; stringLCD8 &rArr; LCD_home &rArr; cmdLCD &rArr; LCD_strobe &rArr; lcd_delayus
 <P>
@@ -255,7 +255,7 @@ Global Symbols
 <P><STRONG><a name="[a4]"></a>__rt_entry_postsh_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __rtentry2.o(.ARM.Collect$$rtentry$$00000009))
 
 <P><STRONG><a name="[71]"></a>__rt_entry_main</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __rtentry2.o(.ARM.Collect$$rtentry$$0000000D))
-<BR><BR>[Stack]<UL><LI>Max Depth = 104 + Unknown Stack Size
+<BR><BR>[Stack]<UL><LI>Max Depth = 112 + Unknown Stack Size
 <LI>Call Chain = __rt_entry_main &rArr; main &rArr; stringLCD8 &rArr; LCD_home &rArr; cmdLCD &rArr; LCD_strobe &rArr; lcd_delayus
 </UL>
 <BR>[Calls]<UL><LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;exit
@@ -707,6 +707,7 @@ Global Symbols
 <LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WaitLCDBusy
 </UL>
 <BR>[Called By]<UL><LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_home
+<LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;stringLCD8
 <LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initLCD4
 <LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
@@ -729,7 +730,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[72]"></a>main</STRONG> (Thumb, 62 bytes, Stack size 24 bytes, main.o(.text.main))
-<BR><BR>[Stack]<UL><LI>Max Depth = 104<LI>Call Chain = main &rArr; stringLCD8 &rArr; LCD_home &rArr; cmdLCD &rArr; LCD_strobe &rArr; lcd_delayus
+<BR><BR>[Stack]<UL><LI>Max Depth = 112<LI>Call Chain = main &rArr; stringLCD8 &rArr; LCD_home &rArr; cmdLCD &rArr; LCD_strobe &rArr; lcd_delayus
 </UL>
 <BR>[Calls]<UL><LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;stringLCD8
 <LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cmdLCD
@@ -755,12 +756,13 @@ Global Symbols
 <LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cmdLCD
 </UL>
 
-<P><STRONG><a name="[82]"></a>stringLCD8</STRONG> (Thumb, 62 bytes, Stack size 32 bytes, lcd.o(.text.stringLCD8))
-<BR><BR>[Stack]<UL><LI>Max Depth = 80<LI>Call Chain = stringLCD8 &rArr; LCD_home &rArr; cmdLCD &rArr; LCD_strobe &rArr; lcd_delayus
+<P><STRONG><a name="[82]"></a>stringLCD8</STRONG> (Thumb, 134 bytes, Stack size 40 bytes, lcd.o(.text.stringLCD8))
+<BR><BR>[Stack]<UL><LI>Max Depth = 88<LI>Call Chain = stringLCD8 &rArr; LCD_home &rArr; cmdLCD &rArr; LCD_strobe &rArr; lcd_delayus
 </UL>
 <BR>[Calls]<UL><LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;putLCD
 <LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_home
 <LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WaitLCDBusy
+<LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cmdLCD
 </UL>
 <BR>[Called By]<UL><LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
