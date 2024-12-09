@@ -1,8 +1,8 @@
 Dependencies for Project 'Heart-rate-monitor-and-oximeter', Target 'Target 1': (DO NOT MODIFY !)
 CompilerVersion: 6180000::V6.18::.\ARMCLANG
-F (.\main.c)(0x67571499)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__EVAL -gdwarf-4 -O0 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier-I./RTE/_Target_1-IC:/Keil_v5/ARM/Pack/ARM/CMSIS/5.9.0/CMSIS/Core/Include-IC:/Keil_v5/ARM/Pack/Keil/STM32F4xx_DFP/2.14.0/Drivers/CMSIS/Device/ST/STM32F4xx/Include-D__UVISION_VERSION="537" -D_RTE_ -DSTM32F429xx -D_RTE_-o ./objects/main.o -MD)
+F (.\main.c)(0x675718E3)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__EVAL -gdwarf-4 -O0 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier-I./RTE/_Target_1-IC:/Keil_v5/ARM/Pack/ARM/CMSIS/5.9.0/CMSIS/Core/Include-IC:/Keil_v5/ARM/Pack/Keil/STM32F4xx_DFP/2.14.0/Drivers/CMSIS/Device/ST/STM32F4xx/Include-D__UVISION_VERSION="537" -D_RTE_ -DSTM32F429xx -D_RTE_-o ./objects/main.o -MD)
 I (C:\Keil_v5\ARM\ARMCLANG\include\stdio.h)(0x6252D156)
-I (lcd.h)(0x675713CF)
+I (lcd.h)(0x675715E4)
 I (C:\Keil_v5\ARM\Pack\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h)(0x5C5BF292)
 I (C:\Keil_v5\ARM\Pack\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f429xx.h)(0x5C5BF292)
 I (C:\Keil_v5\ARM\Pack\ARM\CMSIS\5.9.0\CMSIS\Core\Include\core_cm4.h)(0x626FAD4E)
@@ -12,9 +12,9 @@ I (C:\Keil_v5\ARM\Pack\ARM\CMSIS\5.9.0\CMSIS\Core\Include\cmsis_compiler.h)(0x62
 I (C:\Keil_v5\ARM\Pack\ARM\CMSIS\5.9.0\CMSIS\Core\Include\cmsis_armclang.h)(0x626FAD4E)
 I (C:\Keil_v5\ARM\Pack\ARM\CMSIS\5.9.0\CMSIS\Core\Include\mpu_armv7.h)(0x626FAD4E)
 I (C:\Keil_v5\ARM\Pack\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include\system_stm32f4xx.h)(0x5C5BF292)
-F (.\lcd.c)(0x675713C5)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__EVAL -gdwarf-4 -O0 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier-I./RTE/_Target_1-IC:/Keil_v5/ARM/Pack/ARM/CMSIS/5.9.0/CMSIS/Core/Include-IC:/Keil_v5/ARM/Pack/Keil/STM32F4xx_DFP/2.14.0/Drivers/CMSIS/Device/ST/STM32F4xx/Include-D__UVISION_VERSION="537" -D_RTE_ -DSTM32F429xx -D_RTE_-o ./objects/lcd.o -MD)
+F (.\lcd.c)(0x675718B6)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__EVAL -gdwarf-4 -O0 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -Wno-reserved-identifier-I./RTE/_Target_1-IC:/Keil_v5/ARM/Pack/ARM/CMSIS/5.9.0/CMSIS/Core/Include-IC:/Keil_v5/ARM/Pack/Keil/STM32F4xx_DFP/2.14.0/Drivers/CMSIS/Device/ST/STM32F4xx/Include-D__UVISION_VERSION="537" -D_RTE_ -DSTM32F429xx -D_RTE_-o ./objects/lcd.o -MD)
 I (C:\Keil_v5\ARM\ARMCLANG\include\stdio.h)(0x6252D156)
-I (lcd.h)(0x675713CF)
+I (lcd.h)(0x675715E4)
 I (C:\Keil_v5\ARM\Pack\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h)(0x5C5BF292)
 I (C:\Keil_v5\ARM\Pack\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f429xx.h)(0x5C5BF292)
 I (C:\Keil_v5\ARM\Pack\ARM\CMSIS\5.9.0\CMSIS\Core\Include\core_cm4.h)(0x626FAD4E)

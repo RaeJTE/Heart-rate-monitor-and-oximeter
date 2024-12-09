@@ -22,6 +22,8 @@ int main(void)
 	int numLen;
 	decIntToDecStr(56795, &num, &numLen);
 	stringLCD(num, numLen, 0, 0);
+	decIntToHexStr(56795, &num, &numLen);
+	stringLCD(num, numLen, 1, 0);
 	
 	//endlessScrollLCD(); //Causes LCD screen to scroll endlessly
 	
