@@ -64,28 +64,29 @@ void putLCD(unsigned char put)	//sends a char to the LCD display
 }
 
 void stringLCD(char text[], int length, int line, int pos) //To print strings on LCD, length must be calculated before as array decays into pointer to array when passed into function
+	//for length use -1 with length of character array to remove end signifying character, not needed for intToStr length as floor(log10(abs()))) method does not look at end signifying characters
 {
 	WaitLCDBusy();				//wait for LCD to be not busy
 	LCD_home();
-	if(line == 1)
-	{	//Moves to second line if told to do so via line variable
+	if(line == 1)	//Moves to second line if told to do so via line variable
+	{
 		for(int i = 0; i<(40); i++)
 		{
 		cmdLCD(0b10100);
 		}
 	}
-	for(int i = 0; i<(pos); i++)
+	for(int i = 0; i<(pos); i++)	//Moves a given number of spaces forward on the LCD
 	{
 		cmdLCD(0b10100);
 	}
-	for(int i=0; i<length-1; i++)
+	for(int i=0; i<length; i++)
 	{
 		putLCD(text[i]);
 	}
 	
 }
 
-void scrollLCD(int time)
+void scrollLCD(int time)	//Causes LCD screen to scroll a given number of positions, currently a blocking function pending timers and interrupts work
 {
 	for(int i = 0; i<time; i++)
 	{
@@ -94,22 +95,13 @@ void scrollLCD(int time)
 	}
 }
 
-void endlessScrollLCD(void)
+void endlessScrollLCD(void)	//Causes LCD screen to scroll endlessly, currently a blocking function pending timers and interrupts work
 {
 	while(1)
 	{
 		lcd_delayus(30000);
 		cmdLCD(0b11000);
 	}
-}
-
-//Try using sprintf?? and snprintf
-char numToArray (int var)
-{
-	int varLen = floor(log10(abs(var))) + 1;
-	char varString[varLen];
-	sprintf(varString, "%d", var);
-	return *varString;
 }
 
 void initLCD4(void)	//Initialises the LCD in 4-bit mode
@@ -162,7 +154,7 @@ void initLCD4(void)	//Initialises the LCD in 4-bit mode
 	lcd_delayus(2000);
 	
 	cmdLCD(0b0000);	//Entry mode: auto increment with no shift
-	cmdLCD(0b0100);
+	cmdLCD(0b0110);
 }
 
 void initLCD8(void)	//Initialises the LCD in 4-bit mode
