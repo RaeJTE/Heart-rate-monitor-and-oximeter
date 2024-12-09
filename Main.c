@@ -12,8 +12,16 @@ int main(void)
 	LCD_CLR();
 	
 	
-	
-	stringLCD(varString, varLen+1, 0, 0);
+	char a;
+	a	= numToArray(2587);
+	char* b = &a;
+	//stringLCD(a[1], 4, 0, 0);
+	//putLCD(a);
+	for (int i = 0; i<4; i++)
+	{
+		putLCD(*b);
+		b++;
+	}
 	
 	char example[] = "Proj200 with guest number: ";
 	//stringLCD(name, sizeof(name)/sizeof(name[0]), 0, 0);

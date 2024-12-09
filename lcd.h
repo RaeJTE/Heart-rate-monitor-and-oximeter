@@ -26,7 +26,7 @@
 
 #include <stm32f4xx.h>
 
-void lcd_delayus(unsigned int us); //Wait defined time
+void lcd_delayus(unsigned int us); //Wait defined time using approximate block delay
 void WaitLCDBusy(void); //Wait until LCD is available
 void set_LCD_data(unsigned char d);  //Clears and sets data lines on LCD
 void LCD_strobe(void); //10us high pulse on LCD enable line
@@ -36,7 +36,7 @@ void putLCD(unsigned char put); //Prints character to LCD
 void stringLCD(char text[], int length,int line, int pos); //Prints string to LCD
 void scrollLCD(int time);
 void endlessScrollLCD(void);
-char toArray(int var);
+char numToArray(int var);	//
 void initLCD4(void); //Initialises LCD in 4-bit mode
 void initLCD8(void); //Initialises LCD in 8-bit mode
 

@@ -104,15 +104,15 @@ void endlessScrollLCD(void)
 }
 
 //Try using sprintf?? and snprintf
-char toArray(int var)
+char numToArray (int var)
 {
-	int varLen =  floor(log10(abs(var))) + 1;
+	int varLen = floor(log10(abs(var))) + 1;
 	char varString[varLen];
 	sprintf(varString, "%d", var);
-	return varString;
+	return *varString;
 }
 
-void initLCD4(void)
+void initLCD4(void)	//Initialises the LCD in 4-bit mode
 {
 		SystemCoreClockUpdate();
 		RCC->AHB1ENR|=RCC_AHB1ENR_GPIODEN;	//enable LCD port clock
@@ -165,7 +165,7 @@ void initLCD4(void)
 	cmdLCD(0b0100);
 }
 
-void initLCD8(void)
+void initLCD8(void)	//Initialises the LCD in 4-bit mode
 {
 		SystemCoreClockUpdate();
 		RCC->AHB1ENR|=RCC_AHB1ENR_GPIODEN;	//enable LCD port clock
