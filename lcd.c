@@ -70,29 +70,29 @@ void stringLCD(char text[], int length, int line, int pos) //To print strings on
 	LCD_home();
 	if(line == 1)	//Moves to second line if told to do so via line variable
 	{
-		for(int i = 0; i<(40); i++)
+		for(int i = 0; i<(LCD_LINE2-LCD_LINE1); i++)
 		{
 		cmdLCD(0b10100);
 		}
 	}
-	for(int i = 0; i<(pos); i++)	//Moves a given number of spaces forward on the LCD
+	for(int i = 0; i<pos; i++)	//Moves a given number of spaces forward on the LCD
 	{
 		cmdLCD(0b10100);
 	}
-	for(int i=0; i<length; i++)
+	for(int i=0; i<length-1; i++)
 	{
 		putLCD(text[i]);
 	}
 	
 }
 
-void decIntToDecStr(int num, char* a[], int* b)
+void decIntToDecStr(int num, char* a[], int* b) //Converts a decimal integer into a string that can be printed
 {
 	sprintf(*a, "%d", num);
-	*b = floor(log10(abs(num)))+1;
+	*b = floor(log10(abs(num)))+1; //Warnings can be ignored, identifying that the mathematical functions were designed for different variable types, but all still work with int
 }
 
-void decIntToHexStr(int num, char* a[], int* b)
+void decIntToHexStr(int num, char* a[], int* b) //Converts a decimal integer into a string of the hexadecimal value of that integer
 {
 	sprintf(*a, "%x", num);
 	*b = floor(log10(abs(num)))+1;

@@ -14,16 +14,16 @@ int main(void)
 	
 
 	
-	//char example[] = "Proj200 with guest number: ";
-	//stringLCD(name, sizeof(name)/sizeof(name[0])-1, 0, 0);
-	//stringLCD(example, sizeof(example)/sizeof(example[0])-1, 1, 0);	//Command to display name as defined at top of file, needs string length
+	char example[] = "Proj200 with guest number: ";
+	stringLCD(name, sizeof(name)/sizeof(name[0])-1, 0, 0);
+	stringLCD(example, sizeof(example)/sizeof(example[0])-1, 1, 0);	//Command to display name as defined at top of file, needs string length
 	
 	char* num;
 	int numLen;
-	decIntToDecStr(56795, &num, &numLen);
-	stringLCD(num, numLen, 0, 0);
+	//decIntToDecStr(56795, &num, &numLen);
+	//stringLCD(num, numLen, 0, 0);
 	decIntToHexStr(56795, &num, &numLen);
-	stringLCD(num, numLen, 1, 0);
+	stringLCD(num, numLen, 0, sizeof(example)/sizeof(example[0])+2);
 	
 	//endlessScrollLCD(); //Causes LCD screen to scroll endlessly
 	
