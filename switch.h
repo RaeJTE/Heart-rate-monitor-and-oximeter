@@ -8,19 +8,27 @@
 #define LED_GRN 6	//Defines the pin used by green traffic LED
 //Inputs
 #define switch_PORT GPIOG	//Defines the port used for switch inputs
-#define switch_PORT_ENABLE RCC->AHB1ENR |= (1<<5)
-#define BTN0_pin	0	//Defines pin used by button 0
-#define BTN1_pin	1	//Defines pin used by button 1
-#define BTN2_pin	2	//Defines pin used by button 2
-#define BTN3_pin	3	//Defines pin used by button 3
+#define BTN0_PIN	0	//Defines pin used by button 0
+#define BTN1_PIN	1	//Defines pin used by button 1
+#define BTN2_PIN	2	//Defines pin used by button 2
+#define BTN3_PIN	3	//Defines pin used by button 3
 //Initialisation commands
-#define set_LED_GRN_output LED_PORT->MODER |= (01<<(2*LED_GRN))	//Defines command to set green traffic LED to output mode
-#define set_LED_GRN_pushPull LED_PORT->OTYPER |= (0<<(2*LED_GRN))	//Defines command to set green traffic LED to push pull output mode
-#define set_BTN0_input()	switch_PORT->MODER |= 00<<(2*BTN0_pin)	//Defines command to set button 0 to input mode
-#define set_BTN0_lowspeed() switch_PORT->OSPEEDER |= 00<<(2*BTN0_PIN)	//Defines command to set button 0 to low speed operation to save power
-#define set_BTN0_pull_up() switch_PORT->PUPDR |= 01<<(2*BTN0_PIN)	//Defines command to set button 0 to pull up configuration
+#define LED_PORT_ENABLE()				RCC->AHB1ENR					|= 1<<2							//Defines command to clock to LED port to enable it
+#define switch_PORT_ENABLE() 		RCC->AHB1ENR 					|= 1<<5							//Defines command to clock to switch port to enable it
+
+#define set_LED_GRN_output()		LED_PORT->MODER				|= 01<<(2*LED_GRN)	//Defines command to set green traffic LED to output mode
+#define set_LED_GRN_pushPull()	LED_PORT->OTYPER 			|= 0<<(1*LED_GRN)		//Defines command to set green traffic LED to push pull output mode
+#define set_LED_GRN_lowspeed()	LED_PORT->OSPEEDR 		|= 00<<(2*LED_GRN)	//Defines command to set green traffic LED to 2MHz (low speed) operation to save power
+#define set_LED_GRN_pull_up()		LED_PORT ->PUPDR 			|= 00<<(2*LED_GRN)	//Defines command to set green traffic LED to internal pull up configuration
+
+#define set_BTN_input(BTN_num)				switch_PORT->MODER 		|= 00<<(2*BTN_num)	//Defines command to set a button of given number to input mode
+#define set_BTN_lowspeed(BTN_num)			switch_PORT->OSPEEDR 	|= 00<<(2*BTN_num)	//Defines command to set a button of given number to 2MHz (low speed) operation to save power
+#define set_BTN_pull_up(BTN_num)			switch_PORT->PUPDR 		|= 01<<(2*BTN_num)	//Defines command to set a button of given number to internal pull up configuration
 
 
 
+void LEDInit(void);
+void switchInit(void);
+int readPinValue(int pin);
 
 #endif

@@ -70,7 +70,7 @@ void stringLCD(char text[], int length, int line, int pos) //To print strings on
 	LCD_home();
 	if(line == 1)	//Moves to second line if told to do so via line variable
 	{
-		for(int i = 0; i<(LCD_LINE2-LCD_LINE1); i++)
+		for(int i = 0; i<(40); i++)
 		{
 		cmdLCD(0b10100);
 		}
@@ -79,7 +79,7 @@ void stringLCD(char text[], int length, int line, int pos) //To print strings on
 	{
 		cmdLCD(0b10100);
 	}
-	for(int i=0; i<length-1; i++)
+	for(int i=0; i<length; i++)
 	{
 		putLCD(text[i]);
 	}

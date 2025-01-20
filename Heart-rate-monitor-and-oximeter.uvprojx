@@ -390,14 +390,14 @@
               <FilePath>.\main.c</FilePath>
             </File>
             <File>
-              <FileName>lcd.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\lcd.c</FilePath>
-            </File>
-            <File>
               <FileName>switch.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\switch.c</FilePath>
+            </File>
+            <File>
+              <FileName>lcd.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\lcd.c</FilePath>
             </File>
           </Files>
         </Group>
