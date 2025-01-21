@@ -27,10 +27,6 @@ Project File Date:  01/21/2025
 <h2>Output:</h2>
 *** Using Compiler 'V6.18', folder: 'C:\Keil_v5\ARM\ARMCLANG\Bin'
 Build target 'Target 1'
-assembling startup_stm32f429xx.s...
-compiling system_stm32f4xx.c...
-compiling switch.c...
-compiling main.c...
 lcd.c(92): warning: implicitly declaring library function 'floor' with type 'double (double)' [-Wimplicit-function-declaration]
         *b = floor(log10(abs(num)))+1; //Warnings can be ignored, identifying that the mathematical functions were designed for different variable types, but all still work with int
              ^
@@ -43,11 +39,15 @@ lcd.c(92): warning: implicitly declaring library function 'abs' with type 'int (
         *b = floor(log10(abs(num)))+1; //Warnings can be ignored, identifying that the mathematical functions were designed for different variable types, but all still work with int
                          ^
 lcd.c(92): note: include the header <stdlib.h> or explicitly provide a declaration for 'abs'
-3 warnings generated.
+lcd.c(98): warning: implicitly declaring library function 'log' with type 'double (double)' [-Wimplicit-function-declaration]
+        *b = floor((log(abs(num))/log(16)))+1;
+                    ^
+lcd.c(98): note: include the header <math.h> or explicitly provide a declaration for 'log'
+4 warnings generated.
 compiling lcd.c...
 linking...
-Program Size: Code=13164 RO-data=1144 RW-data=4 ZI-data=1632  
-".\Objects\LCD.axf" - 0 Error(s), 3 Warning(s).
+Program Size: Code=13220 RO-data=1116 RW-data=4 ZI-data=1632  
+".\Objects\LCD.axf" - 0 Error(s), 4 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -78,7 +78,7 @@ Package Vendor: Keil
       Source file:   MDK/Device/Source/ARM/STM32F42xxx_43xxx_OPT.s
       Source file:   Drivers/CMSIS/Device/ST/STM32F4xx/Source/Templates/arm/startup_stm32f429xx.s
       Source file:   Drivers/CMSIS/Device/ST/STM32F4xx/Source/Templates/system_stm32f4xx.c
-Build Time Elapsed:  00:00:01
+Build Time Elapsed:  00:00:00
 </pre>
 </body>
 </html>

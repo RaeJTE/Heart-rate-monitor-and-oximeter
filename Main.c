@@ -22,20 +22,21 @@ int main(void)
 	int numLen;	//Variable to store length of string conversion of number
 	decIntToDecStr(56795, &num, &numLen);
 	stringLCD(num, numLen, 1, 0);	//Command to display decimal number on LCD
-	//decIntToHexStr(56795, &num, &numLen);
-	//stringLCD(num, numLen, 1, 0); //Command to display hexadecimal number on LCD
+	decIntToHexStr(56795, &num, &numLen);
+	stringLCD(num, numLen, 1, numLen+3); //Command to display hexadecimal number on LCD
 	//endlessScrollLCD(); //Causes LCD screen to scroll endlessly
 	
-	int pin_0_prev = 0;
 	while(1)
 	{
 		
-		/*int pin_0_press = readBTNValue(0);
-		if(pin_0_press == 1 && pin_0_prev == 0)
+		int pin_0_press = readBTNValue(0);
+		int pin_1_press = readBTNValue(1);
+		int pin_2_press = readBTNValue(2);
+		int pin_3_press = readBTNValue(3);
+		if(pin_0_press + pin_1_press + pin_2_press + pin_3_press == 1)
 		{
 			scrollLCD(1);
 		}
-		pin_0_prev = pin_0_press;*/
 		lcd_delayus(20000);
 		Toggle_LED();
 	}

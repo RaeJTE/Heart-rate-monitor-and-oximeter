@@ -95,7 +95,7 @@ void decIntToDecStr(int num, char* a[], int* b) //Converts a decimal integer int
 void decIntToHexStr(int num, char* a[], int* b) //Converts a decimal integer into a string of the hexadecimal value of that integer
 {
 	sprintf(*a, "%x", num);
-	*b = floor(log10(abs(num)))+1;
+	*b = floor((log(abs(num))/log(16)))+1;
 }
 
 void scrollLCD(int places)	//Causes LCD screen to scroll a given number of positions, currently a blocking function pending timers and interrupts work
