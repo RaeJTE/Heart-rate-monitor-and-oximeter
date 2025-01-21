@@ -98,9 +98,9 @@ void decIntToHexStr(int num, char* a[], int* b) //Converts a decimal integer int
 	*b = floor(log10(abs(num)))+1;
 }
 
-void scrollLCD(int time)	//Causes LCD screen to scroll a given number of positions, currently a blocking function pending timers and interrupts work
+void scrollLCD(int places)	//Causes LCD screen to scroll a given number of positions, currently a blocking function pending timers and interrupts work
 {
-	for(int i = 0; i<time; i++)
+	for(int i = 0; i<places; i++)
 	{
 		lcd_delayus(30000);
 		cmdLCD(0b11000);
@@ -145,26 +145,21 @@ void initLCD4(void)	//Initialises the LCD in 4-bit mode
 	clr_LCD_E();
 	
 	lcd_delayus(41000);		//41ms startup delay
-	cmdLCD(0b0011);	//Function set 1: 4-bit, this requires all other instructions to be sent in 2 lines (see page 42 of HD44780U datasheet)
+	cmdLCD(0b0011);	//Function set 1: 4-bit, this requires all other instructions to be sent in 2 lines (see page 42 of HD44780U datasheet - individual commands on page 24)
 	lcd_delayus(41);
 	
-	cmdLCD(0b0010); //Function set 2: These lines sets 4-bit operation, 2-line display, 5x8 dot character display
-	cmdLCD(0b1000);
-	lcd_delayus(41);
-	
-	cmdLCD(0b0010); //Function set 3: These lines sets 4-bit operation, 2-line display, 5x8 dot character display
+	cmdLCD(0b0011); //Function set 2: These lines sets 4-bit operation, 2-line display, 5x8 dot character display
 	cmdLCD(0b1000);
 	lcd_delayus(41);
 	
 	cmdLCD(0b0000);	//Display on
-	cmdLCD(0b1110);
+	cmdLCD(0b1100);
 	
 	lcd_delayus(41);
 	cmdLCD(0b0000);	//Clear LCD
 	cmdLCD(0b0001);
 	
-	lcd_delayus(2000);
-	
+	lcd_delayus(41);
 	cmdLCD(0b0000);	//Entry mode: auto increment with no shift
 	cmdLCD(0b0110);
 }

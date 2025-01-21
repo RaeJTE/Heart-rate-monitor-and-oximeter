@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\LCD.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\LCD.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6180002: Last Updated: Mon Jan 20 16:22:47 2025
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6180002: Last Updated: Tue Jan 21 10:16:06 2025
 <BR><P>
 <H3>Maximum Stack Usage =        324 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -797,16 +797,14 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[66]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_sputc
 <LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_char_common
 </UL>
-<BR>[Called By]<UL><LI><a href="#[d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;decIntToHexStr
-<LI><a href="#[cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;decIntToDecStr
+<BR>[Called By]<UL><LI><a href="#[cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;decIntToHexStr
 </UL>
 
 <P><STRONG><a name="[cd]"></a>abs</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, abs.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;decIntToHexStr
-<LI><a href="#[cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;decIntToDecStr
+<BR><BR>[Called By]<UL><LI><a href="#[cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;decIntToHexStr
 </UL>
 
-<P><STRONG><a name="[d7]"></a>__aeabi_memcpy</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, rt_memcpy_v6.o(.text))
+<P><STRONG><a name="[d6]"></a>__aeabi_memcpy</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, rt_memcpy_v6.o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
@@ -1200,7 +1198,7 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cmdLCD
 </UL>
-<BR>[Called By]<UL><LI><a href="#[d8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;stringLCD
+<BR>[Called By]<UL><LI><a href="#[d7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;stringLCD
 </UL>
 
 <P><STRONG><a name="[c8]"></a>LCD_strobe</STRONG> (Thumb, 46 bytes, Stack size 16 bytes, lcd.o(.text.LCD_strobe))
@@ -1212,10 +1210,10 @@ Global Symbols
 <LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cmdLCD
 </UL>
 
-<P><STRONG><a name="[d6]"></a>SystemCoreClockUpdate</STRONG> (Thumb, 302 bytes, Stack size 24 bytes, system_stm32f4xx.o(.text.SystemCoreClockUpdate))
+<P><STRONG><a name="[d4]"></a>SystemCoreClockUpdate</STRONG> (Thumb, 302 bytes, Stack size 24 bytes, system_stm32f4xx.o(.text.SystemCoreClockUpdate))
 <BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = SystemCoreClockUpdate
 </UL>
-<BR>[Called By]<UL><LI><a href="#[d5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initLCD4
+<BR>[Called By]<UL><LI><a href="#[d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initLCD4
 </UL>
 
 <P><STRONG><a name="[64]"></a>SystemInit</STRONG> (Thumb, 110 bytes, Stack size 0 bytes, system_stm32f4xx.o(.text.SystemInit))
@@ -1225,7 +1223,7 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 4<LI>Call Chain = WaitLCDBusy
 </UL>
 <BR>[Called By]<UL><LI><a href="#[da]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;putLCD
-<LI><a href="#[d8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;stringLCD
+<LI><a href="#[d7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;stringLCD
 <LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cmdLCD
 </UL>
 
@@ -1237,28 +1235,13 @@ Global Symbols
 <LI><a href="#[ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WaitLCDBusy
 </UL>
 <BR>[Called By]<UL><LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_home
-<LI><a href="#[d4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;endlessScrollLCD
-<LI><a href="#[d8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;stringLCD
-<LI><a href="#[d5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initLCD4
+<LI><a href="#[d9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;scrollLCD
+<LI><a href="#[d7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;stringLCD
+<LI><a href="#[d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initLCD4
 <LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[cc]"></a>decIntToDecStr</STRONG> (Thumb, 96 bytes, Stack size 24 bytes, lcd.o(.text.decIntToDecStr))
-<BR><BR>[Stack]<UL><LI>Max Depth = 216 + Unknown Stack Size
-<LI>Call Chain = decIntToDecStr &rArr; __hardfp_log10 &rArr; log &rArr; __hardfp_log &rArr; __kernel_poly &rArr; __aeabi_dmul
-</UL>
-<BR>[Calls]<UL><LI><a href="#[cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_log10
-<LI><a href="#[d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_floor
-<LI><a href="#[ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_i2d
-<LI><a href="#[d2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_d2iz
-<LI><a href="#[d1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dadd
-<LI><a href="#[cd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;abs
-<LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sprintf
-</UL>
-<BR>[Called By]<UL><LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
-</UL>
-
-<P><STRONG><a name="[d3]"></a>decIntToHexStr</STRONG> (Thumb, 96 bytes, Stack size 24 bytes, lcd.o(.text.decIntToHexStr))
+<P><STRONG><a name="[cc]"></a>decIntToHexStr</STRONG> (Thumb, 96 bytes, Stack size 24 bytes, lcd.o(.text.decIntToHexStr))
 <BR><BR>[Stack]<UL><LI>Max Depth = 216 + Unknown Stack Size
 <LI>Call Chain = decIntToHexStr &rArr; __hardfp_log10 &rArr; log &rArr; __hardfp_log &rArr; __kernel_poly &rArr; __aeabi_dmul
 </UL>
@@ -1273,19 +1256,10 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[d4]"></a>endlessScrollLCD</STRONG> (Thumb, 20 bytes, Stack size 8 bytes, lcd.o(.text.endlessScrollLCD))
-<BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = endlessScrollLCD &rArr; cmdLCD &rArr; LCD_strobe &rArr; lcd_delayus
-</UL>
-<BR>[Calls]<UL><LI><a href="#[c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lcd_delayus
-<LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cmdLCD
-</UL>
-<BR>[Called By]<UL><LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
-</UL>
-
-<P><STRONG><a name="[d5]"></a>initLCD4</STRONG> (Thumb, 202 bytes, Stack size 24 bytes, lcd.o(.text.initLCD4))
+<P><STRONG><a name="[d3]"></a>initLCD4</STRONG> (Thumb, 180 bytes, Stack size 24 bytes, lcd.o(.text.initLCD4))
 <BR><BR>[Stack]<UL><LI>Max Depth = 64<LI>Call Chain = initLCD4 &rArr; cmdLCD &rArr; LCD_strobe &rArr; lcd_delayus
 </UL>
-<BR>[Calls]<UL><LI><a href="#[d6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemCoreClockUpdate
+<BR>[Calls]<UL><LI><a href="#[d4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemCoreClockUpdate
 <LI><a href="#[c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lcd_delayus
 <LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cmdLCD
 </UL>
@@ -1296,22 +1270,24 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = lcd_delayus
 </UL>
 <BR>[Called By]<UL><LI><a href="#[c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD_strobe
-<LI><a href="#[d4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;endlessScrollLCD
-<LI><a href="#[d5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initLCD4
+<LI><a href="#[d9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;scrollLCD
+<LI><a href="#[d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initLCD4
+<LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[9c]"></a>main</STRONG> (Thumb, 144 bytes, Stack size 80 bytes, main.o(.text.main))
+<P><STRONG><a name="[9c]"></a>main</STRONG> (Thumb, 156 bytes, Stack size 80 bytes, main.o(.text.main))
 <BR><BR>[Stack]<UL><LI>Max Depth = 296 + Unknown Stack Size
 <LI>Call Chain = main &rArr; decIntToHexStr &rArr; __hardfp_log10 &rArr; log &rArr; __hardfp_log &rArr; __kernel_poly &rArr; __aeabi_dmul
 </UL>
-<BR>[Calls]<UL><LI><a href="#[d7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
-<LI><a href="#[d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;decIntToHexStr
-<LI><a href="#[cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;decIntToDecStr
-<LI><a href="#[d9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;readPinValue
-<LI><a href="#[d4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;endlessScrollLCD
-<LI><a href="#[d8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;stringLCD
+<BR>[Calls]<UL><LI><a href="#[d6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
+<LI><a href="#[c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lcd_delayus
+<LI><a href="#[d9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;scrollLCD
+<LI><a href="#[d8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;readPinValue
+<LI><a href="#[cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;decIntToHexStr
+<LI><a href="#[d7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;stringLCD
 <LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cmdLCD
-<LI><a href="#[d5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initLCD4
+<LI><a href="#[d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initLCD4
+<LI><a href="#[d5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;switchInit
 </UL>
 <BR>[Called By]<UL><LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry_main
 </UL>
@@ -1323,11 +1299,20 @@ Global Symbols
 <LI><a href="#[cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;set_LCD_data
 <LI><a href="#[ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WaitLCDBusy
 </UL>
-<BR>[Called By]<UL><LI><a href="#[d8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;stringLCD
+<BR>[Called By]<UL><LI><a href="#[d7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;stringLCD
 </UL>
 
-<P><STRONG><a name="[d9]"></a>readPinValue</STRONG> (Thumb, 34 bytes, Stack size 8 bytes, switch.o(.text.readPinValue))
+<P><STRONG><a name="[d8]"></a>readPinValue</STRONG> (Thumb, 34 bytes, Stack size 8 bytes, switch.o(.text.readPinValue))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = readPinValue
+</UL>
+<BR>[Called By]<UL><LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+</UL>
+
+<P><STRONG><a name="[d9]"></a>scrollLCD</STRONG> (Thumb, 50 bytes, Stack size 16 bytes, lcd.o(.text.scrollLCD))
+<BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = scrollLCD &rArr; cmdLCD &rArr; LCD_strobe &rArr; lcd_delayus
+</UL>
+<BR>[Calls]<UL><LI><a href="#[c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lcd_delayus
+<LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cmdLCD
 </UL>
 <BR>[Called By]<UL><LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
@@ -1339,7 +1324,7 @@ Global Symbols
 <LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cmdLCD
 </UL>
 
-<P><STRONG><a name="[d8]"></a>stringLCD</STRONG> (Thumb, 132 bytes, Stack size 40 bytes, lcd.o(.text.stringLCD))
+<P><STRONG><a name="[d7]"></a>stringLCD</STRONG> (Thumb, 132 bytes, Stack size 40 bytes, lcd.o(.text.stringLCD))
 <BR><BR>[Stack]<UL><LI>Max Depth = 88<LI>Call Chain = stringLCD &rArr; LCD_home &rArr; cmdLCD &rArr; LCD_strobe &rArr; lcd_delayus
 </UL>
 <BR>[Calls]<UL><LI><a href="#[da]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;putLCD
@@ -1348,6 +1333,10 @@ Global Symbols
 <LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cmdLCD
 </UL>
 <BR>[Called By]<UL><LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+</UL>
+
+<P><STRONG><a name="[d5]"></a>switchInit</STRONG> (Thumb, 106 bytes, Stack size 0 bytes, switch.o(.text.switchInit))
+<BR><BR>[Called By]<UL><LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
 <P><STRONG><a name="[b9]"></a>_btod_d2e</STRONG> (Thumb, 62 bytes, Stack size 0 bytes, btod.o(CL$$btod_d2e))
@@ -1419,8 +1408,7 @@ Global Symbols
 <LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_drsub
 <LI><a href="#[d1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dadd
 </UL>
-<BR>[Called By]<UL><LI><a href="#[d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;decIntToHexStr
-<LI><a href="#[cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;decIntToDecStr
+<BR>[Called By]<UL><LI><a href="#[cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;decIntToHexStr
 </UL>
 
 <P><STRONG><a name="[e2]"></a>__hardfp_log</STRONG> (Thumb, 872 bytes, Stack size 88 bytes, log.o(i.__hardfp_log))
@@ -1456,8 +1444,7 @@ Global Symbols
 <LI><a href="#[ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_i2d
 <LI><a href="#[d1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dadd
 </UL>
-<BR>[Called By]<UL><LI><a href="#[d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;decIntToHexStr
-<LI><a href="#[cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;decIntToDecStr
+<BR>[Called By]<UL><LI><a href="#[cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;decIntToHexStr
 </UL>
 
 <P><STRONG><a name="[eb]"></a>__kernel_poly</STRONG> (Thumb, 248 bytes, Stack size 24 bytes, poly.o(i.__kernel_poly))
@@ -1548,8 +1535,7 @@ Global Symbols
 <LI><a href="#[e3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__mathlib_dbl_infnan
 <LI><a href="#[cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_log10
 <LI><a href="#[d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_floor
-<LI><a href="#[d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;decIntToHexStr
-<LI><a href="#[cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;decIntToDecStr
+<LI><a href="#[cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;decIntToHexStr
 </UL>
 
 <P><STRONG><a name="[ee]"></a>_dadd</STRONG> (Thumb, 332 bytes, Stack size 16 bytes, daddsub_clz.o(x$fpl$dadd), UNUSED)
@@ -1590,8 +1576,7 @@ Global Symbols
 <P><STRONG><a name="[d2]"></a>__aeabi_d2iz</STRONG> (Thumb, 0 bytes, Stack size 32 bytes, dfix.o(x$fpl$dfix))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = __aeabi_d2iz
 </UL>
-<BR>[Called By]<UL><LI><a href="#[d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;decIntToHexStr
-<LI><a href="#[cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;decIntToDecStr
+<BR>[Called By]<UL><LI><a href="#[cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;decIntToHexStr
 </UL>
 
 <P><STRONG><a name="[f5]"></a>_dfix</STRONG> (Thumb, 94 bytes, Stack size 32 bytes, dfix.o(x$fpl$dfix), UNUSED)
@@ -1601,8 +1586,7 @@ Global Symbols
 <P><STRONG><a name="[ce]"></a>__aeabi_i2d</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, dflt_clz.o(x$fpl$dflt))
 <BR><BR>[Called By]<UL><LI><a href="#[e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_log
 <LI><a href="#[cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_log10
-<LI><a href="#[d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;decIntToHexStr
-<LI><a href="#[cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;decIntToDecStr
+<LI><a href="#[cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;decIntToHexStr
 </UL>
 
 <P><STRONG><a name="[136]"></a>_dflt</STRONG> (Thumb, 46 bytes, Stack size 0 bytes, dflt_clz.o(x$fpl$dflt), UNUSED)

@@ -37,7 +37,7 @@ void putLCD(unsigned char put); //Prints character to LCD
 void stringLCD(char text[], int length,int line, int pos); //Prints string to LCD in a given position
 void decIntToDecStr(int num, char* a[], int* b);
 void decIntToHexStr(int num, char* a[], int* b);
-void scrollLCD(int time);	//Causes LCD screen to scroll a given number of positions, currently a blocking function pending timers and interrupts work
+void scrollLCD(int places);	//Causes LCD screen to scroll a given number of positions, currently a blocking function pending timers and interrupts work
 void endlessScrollLCD(void);	//Causes LCD screen to scroll endlessly, currently a blocking function pending timers and interrupts work
 void initLCD4(void); //Initialises LCD in 4-bit mode
 void initLCD8(void); //Initialises LCD in 8-bit mode
