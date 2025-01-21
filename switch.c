@@ -31,10 +31,9 @@ void switchInit(void)
 	set_BTN_pull_up(BTN3_PIN);	//Sets to pull up configuration
 }
 
-
-int readPinValue(int pin)
+int readBTNValue(int BTNnum)
 {	
-	int value = switch_PORT->IDR&=(1<<pin);
+	int value = switch_PORT->IDR&=(1<<BTNnum);
 	return value;
 }
 

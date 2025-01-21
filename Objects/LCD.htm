@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\LCD.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\LCD.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6180002: Last Updated: Tue Jan 21 10:16:06 2025
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6180002: Last Updated: Tue Jan 21 10:34:16 2025
 <BR><P>
 <H3>Maximum Stack Usage =        324 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -423,7 +423,7 @@ Global Symbols
 <P><STRONG><a name="[120]"></a>__rt_entry_postsh_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __rtentry2.o(.ARM.Collect$$rtentry$$00000009))
 
 <P><STRONG><a name="[9b]"></a>__rt_entry_main</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __rtentry2.o(.ARM.Collect$$rtentry$$0000000D))
-<BR><BR>[Stack]<UL><LI>Max Depth = 296 + Unknown Stack Size
+<BR><BR>[Stack]<UL><LI>Max Depth = 288 + Unknown Stack Size
 <LI>Call Chain = __rt_entry_main &rArr; main &rArr; decIntToHexStr &rArr; __hardfp_log10 &rArr; log &rArr; __hardfp_log &rArr; __kernel_poly &rArr; __aeabi_dmul
 </UL>
 <BR>[Calls]<UL><LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;exit
@@ -1275,14 +1275,14 @@ Global Symbols
 <LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[9c]"></a>main</STRONG> (Thumb, 156 bytes, Stack size 80 bytes, main.o(.text.main))
-<BR><BR>[Stack]<UL><LI>Max Depth = 296 + Unknown Stack Size
+<P><STRONG><a name="[9c]"></a>main</STRONG> (Thumb, 154 bytes, Stack size 72 bytes, main.o(.text.main))
+<BR><BR>[Stack]<UL><LI>Max Depth = 288 + Unknown Stack Size
 <LI>Call Chain = main &rArr; decIntToHexStr &rArr; __hardfp_log10 &rArr; log &rArr; __hardfp_log &rArr; __kernel_poly &rArr; __aeabi_dmul
 </UL>
 <BR>[Calls]<UL><LI><a href="#[d6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
 <LI><a href="#[c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lcd_delayus
 <LI><a href="#[d9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;scrollLCD
-<LI><a href="#[d8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;readPinValue
+<LI><a href="#[d8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;readBTNValue
 <LI><a href="#[cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;decIntToHexStr
 <LI><a href="#[d7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;stringLCD
 <LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cmdLCD
@@ -1302,8 +1302,8 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[d7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;stringLCD
 </UL>
 
-<P><STRONG><a name="[d8]"></a>readPinValue</STRONG> (Thumb, 34 bytes, Stack size 8 bytes, switch.o(.text.readPinValue))
-<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = readPinValue
+<P><STRONG><a name="[d8]"></a>readBTNValue</STRONG> (Thumb, 34 bytes, Stack size 8 bytes, switch.o(.text.readBTNValue))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = readBTNValue
 </UL>
 <BR>[Called By]<UL><LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>

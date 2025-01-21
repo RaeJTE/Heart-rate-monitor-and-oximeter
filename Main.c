@@ -28,7 +28,7 @@ int main(void)
 	int pin_0_prev = 0;
 	while(1)
 	{
-		int pin_0_press = readPinValue(0);
+		int pin_0_press = readBTNValue(0);
 		if(pin_0_press == 1 && pin_0_prev == 0)
 		{
 			scrollLCD(1);
