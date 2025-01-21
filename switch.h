@@ -28,7 +28,8 @@
 
 
 void LEDInit(void);	//Initialises green traffic LED
+void Toggle_LED (void); //Toggles LED
 void switchInit(void);	//Initialises 4 buttons
-int readBTNValue(int pin);	//Reads whether a specified 1 of the 4 buttons has been pressed
+int readBTNValue(int pin);	//Reads whether a specified 1 of the 4 buttons has been pressed - made easier by the 4 buttons using pins 0,1,2,3
 
 #endif

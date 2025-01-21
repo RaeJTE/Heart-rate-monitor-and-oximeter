@@ -10,6 +10,11 @@ void LEDInit(void)
 	set_LED_GRN_pull_up();	//Sets to pull up configuration
 }
 
+void Toggle_LED(void)
+{
+	GPIOB->ODR^=(1u<<LED_GRN);								//Toggles green traffic LED
+}
+
 void switchInit(void)
 {
 	switch_PORT_ENABLE();	//Clocks the port being used for inputs to enable it
@@ -31,7 +36,7 @@ void switchInit(void)
 	set_BTN_pull_up(BTN3_PIN);	//Sets to pull up configuration
 }
 
-int readBTNValue(int BTNnum)
+int readBTNValue(int BTNnum) //Reads whether a given button is being pressed - made easier by the 4 buttons using pins 0,1,2,3
 {	
 	int value = switch_PORT->IDR&=(1<<BTNnum);
 	return value;
