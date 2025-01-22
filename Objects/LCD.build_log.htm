@@ -21,33 +21,16 @@ Target DLL:      STLink\ST-LINKIII-KEIL_SWO.dll V3.0.9.0
 Dialog DLL:      TCM.DLL V1.56.1.0
  
 <h2>Project:</h2>
-C:\Users\jtrae\OneDrive - University of Plymouth\Documents\GitHub\Heart-rate-monitor-and-oximeter\Heart-rate-monitor-and-oximeter.uvprojx
-Project File Date:  01/21/2025
+C:\Users\jtrae\Documents\PROJ 200\Heart-rate-monitor-and-oximeter\Heart-rate-monitor-and-oximeter.uvprojx
+Project File Date:  01/22/2025
 
 <h2>Output:</h2>
 *** Using Compiler 'V6.18', folder: 'C:\Keil_v5\ARM\ARMCLANG\Bin'
 Build target 'Target 1'
-lcd.c(92): warning: implicitly declaring library function 'floor' with type 'double (double)' [-Wimplicit-function-declaration]
-        *b = floor(log10(abs(num)))+1; //Warnings can be ignored, identifying that the mathematical functions were designed for different variable types, but all still work with int
-             ^
-lcd.c(92): note: include the header <math.h> or explicitly provide a declaration for 'floor'
-lcd.c(92): warning: implicitly declaring library function 'log10' with type 'double (double)' [-Wimplicit-function-declaration]
-        *b = floor(log10(abs(num)))+1; //Warnings can be ignored, identifying that the mathematical functions were designed for different variable types, but all still work with int
-                   ^
-lcd.c(92): note: include the header <math.h> or explicitly provide a declaration for 'log10'
-lcd.c(92): warning: implicitly declaring library function 'abs' with type 'int (int)' [-Wimplicit-function-declaration]
-        *b = floor(log10(abs(num)))+1; //Warnings can be ignored, identifying that the mathematical functions were designed for different variable types, but all still work with int
-                         ^
-lcd.c(92): note: include the header <stdlib.h> or explicitly provide a declaration for 'abs'
-lcd.c(98): warning: implicitly declaring library function 'log' with type 'double (double)' [-Wimplicit-function-declaration]
-        *b = floor((log(abs(num))/log(16)))+1;
-                    ^
-lcd.c(98): note: include the header <math.h> or explicitly provide a declaration for 'log'
-4 warnings generated.
-compiling lcd.c...
+compiling main.c...
 linking...
-Program Size: Code=13220 RO-data=1116 RW-data=4 ZI-data=1632  
-".\Objects\LCD.axf" - 0 Error(s), 4 Warning(s).
+Program Size: Code=13476 RO-data=1116 RW-data=4 ZI-data=1632  
+".\Objects\LCD.axf" - 0 Error(s), 0 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -75,8 +58,8 @@ Package Vendor: Keil
    * Component: Keil::Device:Startup:2.6.3
       Source file:   MDK/Device/Source/ARM/STM32F4xx_OTP.s
       Include file:  Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h
-      Source file:   MDK/Device/Source/ARM/STM32F42xxx_43xxx_OPT.s
       Source file:   Drivers/CMSIS/Device/ST/STM32F4xx/Source/Templates/arm/startup_stm32f429xx.s
+      Source file:   MDK/Device/Source/ARM/STM32F42xxx_43xxx_OPT.s
       Source file:   Drivers/CMSIS/Device/ST/STM32F4xx/Source/Templates/system_stm32f4xx.c
 Build Time Elapsed:  00:00:00
 </pre>

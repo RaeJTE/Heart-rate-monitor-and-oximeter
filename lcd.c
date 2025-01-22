@@ -146,20 +146,24 @@ void initLCD4(void)	//Initialises the LCD in 4-bit mode
 	
 	lcd_delayus(41000);		//41ms startup delay
 	cmdLCD(0b0011);	//Function set 1: 4-bit, this requires all other instructions to be sent in 2 lines (see page 42 of HD44780U datasheet - individual commands on page 24)
-	lcd_delayus(41);
 	
-	cmdLCD(0b0011); //Function set 2: These lines sets 4-bit operation, 2-line display, 5x8 dot character display
+	lcd_delayus(60);
+	cmdLCD(0b0010); //Function set 2: These lines sets 4-bit operation, 2-line display, 5x8 dot character display
 	cmdLCD(0b1000);
-	lcd_delayus(41);
 	
+	lcd_delayus(60);
+	cmdLCD(0b0010); //Function set 3: These lines sets 4-bit operation, 2-line display, 5x8 dot character display
+	cmdLCD(0b1000);
+	
+	lcd_delayus(60);
 	cmdLCD(0b0000);	//Display on
 	cmdLCD(0b1100);
 	
-	lcd_delayus(41);
+	lcd_delayus(60);
 	cmdLCD(0b0000);	//Clear LCD
 	cmdLCD(0b0001);
 	
-	lcd_delayus(41);
+	lcd_delayus(2000);
 	cmdLCD(0b0000);	//Entry mode: auto increment with no shift
 	cmdLCD(0b0110);
 }
@@ -193,9 +197,12 @@ void initLCD8(void)	//Initialises the LCD in 4-bit mode
 	clr_LCD_E();
 	
 	lcd_delayus(41000);		//41ms startup delay
-	cmdLCD(0x38);	//Function set: 2 Line, 8-bit, 5x7 dots
-	cmdLCD(0x0c);	//Display on, Cursor blinking command
-	cmdLCD(0x01);	//Clear LCD
-	cmdLCD(0x06);	//Entry mode, auto increment with no shift
+	cmdLCD(0b00111000);	//Function set: 2 Line, 8-bit, 5x7 dots
+	lcd_delayus(60);
+	cmdLCD(0b00001100);	//Display on, Cursor blinking command
+	lcd_delayus(60);
+	cmdLCD(0b00000001);	//Clear LCD
+	lcd_delayus(2000);
+	cmdLCD(0b00000110);	//Entry mode, auto increment with no shift
 }
 
