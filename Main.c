@@ -36,9 +36,17 @@ int main(void)
 	char message[] = "4-bit mode";	//Creates a variable for a message to be displayed on the LCD
 	stringLCD(message, sizeof(message)/sizeof(message[0])-1, 0, 0); //Command to display message as defined above on LCD
 	stringLCD(message, sizeof(message)/sizeof(message[0])-1, 1, 5); //Command to display message as defined above on LCD second line shifted to the right
+	char messageHidden[] = "The Blue button scrolls.";	//Creates a variable for a message that requires blue button functionality to see
+	stringLCD(messageHidden, sizeof(messageHidden)/sizeof(messageHidden[0])-1, 0, 16);
 	
-	while(readBTNValue(BLU_PORT, BLU_BTN) == 0){}
-	Toggle_LED();
-	LCD_CLR();
+	while(1)
+	{
+		lcd_delayus(2000);
+		if (readBTNValue(BLU_PORT, BLU_BTN))
+		{
+			scrollLCD(1);
+			Toggle_LED();
+		}
+	}
 	
 }
