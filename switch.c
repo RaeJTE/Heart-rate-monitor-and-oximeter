@@ -19,9 +19,9 @@ void BLU_BTN_INIT(GPIO_TypeDef *PORT, unsigned int BIT)
 	RCC->AHB1ENR |= RCC_AHB1ENR_GPIOCEN;
 	
 	//Configure port
-	PORT->MODER &= ~(3UL << (2*BIT));		//Clear GPIOC1 & GPIOC0 - default INPUT state, this is the desired state
-	PORT->OSPEEDR &= ~(3UL << (2*BIT));	//Make Bit0 Speed 2Mhz to save power
-	PORT->PUPDR &= ~(3UL <<(2*BIT));			// Turn off Pullup and Pull down resistors for Bit0
+	PORT->MODER |= (0UL << (2*BIT));		//Set BIT to output mode
+	PORT->OSPEEDR |= (0UL << (2*BIT));	//Make BIT Speed 2Mhz to save power
+	PORT->PUPDR |= (3UL <<(2*BIT));			// Turn off Pullup and Pull down resistors for BIT
 }
 
 void Toggle_LED(void)

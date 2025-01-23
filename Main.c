@@ -26,16 +26,18 @@ int main(void)
 	//endlessScrollLCD(); //Causes LCD screen to scroll endlessly
 	
 	//Delay before changing to 4-bit mode
-	lcd_delayus(50000);
+	lcd_delayus(20000);
+	RCC->AHB1ENR |= ~RCC_AHB1ENR_GPIOBEN;	//Turns port B off to show that 4-bit initialisation works on its own
 	
 	initLCD4();	//Initialisation of LCD in 4-bit mode
 	cmdLCD(LCD_LINE1);
 	LCD_CLR();
-	char message[] = "4-bit mode";
-	stringLCD(message, sizeof(message)/sizeof(message[0])-1, 0, 0); //Command to display message as defined above on LCD
-	stringLCD(message, sizeof(message)/sizeof(message[0])-1, 1, 0); //Command to display message as defined above on LCD second line
 	
-	while(readBTNValue(BLU_PORT, BLU_BTN) == 0) {}
+	char message[] = "4-bit mode";	//Creates a variable for a message to be displayed on the LCD
+	stringLCD(message, sizeof(message)/sizeof(message[0])-1, 0, 0); //Command to display message as defined above on LCD
+	stringLCD(message, sizeof(message)/sizeof(message[0])-1, 1, 5); //Command to display message as defined above on LCD second line shifted to the right
+	
+	while(readBTNValue(BLU_PORT, BLU_BTN) == 0){}
 	Toggle_LED();
 	LCD_CLR();
 	

@@ -11,7 +11,7 @@
 //Inputs
 	//Blue button
 	#define BLU_PORT GPIOC	//Defines the port used by the blue button
-	#define BLU_BTN 0	//Defines the pin used by the blue button
+	#define BLU_BTN 13	//Defines the pin used by the blue button
 	//ABCD buttons
 	#define switch_PORT GPIOG	//Defines the port used for switch inputs
 	#define BTN0_PIN	0	//Defines pin used by button 0
@@ -19,7 +19,7 @@
 	#define BTN2_PIN	2	//Defines pin used by button 2
 	#define BTN3_PIN	3	//Defines pin used by button 3
 //Initialisation commands
-#define switch_PORT_ENABLE() 		RCC->AHB1ENR 					|= 1<<5							//Defines command to clock to switch port (port G/5) to enable it
+#define switch_PORT_ENABLE() 		RCC->AHB1ENR 					|= RCC_AHB1ENR_GPIOGEN							//Defines command to clock to switch port (port G) to enable it
 
 #define set_BTN_input(BTN_num)				switch_PORT->MODER 		|= 0<<(2*BTN_num)	//Defines command to set a button of given number to input mode
 #define set_BTN_lowspeed(BTN_num)			switch_PORT->OSPEEDR 	|= 0<<(2*BTN_num)	//Defines command to set a button of given number to 2MHz (low speed) operation to save power
