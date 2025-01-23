@@ -8,7 +8,7 @@
 int main(void)
 {
 	//Initialisation of switches
-	switchInit();
+	BLU_BTN_INIT(BLU_PORT, BLU_BTN);
 	//Initialisation of green traffic LED
 	LED_INIT(LED_PORT, LED_GRN);
 	//Initialisation of LCD in 8-bit mode
@@ -26,7 +26,7 @@ int main(void)
 	//endlessScrollLCD(); //Causes LCD screen to scroll endlessly
 	
 	//Delay before changing to 4-bit mode
-	lcd_delayus(100000);
+	lcd_delayus(50000);
 	
 	initLCD4();	//Initialisation of LCD in 4-bit mode
 	cmdLCD(LCD_LINE1);
@@ -35,17 +35,8 @@ int main(void)
 	stringLCD(message, sizeof(message)/sizeof(message[0])-1, 0, 0); //Command to display message as defined above on LCD
 	stringLCD(message, sizeof(message)/sizeof(message[0])-1, 1, 0); //Command to display message as defined above on LCD second line
 	
-	while(1)
-	{
-		int pin_0_press = readBTNValue(0);
-		int pin_1_press = readBTNValue(1);
-		int pin_2_press = readBTNValue(2);
-		int pin_3_press = readBTNValue(3);
-		if(pin_0_press + pin_1_press + pin_2_press + pin_3_press == 1)
-		{
-			Toggle_LED();
-		}
-		lcd_delayus(1000);
-	}
+	while(readBTNValue(BLU_PORT, BLU_BTN) == 0) {}
+	Toggle_LED();
+	LCD_CLR();
 	
 }

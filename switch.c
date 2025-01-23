@@ -2,13 +2,24 @@
 
 void LED_INIT(GPIO_TypeDef *PORT, unsigned int BIT)
 {
-	//ENABLE PORT(S)
+	//ENABLE PORT
 	RCC->AHB1ENR |= RCC_AHB1ENR_GPIOBEN;	//ONLY GPIO B clock enable
 	
 	//CONFIGURE PORT:GPIOB  PIN:0 TO OUTPUT for LED1
 	PORT->MODER &= ~(3UL << (2*BIT));		//Clear GPIOB1 & GPIOB0 - default INPUT state
 	PORT->MODER |= (1UL << (2*BIT));			//ONLY set  GPIOB0 make Bit0 OUTPUT
 	PORT->OTYPER &= ~(1UL << BIT);				// Make Bit0 output PUSH-PULL
+	PORT->OSPEEDR &= ~(3UL << (2*BIT));	//Make Bit0 Speed 2Mhz to save power
+	PORT->PUPDR &= ~(3UL <<(2*BIT));			// Turn off Pullup and Pull down resistors for Bit0
+}
+
+void BLU_BTN_INIT(GPIO_TypeDef *PORT, unsigned int BIT)
+{
+	//Enable port
+	RCC->AHB1ENR |= RCC_AHB1ENR_GPIOCEN;
+	
+	//Configure port
+	PORT->MODER &= ~(3UL << (2*BIT));		//Clear GPIOC1 & GPIOC0 - default INPUT state, this is the desired state
 	PORT->OSPEEDR &= ~(3UL << (2*BIT));	//Make Bit0 Speed 2Mhz to save power
 	PORT->PUPDR &= ~(3UL <<(2*BIT));			// Turn off Pullup and Pull down resistors for Bit0
 }
@@ -39,9 +50,10 @@ void switchInit(void)
 	set_BTN_pull_up(BTN3_PIN);	//Sets to pull up configuration
 }
 
-int readBTNValue(int BTNnum) //Reads whether a given button is being pressed - made easier by the 4 buttons using pins 0,1,2,3
+int readBTNValue(GPIO_TypeDef *PORT, unsigned int BIT) //Reads whether a given button is being pressed - made easier by the 4 buttons using pins 0,1,2,3
 {	
-	int value = switch_PORT->IDR&=(1<<BTNnum);
+	int value = PORT->IDR;	//Check pages 23 and 31 of GPIO lecture notes
+	value &= (1<<BIT);
 	return value;
 }
 

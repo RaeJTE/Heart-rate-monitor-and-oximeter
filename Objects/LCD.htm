@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\LCD.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\LCD.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6180002: Last Updated: Thu Jan 23 15:38:10 2025
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6180002: Last Updated: Thu Jan 23 16:12:32 2025
 <BR><P>
 <H3>Maximum Stack Usage =        324 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -423,7 +423,7 @@ Global Symbols
 <P><STRONG><a name="[120]"></a>__rt_entry_postsh_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __rtentry2.o(.ARM.Collect$$rtentry$$00000009))
 
 <P><STRONG><a name="[9b]"></a>__rt_entry_main</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __rtentry2.o(.ARM.Collect$$rtentry$$0000000D))
-<BR><BR>[Stack]<UL><LI>Max Depth = 296 + Unknown Stack Size
+<BR><BR>[Stack]<UL><LI>Max Depth = 280 + Unknown Stack Size
 <LI>Call Chain = __rt_entry_main &rArr; main &rArr; decIntToDecStr &rArr; __hardfp_log10 &rArr; log &rArr; __hardfp_log &rArr; __kernel_poly &rArr; __aeabi_dmul
 </UL>
 <BR>[Calls]<UL><LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;exit
@@ -1175,6 +1175,12 @@ Global Symbols
 
 <P><STRONG><a name="[12c]"></a>__semihosting_library_function</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, indicate_semi.o(.text), UNUSED)
 
+<P><STRONG><a name="[d7]"></a>BLU_BTN_INIT</STRONG> (Thumb, 76 bytes, Stack size 8 bytes, switch.o(.text.BLU_BTN_INIT))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = BLU_BTN_INIT
+</UL>
+<BR>[Called By]<UL><LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+</UL>
+
 <P><STRONG><a name="[c4]"></a>LCD_home</STRONG> (Thumb, 10 bytes, Stack size 8 bytes, lcd.o(.text.LCD_home))
 <BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = LCD_home &rArr; cmdLCD &rArr; LCD_strobe &rArr; lcd_delayus
 </UL>
@@ -1294,8 +1300,8 @@ Global Symbols
 <LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[9c]"></a>main</STRONG> (Thumb, 276 bytes, Stack size 80 bytes, main.o(.text.main))
-<BR><BR>[Stack]<UL><LI>Max Depth = 296 + Unknown Stack Size
+<P><STRONG><a name="[9c]"></a>main</STRONG> (Thumb, 248 bytes, Stack size 64 bytes, main.o(.text.main))
+<BR><BR>[Stack]<UL><LI>Max Depth = 280 + Unknown Stack Size
 <LI>Call Chain = main &rArr; decIntToDecStr &rArr; __hardfp_log10 &rArr; log &rArr; __hardfp_log &rArr; __kernel_poly &rArr; __aeabi_dmul
 </UL>
 <BR>[Calls]<UL><LI><a href="#[db]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Toggle_LED
@@ -1308,7 +1314,7 @@ Global Symbols
 <LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cmdLCD
 <LI><a href="#[d6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initLCD8
 <LI><a href="#[d8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LED_INIT
-<LI><a href="#[d7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;switchInit
+<LI><a href="#[d7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BLU_BTN_INIT
 </UL>
 <BR>[Called By]<UL><LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry_main
 </UL>
@@ -1323,8 +1329,8 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[d9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;stringLCD
 </UL>
 
-<P><STRONG><a name="[da]"></a>readBTNValue</STRONG> (Thumb, 34 bytes, Stack size 8 bytes, switch.o(.text.readBTNValue))
-<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = readBTNValue
+<P><STRONG><a name="[da]"></a>readBTNValue</STRONG> (Thumb, 32 bytes, Stack size 12 bytes, switch.o(.text.readBTNValue))
+<BR><BR>[Stack]<UL><LI>Max Depth = 12<LI>Call Chain = readBTNValue
 </UL>
 <BR>[Called By]<UL><LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
@@ -1345,10 +1351,6 @@ Global Symbols
 <LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cmdLCD
 </UL>
 <BR>[Called By]<UL><LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
-</UL>
-
-<P><STRONG><a name="[d7]"></a>switchInit</STRONG> (Thumb, 106 bytes, Stack size 0 bytes, switch.o(.text.switchInit))
-<BR><BR>[Called By]<UL><LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
 <P><STRONG><a name="[b7]"></a>_btod_d2e</STRONG> (Thumb, 62 bytes, Stack size 0 bytes, btod.o(CL$$btod_d2e))
