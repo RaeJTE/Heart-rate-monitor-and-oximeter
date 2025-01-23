@@ -1,18 +1,21 @@
 #include "switch.h"
 
-void LEDInit(void)
+void LED_INIT(GPIO_TypeDef *PORT, unsigned int BIT)
 {
-	LED_PORT_ENABLE();	//Clocks the port being used for inputs to enable it
-	//Green traffic LED
-	set_LED_GRN_output(); //Sets to output mode
-	set_LED_GRN_pushPull(); //Sets to push-pull output
-	set_LED_GRN_lowspeed();	//Sets to 2MHz (low speed) operation to save power
-	set_LED_GRN_pull_up();	//Sets to pull up configuration
+	//ENABLE PORT(S)
+	RCC->AHB1ENR |= RCC_AHB1ENR_GPIOBEN;	//ONLY GPIO B clock enable
+	
+	//CONFIGURE PORT:GPIOB  PIN:0 TO OUTPUT for LED1
+	PORT->MODER &= ~(3UL << (2*BIT));		//Clear GPIOB1 & GPIOB0 - default INPUT state
+	PORT->MODER |= (1UL << (2*BIT));			//ONLY set  GPIOB0 make Bit0 OUTPUT
+	PORT->OTYPER &= ~(1UL << BIT);				// Make Bit0 output PUSH-PULL
+	PORT->OSPEEDR &= ~(3UL << (2*BIT));	//Make Bit0 Speed 2Mhz to save power
+	PORT->PUPDR &= ~(3UL <<(2*BIT));			// Turn off Pullup and Pull down resistors for Bit0
 }
 
 void Toggle_LED(void)
 {
-	GPIOB->ODR^=(1u<<LED_GRN);								//Toggles green traffic LED
+	GPIOB->ODR^=(0b00000001<<LED_GRN);								//Toggles green LED
 }
 
 void switchInit(void)
