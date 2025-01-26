@@ -70,10 +70,7 @@ void stringLCD(char text[], int length, int line, int pos) //To print strings on
 	LCD_home();
 	if(line == 1)	//Moves to second line if told to do so via line variable
 	{
-		for(int i = 0; i<(40); i++)
-		{
-		cmdLCD(0b10100);
-		}
+		cmdLCD(0b11000);
 	}
 	for(int i = 0; i<pos; i++)	//Moves a given number of spaces forward on the LCD
 	{
@@ -157,7 +154,7 @@ void initLCD4(void)	//Initialises the LCD in 4-bit mode
 	
 	lcd_delayus(60);
 	cmdLCD(0b0000);	//Display on
-	cmdLCD(0b1100);
+	cmdLCD(0b1110);
 	
 	lcd_delayus(60);
 	cmdLCD(0b0000);	//Clear LCD
