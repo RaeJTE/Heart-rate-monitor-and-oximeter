@@ -13,17 +13,17 @@
 	#define BLU_PORT GPIOC	//Defines the port used by the blue button
 	#define BLU_BTN 13	//Defines the pin used by the blue button
 	//ABCD buttons
-	#define switch_PORT GPIOG	//Defines the port used for switch inputs
-	#define BTN0_PIN	0	//Defines pin used by button 0
-	#define BTN1_PIN	1	//Defines pin used by button 1
-	#define BTN2_PIN	2	//Defines pin used by button 2
-	#define BTN3_PIN	3	//Defines pin used by button 3
+	#define FOUR_BTN_PORT GPIOG	//Defines the port used for switch inputs
+	#define BTN0	0	//Defines pin used by button 0
+	#define BTN1	1	//Defines pin used by button 1
+	#define BTN2	2	//Defines pin used by button 2
+	#define BTN3	3	//Defines pin used by button 3
 //Initialisation commands
 #define FOUR_BTN_PORT_ENABLE() 		RCC->AHB1ENR 					|= RCC_AHB1ENR_GPIOGEN							//Defines command to clock to four button port (port G) to enable it
 
-#define set_BTN_input(BTN_num)				switch_PORT->MODER 		|= 0ul<<(2*BTN_num)	//Defines command to set a button of given number to input mode
-#define set_BTN_lowspeed(BTN_num)			switch_PORT->OSPEEDR 	|= 0ul<<(2*BTN_num)	//Defines command to set a button of given number to 2MHz (low speed) operation to save power
-#define set_BTN_not_pull_up(BTN_num)			switch_PORT->PUPDR 		|= 3ul<<(2*BTN_num)	//Defines command to set a button of given number to not use internal pull up configuration
+#define set_BTN_input(BTN_num)				FOUR_BTN_PORT->MODER 		|= 0ul<<(2*BTN_num)	//Defines command to set a button of given number to input mode
+#define set_BTN_lowspeed(BTN_num)			FOUR_BTN_PORT->OSPEEDR 	|= 0ul<<(2*BTN_num)	//Defines command to set a button of given number to 2MHz (low speed) operation to save power
+#define set_BTN_not_pull_up(BTN_num)	FOUR_BTN_PORT->PUPDR 		|= 3ul<<(2*BTN_num)	//Defines command to set a button of given number to not use internal pull up configuration
 //Activation commands
 #define LEDon(PORT, BIT)   ((PORT->ODR) |= (1U << BIT))		// Macro to set port bit - not BSRR (Here to test responsiveness of buttons)
 #define LEDoff(PORT, BIT)   ((PORT->ODR) &= ~(1U << (BIT))) // Macro to clear port bit - not BSRR (Here to test responsiveness of buttons)
