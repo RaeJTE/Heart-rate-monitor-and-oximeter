@@ -40,30 +40,41 @@ int main(void)
 	char messageHidden[] = "The Blue button scrolls.";	//Creates a variable for a message that requires blue button functionality to see
 	stringLCD(messageHidden, sizeof(messageHidden)/sizeof(messageHidden[0])-1, 0, 16);	//Displayes a message ont he LCD which requires scrolling to see
 
+	int BLUE_BTN_PRESSES = 0; //Variable which will be used to check whether the blue button is being held
+
 	while(1)	//While loop to repeatedly check for button presses, may be replaced with interrupts once code is merged with partner's work
 	{
-		lcd_delayus(2000);
-		if (readBTNValue(BLU_PORT, BLU_BTN))	//Scrolls LCD when blue button is pressed, holding works to continuously scroll
+		if(readBTNValue(BLU_PORT, BLU_BTN))	//Scrolls LCD when blue button is pressed, holding works to continuously scroll - holding long enough will activate endless scroll
 		{
 			scrollLCD(1);
 			Toggle_LED();
+			BLUE_BTN_PRESSES++;	//Used to check whether the blue button is being held
 		}
-		if (readBTNValue(FOUR_BTN_PORT, BTN0))	//Displays message saying when button 0 is pressed
+		else
+		{
+			BLUE_BTN_PRESSES = 0;	//Used to indicate the blue button has been released
+		}
+		if(BLUE_BTN_PRESSES >= 1000)	//If blue button is held (no releases are detected over 'held' period) activates endless scroll mode
+		{
+			endlessScrollLCD();
+		}
+		if(readBTNValue(FOUR_BTN_PORT, BTN0))	//Displays message saying when button 0 is pressed
 		{
 			stringLCD("Button 0 pressed", 16, 0, 0);
 		}
-		if (readBTNValue(FOUR_BTN_PORT, BTN1))	//Displays message saying when button 1 is pressed
+		if(readBTNValue(FOUR_BTN_PORT, BTN1))	//Displays message saying when button 1 is pressed
 		{
 			stringLCD("Button 1 pressed", 16, 0, 0);
 		}
-		if (readBTNValue(FOUR_BTN_PORT, BTN2))	//Displays message saying when button 2 is pressed
+		if(readBTNValue(FOUR_BTN_PORT, BTN2))	//Displays message saying when button 2 is pressed
 		{
 			stringLCD("Button 2 pressed", 16, 0, 0);
 		}
-		if (readBTNValue(FOUR_BTN_PORT, BTN3))	//Displays message saying when button 3 is pressed
+		if(readBTNValue(FOUR_BTN_PORT, BTN3))	//Displays message saying when button 3 is pressed
 		{
 			stringLCD("Button 3 pressed", 16, 0, 0);
 		}
+		lcd_delayus(1000);	//Switch debounce delay
 	}
 	
 }
