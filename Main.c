@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include "switch.h"
 #include "lcd.h"
+#include "DAC.h"
 //Definitions
 #define name "Jacob Rae"
 
@@ -42,7 +43,7 @@ int main(void)
 
 	int BLUE_BTN_PRESSES = 0; //Variable which will be used to check whether the blue button is being held
 
-	while(1)	//While loop to repeatedly check for button presses, may be replaced with interrupts once code is merged with partner's work
+	/*while(1)	//While loop to repeatedly check for button presses, may be replaced with interrupts once code is merged with partner's work
 	{
 		if(readBTNValue(BLU_PORT, BLU_BTN))	//Scrolls LCD when blue button is pressed, holding works to continuously scroll - holding long enough will activate endless scroll
 		{
@@ -54,27 +55,54 @@ int main(void)
 		{
 			BLUE_BTN_PRESSES = 0;	//Used to indicate the blue button has been released
 		}
-		if(BLUE_BTN_PRESSES >= 1000)	//If blue button is held (no releases are detected over 'held' period) activates endless scroll mode
+		if(BLUE_BTN_PRESSES >= 10)	//If blue button is held (no releases are detected over 'held' period) activates endless scroll mode
 		{
 			endlessScrollLCD();
 		}
 		if(readBTNValue(FOUR_BTN_PORT, BTN0))	//Displays message saying when button 0 is pressed
 		{
 			stringLCD("Button 0 pressed", 16, 0, 0);
+			lcd_delayus(100000);
+			LCD_CLR();
 		}
 		if(readBTNValue(FOUR_BTN_PORT, BTN1))	//Displays message saying when button 1 is pressed
 		{
 			stringLCD("Button 1 pressed", 16, 0, 0);
+			lcd_delayus(100000);
+			LCD_CLR();
 		}
 		if(readBTNValue(FOUR_BTN_PORT, BTN2))	//Displays message saying when button 2 is pressed
 		{
 			stringLCD("Button 2 pressed", 16, 0, 0);
+			lcd_delayus(100000);
+			LCD_CLR();
 		}
 		if(readBTNValue(FOUR_BTN_PORT, BTN3))	//Displays message saying when button 3 is pressed
 		{
 			stringLCD("Button 3 pressed", 16, 0, 0);
+			lcd_delayus(100000);
+			LCD_CLR();  
 		}
-		lcd_delayus(1000);	//Switch debounce delay
+		
+		lcd_delayus(100);	//Switch debounce delay
+	}*/
+	
+	LCD_CLR();
+	
+	
+	//------CURRENTLY NOT WORKING AS INTENDED------
+	
+	while(1)	//While loop for DAC output
+	{
+		stringLCD("DAC active", 10, 0, 0);	//Used for testing so I could tell DACs were meant to be on
+		//Turns output high on both DACS
+		output_dac1(1);
+		output_dac2(1);
+		lcd_delayus(100000);	//Delay so high level can be seen
+		//Sets output low on both DACs
+		output_dac1(0);
+		output_dac2(0);
+		lcd_delayus(100000);	//Delay so low level can be seen
 	}
 	
 }
