@@ -6,6 +6,8 @@
 //Definitions
 #define name "Jacob Rae"
 
+//4-bit mode not working
+
 int main(void)
 {
 	//Initialisation of switches
@@ -27,7 +29,7 @@ int main(void)
 	//endlessScrollLCD(); //Causes LCD screen to scroll endlessly
 	
 	//Delay before changing to 4-bit mode
-	lcd_delayus(20000);
+	lcd_delayus(50000);
 	RCC->AHB1ENR |= ~RCC_AHB1ENR_GPIOBEN;	//Turns port B off to show that 4-bit initialisation works on its own
 	lcd_delayus(20000);
 	
@@ -43,7 +45,7 @@ int main(void)
 
 	int BLUE_BTN_PRESSES = 0; //Variable which will be used to check whether the blue button is being held
 
-	/*while(1)	//While loop to repeatedly check for button presses, may be replaced with interrupts once code is merged with partner's work
+	while(1)	//While loop to repeatedly check for button presses, may be replaced with interrupts once code is merged with partner's work
 	{
 		if(readBTNValue(BLU_PORT, BLU_BTN))	//Scrolls LCD when blue button is pressed, holding works to continuously scroll - holding long enough will activate endless scroll
 		{
@@ -71,7 +73,7 @@ int main(void)
 			lcd_delayus(100000);
 			LCD_CLR();
 		}
-		if(readBTNValue(FOUR_BTN_PORT, BTN2))	//Displays message saying when button 2 is pressed
+		/*if(readBTNValue(FOUR_BTN_PORT, BTN2))	//Displays message saying when button 2 is pressed
 		{
 			stringLCD("Button 2 pressed", 16, 0, 0);
 			lcd_delayus(100000);
@@ -83,15 +85,17 @@ int main(void)
 			lcd_delayus(100000);
 			LCD_CLR();  
 		}
-		
+		*/
 		lcd_delayus(100);	//Switch debounce delay
-	}*/
+	}
 	
-	LCD_CLR();
+	
+	
 	
 	
 	//------CURRENTLY NOT WORKING AS INTENDED------
 	
+	/*	LCD_CLR();
 	while(1)	//While loop for DAC output
 	{
 		stringLCD("DAC active", 10, 0, 0);	//Used for testing so I could tell DACs were meant to be on
@@ -99,10 +103,13 @@ int main(void)
 		output_dac1(1);
 		output_dac2(1);
 		lcd_delayus(100000);	//Delay so high level can be seen
-		//Sets output low on both DACs
+		//Sets output low on both DACs - makes square wave
 		output_dac1(0);
 		output_dac2(0);
 		lcd_delayus(100000);	//Delay so low level can be seen
-	}
+	}*/
+	
+	
+	
 	
 }

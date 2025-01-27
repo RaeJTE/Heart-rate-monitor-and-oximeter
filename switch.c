@@ -40,8 +40,8 @@ void FOUR_BTN_INIT(GPIO_TypeDef *PORT, unsigned int BIT0, unsigned int BIT1, uns
 	//Sets the pins for the four buttons to not use internal pull-up or pull-down resistors
 	set_BTN_not_pull_up(BIT0);
 	set_BTN_not_pull_up(BIT1);
-	set_BTN_not_pull_up(BIT2);
-	set_BTN_not_pull_up(BIT3);
+	set_BTN_not_pull_up(BIT2);	//Add pull-up pull down resistor
+	set_BTN_not_pull_up(BIT3);	//Add pull-up pull down resistor
 }
 
 void Toggle_LED(void)
