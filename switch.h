@@ -23,6 +23,7 @@
 
 #define set_BTN_input(BTN_num)				FOUR_BTN_PORT->MODER 		|= 0ul<<(2*BTN_num)	//Defines command to set a button of given number to input mode
 #define set_BTN_lowspeed(BTN_num)			FOUR_BTN_PORT->OSPEEDR 	|= 0ul<<(2*BTN_num)	//Defines command to set a button of given number to 2MHz (low speed) operation to save power
+#define set_BTN_pull_up(BTN_num)			FOUR_BTN_PORT->PUPDR 		|= 2ul<<(2*BTN_num)	//Defines command to set a button of given number to use internal pull up
 #define set_BTN_not_pull_up(BTN_num)	FOUR_BTN_PORT->PUPDR 		|= 3ul<<(2*BTN_num)	//Defines command to set a button of given number to not use internal pull up configuration
 //Activation commands
 #define LEDon(PORT, BIT)   ((PORT->ODR) |= (1U << BIT))		// Macro to set port bit - not BSRR (Here to test responsiveness of buttons)

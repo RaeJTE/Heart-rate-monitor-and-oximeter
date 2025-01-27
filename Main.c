@@ -73,7 +73,7 @@ int main(void)
 			lcd_delayus(100000);
 			LCD_CLR();
 		}
-		/*if(readBTNValue(FOUR_BTN_PORT, BTN2))	//Displays message saying when button 2 is pressed
+		if(readBTNValue(FOUR_BTN_PORT, BTN2))	//Displays message saying when button 2 is pressed
 		{
 			stringLCD("Button 2 pressed", 16, 0, 0);
 			lcd_delayus(100000);
@@ -85,7 +85,7 @@ int main(void)
 			lcd_delayus(100000);
 			LCD_CLR();  
 		}
-		*/
+		
 		lcd_delayus(100);	//Switch debounce delay
 	}
 	
