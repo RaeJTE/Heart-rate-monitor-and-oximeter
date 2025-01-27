@@ -1,11 +1,13 @@
 //Includes
 #include <stdio.h>
+#include <math.h>
 #include "switch.h"
 #include "lcd.h"
 #include "DAC.h"
 #include "ADC.h"
 //Definitions
 #define name "Jacob Rae"
+#define pi 3.14159
 
 //4-bit mode not working
 
@@ -36,11 +38,16 @@ int main(void)
 	stringLCD(num, numLen, 1, numLen+3); //Command to display hexadecimal number on LCD
 	//endlessScrollLCD(); //Causes LCD screen to scroll endlessly
 	
+	lcd_delayus(100000);	//Delay to allow reading of LCD display
+	
+	LCD_CLR();
 	char message[] = "8-bit mode";	//Creates a variable for a message to be displayed on the LCD
 	//stringLCD(message, sizeof(message)/sizeof(message[0])-1, 0, 0); //Command to display message as defined above on LCD
 	stringLCD(message, sizeof(message)/sizeof(message[0])-1, 1, 5); //Command to display message as defined above on LCD second line shifted to the right
 	char messageHidden[] = "The Blue button scrolls.";	//Creates a variable for a message that requires blue button functionality to see
 	stringLCD(messageHidden, sizeof(messageHidden)/sizeof(messageHidden[0])-1, 0, 16);	//Displayes a message ont he LCD which requires scrolling to see
+	
+	lcd_delayus(100000);	//Delay to allow reading of LCD display
 
 	int BLUE_BTN_PRESSES = 0; //Variable which will be used to check whether the blue button is being held
 
@@ -93,11 +100,31 @@ int main(void)
 	
 	LCD_CLR();
 	
-	while(i < 3000)	//While loop for square wave DAC output, finite so multiple waves can be tested in succession
+	output_dac1(100);			//Generates a constant output from DAC2, use values from 0-900
+	lcd_delayus(100000);
+	output_dac1(400);			//Generates a constant output from DAC2, use values from 0-900 
+	lcd_delayus(100000);
+	output_dac1(72);			//Generates a constant output from DAC2, use values from 0-900 
+	lcd_delayus(100000);
+	
+	while(i < 200)	//While loop for square wave DAC output, finite so multiple waves can be tested in succession
 	{
-		output_dac1(300);			//Generates a constant output from DAC2, use values from 0-9000 
+		
+		output_dac1(300);			//Generates a constant output from DAC1, use values from 0-8000ish based on values read in and re-outputted from LDR in intiial tests with example code
 		lcd_delayus(1000);
 		output_dac1(0);	//0s output from DAC2, with time delays creates a square wave
+		lcd_delayus(1000);
+		i++;
+	}
+	
+	i = 0;
+	
+	while(i < 3600)	//While loop for sine wave output from DAC2
+	{
+		double angle_radians = i*(2*pi)/360;
+		output_dac2(sin(angle_radians));
+		decIntToDecStr(angle_radians, &num, &numLen);
+		stringLCD(num, 6, 0, 0);
 		lcd_delayus(1000);
 		i++;
 	}
