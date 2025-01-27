@@ -3,6 +3,7 @@
 #include "switch.h"
 #include "lcd.h"
 #include "DAC.h"
+#include "ADC.h"
 //Definitions
 #define name "Jacob Rae"
 
@@ -18,6 +19,13 @@ int main(void)
 	initLCD8();
 	cmdLCD(LCD_LINE1);
 	LCD_CLR();
+	//Initiliases the ADC and DAC
+	init_ADC();
+	init_DAC();
+	
+	//Creating variables to be used later
+	unsigned short i = 0;	//For counting and for loops
+	unsigned short ADC_DATA;	//Variable to store ADC data, rapidly overwritten
 
 	stringLCD(name, sizeof(name)/sizeof(name[0])-1, 0, 0); //Command to display name as defined at top of main.c on LCD
 	char* num;	//Creates a pointer to be used to store a string conversion of a number - pointer necessary because of pointer decay when moving between .c files
@@ -28,16 +36,7 @@ int main(void)
 	stringLCD(num, numLen, 1, numLen+3); //Command to display hexadecimal number on LCD
 	//endlessScrollLCD(); //Causes LCD screen to scroll endlessly
 	
-	//Delay before changing to 4-bit mode
-	lcd_delayus(50000);
-	RCC->AHB1ENR |= ~RCC_AHB1ENR_GPIOBEN;	//Turns port B off to show that 4-bit initialisation works on its own
-	lcd_delayus(20000);
-	
-	initLCD4();	//Initialisation of LCD in 4-bit mode
-	cmdLCD(LCD_LINE1);
-	LCD_CLR();
-	
-	char message[] = "4-bit mode";	//Creates a variable for a message to be displayed on the LCD
+	char message[] = "8-bit mode";	//Creates a variable for a message to be displayed on the LCD
 	//stringLCD(message, sizeof(message)/sizeof(message[0])-1, 0, 0); //Command to display message as defined above on LCD
 	stringLCD(message, sizeof(message)/sizeof(message[0])-1, 1, 5); //Command to display message as defined above on LCD second line shifted to the right
 	char messageHidden[] = "The Blue button scrolls.";	//Creates a variable for a message that requires blue button functionality to see
@@ -45,7 +44,7 @@ int main(void)
 
 	int BLUE_BTN_PRESSES = 0; //Variable which will be used to check whether the blue button is being held
 
-	while(1)	//While loop to repeatedly check for button presses, may be replaced with interrupts once code is merged with partner's work
+	/*while(1)	//While loop to repeatedly check for button presses, may be replaced with interrupts once code is merged with partner's work
 	{
 		if(readBTNValue(BLU_PORT, BLU_BTN))	//Scrolls LCD when blue button is pressed, holding works to continuously scroll - holding long enough will activate endless scroll
 		{
@@ -73,6 +72,9 @@ int main(void)
 			lcd_delayus(100000);
 			LCD_CLR();
 		}
+		
+		//Having issues with BTN2 and BTN3 detecting presses constantly - already added in pupdr resistors but maybe re-look at that
+		
 		if(readBTNValue(FOUR_BTN_PORT, BTN2))	//Displays message saying when button 2 is pressed
 		{
 			stringLCD("Button 2 pressed", 16, 0, 0);
@@ -87,29 +89,34 @@ int main(void)
 		}
 		
 		lcd_delayus(100);	//Switch debounce delay
+	}*/
+	
+	LCD_CLR();
+	
+	while(i < 3000)	//While loop for square wave DAC output, finite so multiple waves can be tested in succession
+	{
+		output_dac1(300);			//Generates a constant output from DAC2, use values from 0-9000 
+		lcd_delayus(1000);
+		output_dac1(0);	//0s output from DAC2, with time delays creates a square wave
+		lcd_delayus(1000);
+		i++;
 	}
-	
-	
 	
 	
 	
 	//------CURRENTLY NOT WORKING AS INTENDED------
 	
-	/*	LCD_CLR();
-	while(1)	//While loop for DAC output
-	{
-		stringLCD("DAC active", 10, 0, 0);	//Used for testing so I could tell DACs were meant to be on
-		//Turns output high on both DACS
-		output_dac1(1);
-		output_dac2(1);
-		lcd_delayus(100000);	//Delay so high level can be seen
-		//Sets output low on both DACs - makes square wave
-		output_dac1(0);
-		output_dac2(0);
-		lcd_delayus(100000);	//Delay so low level can be seen
-	}*/
 	
+	/*
+	//Delay before changing to 4-bit mode
+	lcd_delayus(50000);
+	RCC->AHB1ENR |= ~RCC_AHB1ENR_GPIOBEN;	//Turns port B off to show that 4-bit initialisation works on its own
+	lcd_delayus(20000);
 	
+	initLCD4();	//Initialisation of LCD in 4-bit mode
+	cmdLCD(LCD_LINE1);
+	LCD_CLR();
+	*/
 	
 	
 }
