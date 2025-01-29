@@ -126,10 +126,10 @@ int main(void)
 	while (i < dataPoints)
 	{
 		float radians = i*(pi/180);
-		int y_value = 400 + 100*sin(radians);
-		decIntToDecStr(y_value, &num, &numLen);
+		int y1_value = 400 + 100*sin(radians);
+		decIntToDecStr(y1_value, &num, &numLen);
 		stringLCD(num, numLen, 0, 0);
-		output_dac2(y_value);
+		output_dac2(y1_value);
 		i++;
 		lcd_delayus(500);	//Defines the time interval between data points
 	}
@@ -137,12 +137,28 @@ int main(void)
 	i = 0;
 	while(i < dataPoints)
 	{
-		int y_value = 400+2*(100/pi)*asin(sin(i*2*pi/360));
-		decIntToDecStr(y_value, &num, &numLen);
+		int y2_value = 400+2*(100/pi)*asin(sin(i*2*pi/360));
+		decIntToDecStr(y2_value, &num, &numLen);
 		stringLCD(num, numLen, 0, 0);
-		output_dac2(y_value);
+		output_dac2(y2_value);
 		i++;
 		lcd_delayus(500);	//Defines the time interval between data points
+	}
+	
+	//Complex wave made by multiplying two existing waves together with scaling factor to make it fit on the same display as previous two waves
+	i = 0;
+	while(i < dataPoints)
+	{
+		float radians = i*(pi/180);
+		int y1_value = 400 + 100*sin(radians);
+		int y2_value = 400+2*(100/pi)*asin(sin(i*2*pi/360));
+		int y3_value = y1_value*y2_value/800;
+		decIntToDecStr(y3_value, &num, &numLen);
+		stringLCD(num, numLen, 0, 0);
+		output_dac2(y3_value);
+		i++;
+		lcd_delayus(500);	//Defines the time interval between data points
+		
 	}
 		
 	stringLCD("Code complete", 13, 0,0);
