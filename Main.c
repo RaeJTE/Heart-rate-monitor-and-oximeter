@@ -26,7 +26,6 @@ int main(void)
 	init_DAC();
 	
 	//Creating variables to be used later
-	unsigned short i = 0;	//For counting and for loops
 	unsigned short ADC_DATA;	//Variable to store ADC data, rapidly overwritten
 
 	stringLCD(name, sizeof(name)/sizeof(name[0])-1, 0, 0); //Command to display name as defined at top of main.c on LCD
@@ -100,13 +99,16 @@ int main(void)
 	
 	LCD_CLR();
 	
-/*	output_dac1(100);			//Generates a constant output from DAC2, use values from 0-900
-	lcd_delayus(100000);
-	output_dac1(400);			//Generates a constant output from DAC2, use values from 0-900 
-	lcd_delayus(100000);
-	output_dac1(72);			//Generates a constant output from DAC2, use values from 0-900 
-	lcd_delayus(100000);*/
 	
+	//Arbitrary DC voltages on DAC1
+	output_dac1(100);			//Generates a constant output from DAC2, use values from 0-900
+	lcd_delayus(1000);
+	output_dac1(400);			//Generates a constant output from DAC2, use values from 0-900 
+	lcd_delayus(1000);
+	output_dac1(72);			//Generates a constant output from DAC2, use values from 0-900 
+	lcd_delayus(1000);
+	
+	unsigned short i = 0;	//For counting in loops
 	while(i < 100)	//While loop for square wave DAC output, finite so multiple waves can be tested in succession
 	{
 		output_dac1(300);			//Generates a constant output from DAC1, use values from 0-8000ish based on values read in and re-outputted from LDR in intiial tests with example code
