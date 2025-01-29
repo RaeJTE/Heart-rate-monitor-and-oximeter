@@ -90,7 +90,7 @@ void stringLCD(char text[], int length, int line, int pos) //To print strings on
 void decIntToDecStr(int num, char* a[], int* b) //Converts a decimal integer into a string that can be printed
 {
 	sprintf(*a, "%d", num);
-	*b = floor(log10(num))+1; //Warnings can be ignored, identifying that the mathematical functions were designed for different variable types, but all still work with int
+	*b = floor(log10(num))+1;
 }
 
 void decIntToHexStr(int num, char* a[], int* b) //Converts a decimal integer into a string of the hexadecimal value of that integer

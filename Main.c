@@ -100,35 +100,40 @@ int main(void)
 	
 	LCD_CLR();
 	
-	output_dac1(100);			//Generates a constant output from DAC2, use values from 0-900
+/*	output_dac1(100);			//Generates a constant output from DAC2, use values from 0-900
 	lcd_delayus(100000);
 	output_dac1(400);			//Generates a constant output from DAC2, use values from 0-900 
 	lcd_delayus(100000);
 	output_dac1(72);			//Generates a constant output from DAC2, use values from 0-900 
-	lcd_delayus(100000);
+	lcd_delayus(100000);*/
 	
-	while(i < 200)	//While loop for square wave DAC output, finite so multiple waves can be tested in succession
+	while(i < 100)	//While loop for square wave DAC output, finite so multiple waves can be tested in succession
 	{
-		
 		output_dac1(300);			//Generates a constant output from DAC1, use values from 0-8000ish based on values read in and re-outputted from LDR in intiial tests with example code
 		lcd_delayus(1000);
 		output_dac1(0);	//0s output from DAC2, with time delays creates a square wave
-		lcd_delayus(1000);
+		lcd_delayus(100);
 		i++;
 	}
-	
+
 	i = 0;
+	int dataPoints = 3600;	//Defines how many data points we want to take
+	//For some reason previous code keeps breaking when I try to use arrays, so maybe avoid those.
 	
-	while(i < 3600)	//While loop for sine wave output from DAC2
+	while (i < dataPoints)
 	{
-		double angle_radians = i*(2*pi)/360;
-		output_dac2(sin(angle_radians));
-		decIntToDecStr(angle_radians, &num, &numLen);
-		stringLCD(num, 6, 0, 0);
-		lcd_delayus(1000);
+		int y_value = 400 + 100*sin(i*(pi/180));
+		decIntToDecStr(y_value, &num, &numLen);
+		stringLCD(num, numLen, 0, 0);
+		output_dac2(y_value);
 		i++;
+		lcd_delayus(500);	//Defines the interval between data points
 	}
 	
+		
+	stringLCD("Code complete", 13, 0,0);
+	lcd_delayus(500000);
+	LCD_CLR();
 	
 	
 	//------CURRENTLY NOT WORKING AS INTENDED------
