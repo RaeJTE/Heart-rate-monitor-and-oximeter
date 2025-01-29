@@ -1,5 +1,6 @@
 //Includes
 #include <stdio.h>
+#include <stdlib.h>
 #include <math.h>
 #include "switch.h"
 #include "lcd.h"
@@ -124,16 +125,29 @@ int main(void)
 	
 	while (i < dataPoints)
 	{
-		int y_value = 400 + 100*sin(i*(pi/180));
+		float radians = i*(pi/180);
+		int y_value = 400 + 100*sin(radians);
 		decIntToDecStr(y_value, &num, &numLen);
 		stringLCD(num, numLen, 0, 0);
 		output_dac2(y_value);
 		i++;
-		lcd_delayus(500);	//Defines the interval between data points
+		lcd_delayus(500);	//Defines the time interval between data points
 	}
 	
+	i = 0;
+	while(i < dataPoints)
+	{
+		int y_value = 400+2*(100/pi)*asin(sin(i*2*pi/360));
+		decIntToDecStr(y_value, &num, &numLen);
+		stringLCD(num, numLen, 0, 0);
+		output_dac2(y_value);
+		i++;
+		lcd_delayus(500);	//Defines the time interval between data points
+	}
 		
 	stringLCD("Code complete", 13, 0,0);
+	output_dac1(0);
+	output_dac2(0);
 	lcd_delayus(500000);
 	LCD_CLR();
 	
