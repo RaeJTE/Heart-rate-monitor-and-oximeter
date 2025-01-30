@@ -6,6 +6,7 @@
 #include "lcd.h"
 #include "DAC.h"
 #include "ADC.h"
+#include "Buzz.h"
 //Definitions
 #define name "Jacob Rae"
 #define pi 3.14159
@@ -25,6 +26,8 @@ int main(void)
 	//Initiliases the ADC and DAC
 	init_ADC();
 	init_DAC();
+	//Initialisation of Buzzer
+	initBuzz();
 	
 	//Creating variables to be used later
 	unsigned short ADC_DATA;	//Variable to store ADC data, rapidly overwritten
@@ -120,8 +123,8 @@ int main(void)
 	}
 
 	i = 0;
-	int dataPoints = 3600;	//Defines how many data points we want to take
-	//For some reason previous code keeps breaking when I try to use arrays, so maybe avoid those.
+	int dataPoints = 36;	//Defines how many data points we want to take
+	//For some reason previous code kept breaking when I used for loops here - possible from use of i specificly?
 	
 	while (i < dataPoints)
 	{
@@ -160,12 +163,18 @@ int main(void)
 		lcd_delayus(500);	//Defines the time interval between data points
 		
 	}
-		
-	stringLCD("Code complete", 13, 0,0);
-	output_dac1(0);
-	output_dac2(0);
-	lcd_delayus(500000);
-	LCD_CLR();
+	
+	
+	//Theoretical measurement section
+	tempBuzz(100000, 1000);	//Marks start of measurement section
+	
+	for(int j = 0; j<100; j++)
+	{
+		stringLCD("Measuring", 9, 0, 0);
+	}
+	
+	tempBuzz(100000, 1000);	//Marks end of measurement section
+	
 	
 	
 	//------CURRENTLY NOT WORKING AS INTENDED------
@@ -181,6 +190,13 @@ int main(void)
 	cmdLCD(LCD_LINE1);
 	LCD_CLR();
 	*/
+	
+	
+	stringLCD("Code complete", 13, 0,0);
+	output_dac1(0);
+	output_dac2(0);
+	lcd_delayus(500000);
+	LCD_CLR();
 	
 	
 }
