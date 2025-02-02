@@ -1,6 +1,7 @@
 //Includes
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <math.h>
 #include "switch.h"
 #include "lcd.h"
@@ -175,6 +176,34 @@ int main(void)
 	
 	tempBuzz(100000, 1000);	//Marks end of measurement section
 	
+	lcd_delayus(1000);
+	
+	char mode[] = "Heartrate";
+	
+	if(strcmp(mode, "Heartrate") == 0)	//strcmp returns difference between strings so is 0 if they match
+	{
+		tempBuzz(100000, 1000);
+	}
+	
+	if(strcmp(mode, "Oxygen level") == 0)	//strcmp returns difference between strings so is 0 if they match
+	{
+		tempBuzz(100000, 2000);
+	}
+	
+	if(strcmp(mode, "Temperature") == 0)	//strcmp returns difference between strings so is 0 if they match
+	{
+		tempBuzz(100000, 3000);
+	}
+	
+	if(strcmp(mode, "Humidity") == 0)	//strcmp returns difference between strings so is 0 if they match
+	{
+		tempBuzz(100000, 4000);
+	}
+	
+	if(strcmp(mode, "Movement") == 0)	//strcmp returns difference between strings so is 0 if they match
+	{
+		tempBuzz(100000, 5000);
+	}
 	
 	
 	//------CURRENTLY NOT WORKING AS INTENDED------
