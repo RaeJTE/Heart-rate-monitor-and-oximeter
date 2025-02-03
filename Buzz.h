@@ -10,6 +10,8 @@
 void initBuzz(void);
 void endlessBuzz(void);
 void tempBuzz(int time_ms, int freq);
+void playMelody(void);
+void modeDetection (char mode[]);
 
 
 #endif

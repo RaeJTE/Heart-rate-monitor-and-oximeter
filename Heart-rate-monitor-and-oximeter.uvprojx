@@ -415,9 +415,19 @@
               <FilePath>.\Buzz.c</FilePath>
             </File>
             <File>
-              <FileName>Buzz.h</FileName>
+              <FileName>SPI.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\SPI.c</FilePath>
+            </File>
+            <File>
+              <FileName>Timers and interrupt.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Timers and interrupt.c</FilePath>
+            </File>
+            <File>
+              <FileName>timers.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\Buzz.h</FilePath>
+              <FilePath>.\timers.h</FilePath>
             </File>
           </Files>
         </Group>

@@ -1,4 +1,5 @@
 #include <stm32f4xx.h>
+#include <string.h>
 #include "Buzz.h"
 #include "LCD.h"
 #include "pitches.h"
@@ -73,7 +74,7 @@ void tempBuzz(int time_ms, int freq_Hz)	//Actual timings very approximate for no
 {
 	int i =0;
 	int period_us = 1000000/freq_Hz;
-	while(i<(100*time_ms/period_us))
+	while(i<(1000*time_ms/period_us))
 	{
 		BUZZ_PORT->ODR^=(0b00000001<<BUZZ_PIN);	//Toggles buzzer
 		lcd_delayus(1/period_us);
@@ -97,11 +98,45 @@ void playMelody(void)
     //to distinguish the notes, set a minimum time between them.
     //the note's duration + 30% seems to work well:
     int pauseBetweenNotes = duration * 1.30;
-    lcd_delayus(pauseBetweenNotes);
-
-    //stop the tone playing:
-    tempBuzz(0,0);
+    lcd_delayus(pauseBetweenNotes*10);
   }
+}
+
+void modeDetection (char mode[])
+{
+	for(int j = 0; j <100; j++)
+		if(strcmp(mode, "Heartrate") == 0)	//strcmp returns difference between strings so is 0 if they match
+		{
+			tempBuzz(1000, 500);
+			stringLCD(mode, 9, 0, 0);
+		}
+		else if(strcmp(mode, "OxygenLevel") == 0)	//strcmp returns difference between strings so is 0 if they match
+		{
+			tempBuzz(1000, 2000);
+			stringLCD(mode, 10, 0, 0);
+		}
+		else if(strcmp(mode, "Temperature") == 0)	//strcmp returns difference between strings so is 0 if they match
+		{
+			tempBuzz(1000, 3000);
+			stringLCD(mode, 11, 0, 0);
+		}
+		else if(strcmp(mode, "Humidity") == 0)	//strcmp returns difference between strings so is 0 if they match
+		{
+			tempBuzz(1000, 4000);
+			stringLCD(mode, 8, 0, 0);
+		}
+		else if(strcmp(mode, "Movement") == 0)	//strcmp returns difference between strings so is 0 if they match
+		{
+			tempBuzz(1000, 5000);
+			stringLCD(mode, 8, 0, 0);
+		}
+		else
+		{
+			stringLCD("NO MODE SELECTED", 16, 0, 0);
+			stringLCD("NO MODE SELECTED", 16, 1, 0);
+			while(1);
+		}
+		lcd_delayus(100);
 }
 
 

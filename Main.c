@@ -1,7 +1,6 @@
 //Includes
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include <math.h>
 #include "switch.h"
 #include "lcd.h"
@@ -18,6 +17,7 @@ int main(void)
 {
 	//Initialisation of switches
 	BLU_BTN_INIT(BLU_PORT, BLU_BTN);
+	FOUR_BTN_INIT(FOUR_BTN_PORT, BTN0, BTN1, BTN2, BTN3);
 	//Initialisation of green traffic LED
 	LED_INIT(LED_PORT, LED_GRN);
 	//Initialisation of LCD in 8-bit mode
@@ -53,12 +53,14 @@ int main(void)
 	
 	lcd_delayus(100000);	//Delay to allow reading of LCD display
 
+
 	int BLUE_BTN_PRESSES = 0; //Variable which will be used to check whether the blue button is being held
 
-	/*while(1)	//While loop to repeatedly check for button presses, may be replaced with interrupts once code is merged with partner's work
+	while(readBTNValue(FOUR_BTN_PORT, BTN3) == 0)	//While loop to repeatedly check for button presses, may be replaced with interrupts once code is merged with partner's work
 	{
+		//Blue buttons
 		if(readBTNValue(BLU_PORT, BLU_BTN))	//Scrolls LCD when blue button is pressed, holding works to continuously scroll - holding long enough will activate endless scroll
-		{
+		{                                                                                                                                          
 			scrollLCD(1);
 			Toggle_LED();
 			BLUE_BTN_PRESSES++;	//Used to check whether the blue button is being held
@@ -70,6 +72,8 @@ int main(void)
 		if(BLUE_BTN_PRESSES >= 10)	//If blue button is held (no releases are detected over 'held' period) activates endless scroll mode
 		{
 			endlessScrollLCD();
+			
+		//Four buttons
 		}
 		if(readBTNValue(FOUR_BTN_PORT, BTN0))	//Displays message saying when button 0 is pressed
 		{
@@ -92,15 +96,15 @@ int main(void)
 			lcd_delayus(100000);
 			LCD_CLR();
 		}
-		if(readBTNValue(FOUR_BTN_PORT, BTN3))	//Displays message saying when button 3 is pressed
+		/*if(readBTNValue(FOUR_BTN_PORT, BTN3))	//Displays message saying when button 3 is pressed
 		{
 			stringLCD("Button 3 pressed", 16, 0, 0);
 			lcd_delayus(100000);
 			LCD_CLR();  
-		}
+		}*/
 		
 		lcd_delayus(100);	//Switch debounce delay
-	}*/
+	}
 	
 	LCD_CLR();
 	
@@ -114,41 +118,46 @@ int main(void)
 	lcd_delayus(1000);
 	
 	unsigned short i = 0;	//For counting in loops
-	while(i < 100)	//While loop for square wave DAC output, finite so multiple waves can be tested in succession
+	while(i < 20)	//While loop for square wave DAC output, finite so multiple waves can be tested in succession
 	{
 		output_dac1(300);			//Generates a constant output from DAC1, use values from 0-8000ish based on values read in and re-outputted from LDR in intiial tests with example code
-		lcd_delayus(1000);
+		lcd_delayus(10000);
 		output_dac1(0);	//0s output from DAC2, with time delays creates a square wave
-		lcd_delayus(100);
+		lcd_delayus(10000);
 		i++;
 	}
 
+	int dataPoints = 720;	//Defines how many data points we want to take
 	i = 0;
-	int dataPoints = 36;	//Defines how many data points we want to take
 	//For some reason previous code kept breaking when I used for loops here - possible from use of i specificly?
-	
+	LCD_CLR();
+	stringLCD("Sine", 4, 0, 0);
 	while (i < dataPoints)
 	{
 		float radians = i*(pi/180);
-		int y1_value = 400 + 100*sin(radians);
+		int y1_value = 400 + 100*sin(radians);	//Calculates y values for sine wave
 		decIntToDecStr(y1_value, &num, &numLen);
-		stringLCD(num, numLen, 0, 0);
-		output_dac2(y1_value);
+		stringLCD(num, numLen, 1, 0);	//Prints y values to LCD
+		output_dac2(y1_value);	//Outputs the y values on the DAC
 		i++;
 		lcd_delayus(500);	//Defines the time interval between data points
 	}
 	
+	LCD_CLR();
+	stringLCD("Triangle", 8, 0, 0);
 	i = 0;
-	while(i < dataPoints)
+	while(i < dataPoints)	//Makes a triangle wave DAC output
 	{
-		int y2_value = 400+2*(100/pi)*asin(sin(i*2*pi/360));
+		int y2_value = 400+2*(100/pi)*asin(sin(i*2*pi/360));	//Calculates y values for triangle wave
 		decIntToDecStr(y2_value, &num, &numLen);
-		stringLCD(num, numLen, 0, 0);
-		output_dac2(y2_value);
+		stringLCD(num, numLen, 1, 0);	//Prints y values to LCD
+		output_dac2(y2_value);	//Outputs the y values on the DAC
 		i++;
 		lcd_delayus(500);	//Defines the time interval between data points
 	}
 	
+	LCD_CLR();
+	stringLCD("Complex", 7, 0, 0);
 	//Complex wave made by multiplying two existing waves together with scaling factor to make it fit on the same display as previous two waves
 	i = 0;
 	while(i < dataPoints)
@@ -156,54 +165,72 @@ int main(void)
 		float radians = i*(pi/180);
 		int y1_value = 400 + 100*sin(radians);
 		int y2_value = 400+2*(100/pi)*asin(sin(i*2*pi/360));
-		int y3_value = y1_value*y2_value/800;
+		int y3_value = y1_value*y2_value/800;	//Calculates y values for complex wave
 		decIntToDecStr(y3_value, &num, &numLen);
-		stringLCD(num, numLen, 0, 0);
-		output_dac2(y3_value);
+		stringLCD(num, numLen, 1, 0);	//Prints y values to LCD
+		output_dac2(y3_value);	//Outputs the y values on the DAC
 		i++;
 		lcd_delayus(500);	//Defines the time interval between data points
 		
 	}
 	
 	
+	
+	
 	//Theoretical measurement section
-	tempBuzz(100000, 1000);	//Marks start of measurement section
-	
-	for(int j = 0; j<100; j++)
+	LCD_CLR();
+	stringLCD("Measuring", 9, 0, 0);
+	for (i = 0; i < 1000; i++)
 	{
-		stringLCD("Measuring", 9, 0, 0);
+		tempBuzz(100, 1000);	//Marks start of measurement section
+		lcd_delayus(100);
 	}
 	
-	tempBuzz(100000, 1000);	//Marks end of measurement section
+	lcd_delayus(10000);
+	dataPoints = 360;
 	
-	lcd_delayus(1000);
+	LCD_CLR();
+	stringLCD("Mode detection", 18, 0, 0);
 	
-	char mode[] = "Heartrate";
+	//Mode detection
+	lcd_delayus(1000);	//Delay to mark transition to mode detection
 	
-	if(strcmp(mode, "Heartrate") == 0)	//strcmp returns difference between strings so is 0 if they match
+	LCD_CLR();
+	char mode[] = "OxygenLevel";	//Options are: Heartrate		OxygenLevel		Temperature		Humidity		Movement
+	modeDetection(mode);
+	
+		
+	//Peak detection buzzing
+	LCD_CLR();
+	stringLCD("Peak detection", 14, 0, 0);
+	int prevVal = 0;
+	for(i = 0; i < dataPoints; i++)
 	{
-		tempBuzz(100000, 1000);
+		float radians = i*(pi/180);
+		int currentVal = 400 + 100*sin(radians);	//Calculates y values for sine wave
+		decIntToDecStr(currentVal, &num, &numLen);
+		stringLCD(num, numLen, 1, 0);	//Prints y values to LCD
+		output_dac2(currentVal);	//Outputs the y values on the DAC
+		
+		if(currentVal == prevVal)
+		{
+			tempBuzz(100, 1000);
+		}
+		prevVal = currentVal;
+			
+		lcd_delayus(200);
+	} 
+	
+	lcd_delayus(10000);
+	LCD_CLR();
+	for (i = 0; i < 1000; i++)	//Marks end of measurement section
+	{
+		tempBuzz(100, 1000);
+		lcd_delayus(100);
 	}
 	
-	if(strcmp(mode, "Oxygen level") == 0)	//strcmp returns difference between strings so is 0 if they match
-	{
-		tempBuzz(100000, 2000);
-	}
 	
-	if(strcmp(mode, "Temperature") == 0)	//strcmp returns difference between strings so is 0 if they match
-	{
-		tempBuzz(100000, 3000);
-	}
-	
-	if(strcmp(mode, "Humidity") == 0)	//strcmp returns difference between strings so is 0 if they match
-	{
-		tempBuzz(100000, 4000);
-	}
-	
-	if(strcmp(mode, "Movement") == 0)	//strcmp returns difference between strings so is 0 if they match
-	{
-		tempBuzz(100000, 5000);
-	}
+	//playMelody();
 	
 	
 	//------CURRENTLY NOT WORKING AS INTENDED------
