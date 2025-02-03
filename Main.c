@@ -127,7 +127,7 @@ int main(void)
 		i++;
 	}
 
-	int dataPoints = 720;	//Defines how many data points we want to take
+	int dataPoints = 3600;	//Defines how many data points we want to take
 	i = 0;
 	//For some reason previous code kept breaking when I used for loops here - possible from use of i specificly?
 	LCD_CLR();
