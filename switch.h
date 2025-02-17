@@ -29,10 +29,8 @@
 #define LEDon(PORT, BIT)   ((PORT->ODR) |= (1U << BIT))		// Macro to set port bit - not BSRR (Here to test responsiveness of buttons)
 #define LEDoff(PORT, BIT)   ((PORT->ODR) &= ~(1U << (BIT))) // Macro to clear port bit - not BSRR (Here to test responsiveness of buttons)
 
-void LED_INIT(GPIO_TypeDef *PORT, unsigned int BIT);	//Initialises green traffic LED
 void BLU_BTN_INIT(GPIO_TypeDef *PORT, unsigned int BIT);	//Initialises Blue button
 void FOUR_BTN_INIT(GPIO_TypeDef *PORT, unsigned int BIT0, unsigned int BIT1, unsigned int BIT2, unsigned int BIT3);	//Initialises the four directional buttons
-void Toggle_LED (void); //Toggles green LED
 void switchInit(void);	//Initialises 4 buttons
 int readBTNValue(GPIO_TypeDef *PORT, unsigned int BIT);	//Reads whether a specified 1 of the 4 buttons has been pressed - made easier by the 4 buttons using pins 0,1,2,3
 

@@ -7,6 +7,13 @@
 #include "DAC.h"
 #include "ADC.h"
 #include "Buzz.h"
+#include "LED.h"
+#include "usart.h"
+#include "timer.h"
+#include "RGB_Bar.h"
+#include "segments.h"
+#include "i2c.h"
+#include "MPU_stuff.h"
 //Definitions
 #define name "Jacob Rae"
 #define pi 3.14159
@@ -19,7 +26,7 @@ int main(void)
 	BLU_BTN_INIT(BLU_PORT, BLU_BTN);
 	FOUR_BTN_INIT(FOUR_BTN_PORT, BTN0, BTN1, BTN2, BTN3);
 	//Initialisation of green traffic LED
-	LED_INIT(LED_PORT, LED_GRN);
+	LED_INIT();
 	//Initialisation of LCD in 8-bit mode
 	initLCD8();
 	cmdLCD(LCD_LINE1);
@@ -29,6 +36,10 @@ int main(void)
 	init_DAC();
 	//Initialisation of Buzzer
 	initBuzz();
+	//Initialisation of MPU
+	MPU6050_Init();
+	//Initialises Usart
+	init_USART();
 	
 	//Creating variables to be used later
 	unsigned short ADC_DATA;	//Variable to store ADC data, rapidly overwritten
@@ -62,7 +73,7 @@ int main(void)
 		if(readBTNValue(BLU_PORT, BLU_BTN))	//Scrolls LCD when blue button is pressed, holding works to continuously scroll - holding long enough will activate endless scroll
 		{                                                                                                                                          
 			scrollLCD(1);
-			Toggle_LED();
+			Toggle_LED('G');
 			BLUE_BTN_PRESSES++;	//Used to check whether the blue button is being held
 		}
 		else
