@@ -20,6 +20,12 @@
 
 //4-bit mode not working
 
+
+// Global Variables
+int16_t Accel_X_RAW = 0, Accel_Y_RAW = 0, Accel_Z_RAW = 0;
+float Ax, Ay, Az;
+uint8_t check;
+
 int main(void)
 {
 	//Initialisation of switches
