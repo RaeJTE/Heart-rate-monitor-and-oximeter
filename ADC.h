@@ -3,16 +3,9 @@
 #include <stm32f4xx.h>// library
 
 
-
-
-
-#define ADC_input_port		GPIOC // definitions
-#define ADC_input_pin			0
+#define ADC_input_port		GPIOF // definitions
+#define ADC_input_pin			5
 #define ADC_Channel				10
-
-
-
-
 
 
 void init_ADC(void);

@@ -6,9 +6,9 @@ extern unsigned int int_part;
 extern unsigned int frac_part;
 
 // Timer 1 used for ADC
+// Timer 2 used for rgb bar
 // Timer 3 used for blue pwm
-// timer 2 used for rgb bar
-
+// Timer 5 used for red LED
 
 // check rm0090 (13.13.3) for adc clock 1
 
@@ -35,15 +35,7 @@ void init_Timer1(void)// ADC
 
     // Enable Timer 1
     TIM1->CR1 |= TIM_CR1_CEN;
-
 }
-
-
-
-
-
-
-
 
 
 //BLUE PWM STUFF

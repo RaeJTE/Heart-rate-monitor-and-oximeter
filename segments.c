@@ -11,9 +11,9 @@ void GPIO_Init(void)
     GPIOE->OTYPER = 0x00000000; // pe2-pe11 as push-pull
     GPIOE->OSPEEDR = 0xAAAAAAAA; //sets pe2 to pe11 as high speed
     GPIOE->PUPDR = 0x00000000; // pe2-pe11 as no pull-up, no pull-down
+		// Clear all segments using BSRR
+    GPIOE->BSRR = (SEG_A | SEG_B | SEG_C | SEG_D | SEG_E | SEG_F | SEG_G) << 16;
 }
-
-
 
 
 // Function to set the segments for a given digit
@@ -45,11 +45,6 @@ void displayDigit(uint8_t digit, uint8_t position)
     }
 }
 
-
-
-
-
-
 int seg_main(void)
 {
     // Initialize GPIO
@@ -64,5 +59,3 @@ int seg_main(void)
         displayDigit(2, 2);
     }
 	}
-
-

@@ -13,13 +13,12 @@
 #include "RGB_Bar.h"
 #include "segments.h"
 #include "i2c.h"
-#include "MPU_stuff.h"
+//#include "MPU_stuff.h"	//MPU init breaking LCD for some reason?
 //Definitions
-#define name "Jacob Rae"
+#define names "Edward Drover - Taylor and Jacob Rae"
 #define pi 3.14159
 
-//4-bit mode not working
-
+//LCD 4-bit mode not working
 
 // Global Variables
 int16_t Accel_X_RAW = 0, Accel_Y_RAW = 0, Accel_Z_RAW = 0;
@@ -31,7 +30,7 @@ int main(void)
 	//Initialisation of switches
 	BLU_BTN_INIT(BLU_PORT, BLU_BTN);
 	FOUR_BTN_INIT(FOUR_BTN_PORT, BTN0, BTN1, BTN2, BTN3);
-	//Initialisation of green traffic LED
+	//Initialisation of LEDs
 	LED_INIT();
 	//Initialisation of LCD in 8-bit mode
 	initLCD8();
@@ -43,21 +42,37 @@ int main(void)
 	//Initialisation of Buzzer
 	initBuzz();
 	//Initialisation of MPU
-	MPU6050_Init();
+	//MPU6050_Init();
 	//Initialises Usart
 	init_USART();
+	//Initialises RGB LED strip
+	init_GPIO_RGB_Bar();
+	//Initialises segment LED display
+	GPIO_Init();
 	
-	
-	
-	
-	
-	
-	
+	int n = 0;
+	int test = 0;
+	char* num;	//Creates a pointer to be used to store a string conversion of a number - pointer necessary because of pointer decay when moving between .c files
+	int numLen;	//Variable to store length of string conversion of number
+	while(1)
+	{
+		stringLCD("Begin", 5, 0, 0);
+		lcd_delayus(100000);
+		LCD_CLR();
+		test = read_adc();
+		decIntToDecStr(test, &num, &numLen);
+		stringLCD(num, numLen, 0, n);
+		lcd_delayus(10000);
+		n++;
+		test = read_adc();
+		stringLCD(num, numLen, 1, n);
+		lcd_delayus(100000);
+		LCD_CLR();
+	}
 	
 	stringLCD("Code complete", 13, 0,0);
 	output_dac1(0);
 	lcd_delayus(500000);
 	LCD_CLR();
-	
 	
 }

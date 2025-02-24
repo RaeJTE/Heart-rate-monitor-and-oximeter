@@ -2,7 +2,7 @@
 
 void init_ADC(void)
 {
-	RCC->AHB1ENR|=RCC_AHB1ENR_GPIOCEN;	//GPIOC clock enable
+	RCC->AHB1ENR|=RCC_AHB1ENR_GPIOFEN;	//GPIOA clock enable
 	ADC_input_port->MODER|=(3u<<(2*ADC_input_pin));	//ADC input pin is analogue mode
 	
 	RCC->APB2ENR|=RCC_APB2ENR_ADC1EN;		//ADC clock enable
@@ -14,16 +14,14 @@ void init_ADC(void)
 	ADC1->SQR3&=~ADC_SQR3_SQ1;		//clear channel select bits
 	ADC1->SQR3|=ADC_Channel;		//set channel
 	ADC1->CR2 |= ADC_CR2_CONT; // set to continuous
-
 	
+	// Set external trigger for injected group (using Timer 1 CC4 event)
+  ADC1->CR2 |= ADC_CR2_JEXTSEL_0; // External trigger for injected group: Timer 1 CC4 event
+  ADC1->CR2 |= ADC_CR2_JEXTEN_0;  // Trigger on rising edge of the selected external event
+	// CHECK RM0090 PG 422 FOR JEXTSEL
+	//(uses timer 1 cc4 for triggers)
 	
-	 // Set external trigger for injected group (using Timer 1 CC4 event)
-   ADC1->CR2 |= ADC_CR2_JEXTSEL_0; // External trigger for injected group: Timer 1 CC4 event
-   ADC1->CR2 |= ADC_CR2_JEXTEN_0;  // Trigger on rising edge of the selected external event
-		// CHECK RM0090 PG 422 FOR JEXTSEL
-		//(uses timer 1 cc4 for triggers)
-	
-		ADC1->CR2|=ADC_CR2_ADON;//enable ADC
+	ADC1->CR2|=ADC_CR2_ADON;//enable ADC
 	
 }
 
