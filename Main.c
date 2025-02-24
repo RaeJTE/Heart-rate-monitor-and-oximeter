@@ -31,7 +31,7 @@ int main(void)
 	BLU_BTN_INIT(BLU_PORT, BLU_BTN);
 	FOUR_BTN_INIT(FOUR_BTN_PORT, BTN0, BTN1, BTN2, BTN3);
 	//Initialisation of LEDs
-	LED_INIT();
+	//LED_INIT();
 	//Initialisation of LCD in 8-bit mode
 	initLCD8();
 	cmdLCD(LCD_LINE1);
@@ -54,9 +54,9 @@ int main(void)
 	int test = 0;
 	char* num;	//Creates a pointer to be used to store a string conversion of a number - pointer necessary because of pointer decay when moving between .c files
 	int numLen;	//Variable to store length of string conversion of number
-	while(1)
+	/*while(1)
 	{
-		stringLCD("Begin", 5, 0, 0);
+		stringLCD("Begin", 5, 0, n);
 		lcd_delayus(100000);
 		LCD_CLR();
 		test = read_adc();
@@ -65,10 +65,34 @@ int main(void)
 		lcd_delayus(10000);
 		n++;
 		test = read_adc();
+		decIntToDecStr(test, &num, &numLen);
 		stringLCD(num, numLen, 1, n);
 		lcd_delayus(100000);
 		LCD_CLR();
+	}*/
+	
+	for(int i = 0; i<5; i++)
+	{
+		LCD_CLR();
+		test = read_adc();
+		decIntToDecStr(test, &num, &numLen);
+		stringLCD(num, numLen, 0, i);
+		lcd_delayus(100000);
 	}
+	
+	char* num2;	//Creates a pointer to be used to store a string conversion of a number - pointer necessary because of pointer decay when moving between .c files
+	int numLen2;	//Variable to store length of string conversion of number
+	int test2 = 0;
+	
+	for(int i = 0; i<5; i++)
+	{
+		LCD_CLR();
+		test2 = read_adc();
+		decIntToDecStr(test2, &num2, &numLen2);
+		stringLCD(num2, numLen2, 0, i);
+		lcd_delayus(100000);
+	}
+	
 	
 	stringLCD("Code complete", 13, 0,0);
 	output_dac1(0);

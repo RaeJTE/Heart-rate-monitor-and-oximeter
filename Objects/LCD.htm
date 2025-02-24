@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\LCD.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\LCD.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6180002: Last Updated: Mon Feb 24 10:52:06 2025
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6180002: Last Updated: Mon Feb 24 11:09:43 2025
 <BR><P>
 <H3>Maximum Stack Usage =        324 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -423,7 +423,7 @@ Global Symbols
 <P><STRONG><a name="[131]"></a>__rt_entry_postsh_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __rtentry2.o(.ARM.Collect$$rtentry$$00000009))
 
 <P><STRONG><a name="[9b]"></a>__rt_entry_main</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __rtentry2.o(.ARM.Collect$$rtentry$$0000000D))
-<BR><BR>[Stack]<UL><LI>Max Depth = 272 + Unknown Stack Size
+<BR><BR>[Stack]<UL><LI>Max Depth = 280 + Unknown Stack Size
 <LI>Call Chain = __rt_entry_main &rArr; main &rArr; decIntToDecStr &rArr; __hardfp_log10 &rArr; log &rArr; __hardfp_log &rArr; __kernel_poly &rArr; __aeabi_dmul
 </UL>
 <BR>[Calls]<UL><LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
@@ -1169,7 +1169,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[e6]"></a>GPIO_Init</STRONG> (Thumb, 82 bytes, Stack size 0 bytes, segments.o(.text.GPIO_Init))
+<P><STRONG><a name="[e5]"></a>GPIO_Init</STRONG> (Thumb, 82 bytes, Stack size 0 bytes, segments.o(.text.GPIO_Init))
 <BR><BR>[Called By]<UL><LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
@@ -1188,10 +1188,6 @@ Global Symbols
 </UL>
 <BR>[Called By]<UL><LI><a href="#[e9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;putLCD
 <LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cmdLCD
-</UL>
-
-<P><STRONG><a name="[e1]"></a>LED_INIT</STRONG> (Thumb, 124 bytes, Stack size 0 bytes, led.o(.text.LED_INIT))
-<BR><BR>[Called By]<UL><LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
 <P><STRONG><a name="[dc]"></a>SystemCoreClockUpdate</STRONG> (Thumb, 302 bytes, Stack size 24 bytes, system_stm32f4xx.o(.text.SystemCoreClockUpdate))
@@ -1326,7 +1322,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[e4]"></a>initBuzz</STRONG> (Thumb, 90 bytes, Stack size 0 bytes, buzz.o(.text.initBuzz))
+<P><STRONG><a name="[e3]"></a>initBuzz</STRONG> (Thumb, 90 bytes, Stack size 0 bytes, buzz.o(.text.initBuzz))
 <BR><BR>[Called By]<UL><LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
@@ -1340,15 +1336,15 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[e2]"></a>init_ADC</STRONG> (Thumb, 146 bytes, Stack size 0 bytes, adc.o(.text.init_ADC))
+<P><STRONG><a name="[e1]"></a>init_ADC</STRONG> (Thumb, 146 bytes, Stack size 0 bytes, adc.o(.text.init_ADC))
 <BR><BR>[Called By]<UL><LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[e3]"></a>init_DAC</STRONG> (Thumb, 64 bytes, Stack size 0 bytes, dac.o(.text.init_DAC))
+<P><STRONG><a name="[e2]"></a>init_DAC</STRONG> (Thumb, 64 bytes, Stack size 0 bytes, dac.o(.text.init_DAC))
 <BR><BR>[Called By]<UL><LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[e5]"></a>init_GPIO_RGB_Bar</STRONG> (Thumb, 94 bytes, Stack size 0 bytes, rgb_bar.o(.text.init_GPIO_RGB_Bar))
+<P><STRONG><a name="[e4]"></a>init_GPIO_RGB_Bar</STRONG> (Thumb, 94 bytes, Stack size 0 bytes, rgb_bar.o(.text.init_GPIO_RGB_Bar))
 <BR><BR>[Called By]<UL><LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
@@ -1370,27 +1366,33 @@ Global Symbols
 <LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[9c]"></a>main</STRONG> (Thumb, 218 bytes, Stack size 56 bytes, main.o(.text.main))
-<BR><BR>[Stack]<UL><LI>Max Depth = 272 + Unknown Stack Size
+<P><STRONG><a name="[9c]"></a>main</STRONG> (Thumb, 286 bytes, Stack size 64 bytes, main.o(.text.main))
+<BR><BR>[Stack]<UL><LI>Max Depth = 280 + Unknown Stack Size
 <LI>Call Chain = main &rArr; decIntToDecStr &rArr; __hardfp_log10 &rArr; log &rArr; __hardfp_log &rArr; __kernel_poly &rArr; __aeabi_dmul
 </UL>
-<BR>[Calls]<UL><LI><a href="#[d7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;decIntToDecStr
-<LI><a href="#[e8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;read_adc
+<BR>[Calls]<UL><LI><a href="#[e8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;output_dac1
 <LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;lcd_delayus
 <LI><a href="#[e7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;stringLCD
-<LI><a href="#[e6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_Init
-<LI><a href="#[e5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;init_GPIO_RGB_Bar
+<LI><a href="#[d7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;decIntToDecStr
+<LI><a href="#[e6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;read_adc
+<LI><a href="#[e5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_Init
+<LI><a href="#[e4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;init_GPIO_RGB_Bar
 <LI><a href="#[dd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;init_USART
-<LI><a href="#[e4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initBuzz
-<LI><a href="#[e3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;init_DAC
-<LI><a href="#[e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;init_ADC
+<LI><a href="#[e3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initBuzz
+<LI><a href="#[e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;init_DAC
+<LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;init_ADC
 <LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;cmdLCD
 <LI><a href="#[db]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;initLCD8
-<LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LED_INIT
 <LI><a href="#[e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FOUR_BTN_INIT
 <LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BLU_BTN_INIT
 </UL>
 <BR>[Called By]<UL><LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry_main
+</UL>
+
+<P><STRONG><a name="[e8]"></a>output_dac1</STRONG> (Thumb, 24 bytes, Stack size 4 bytes, dac.o(.text.output_dac1))
+<BR><BR>[Stack]<UL><LI>Max Depth = 4<LI>Call Chain = output_dac1
+</UL>
+<BR>[Called By]<UL><LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
 <P><STRONG><a name="[e9]"></a>putLCD</STRONG> (Thumb, 48 bytes, Stack size 16 bytes, lcd.o(.text.putLCD))
@@ -1403,7 +1405,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[e7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;stringLCD
 </UL>
 
-<P><STRONG><a name="[e8]"></a>read_adc</STRONG> (Thumb, 54 bytes, Stack size 0 bytes, adc.o(.text.read_adc))
+<P><STRONG><a name="[e6]"></a>read_adc</STRONG> (Thumb, 54 bytes, Stack size 0 bytes, adc.o(.text.read_adc))
 <BR><BR>[Called By]<UL><LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
