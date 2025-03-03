@@ -10,4 +10,5 @@
 
 void init_ADC(void);
 unsigned short read_adc(void); // functiont prototypes
+void Peak_Detect(int inData[], int inDataLen);
 #endif 

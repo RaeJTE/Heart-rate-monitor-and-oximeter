@@ -31,4 +31,25 @@ unsigned short read_adc(void)
 	while((ADC1->SR&ADC_SR_EOC)==0){__NOP();}	//wait for ADC conversion complete
 	return ADC1->DR;									//return converted value
 }
+
+
+void Peak_Detect(int inData[], int inDataLen)	//Function to detect peaks
+{
+	int marker = 0;
+	int peakPosition = 0;
+	int preVal = inData[0];
+	for(int i = 0; i<inDataLen; i++)	//Loops through data array fed in - blocking code, can this be done with interrupts?
+	{
+		if(inData[i] > preVal && peakPosition > i+100)	//Checks if gradient is positive and if 'enough' time has passed since previous peak detection (replace with timer?)
+		{
+			marker = 1;	//Indicates that a peak is 'allowed' to be detected by a change in gradient
+		}
+		if(inData[i]<preVal && marker == 1)	//Checks if gradient is negative and has previously been detected as positive - a change from positive to negative indicates a peak.
+		{
+			marker = 0;	//Resets marker
+			peakPosition = i;	//Tracks the i value the last peak was detected at to avoid repeated detection (replace with timer?)
+			//Add code to show peak detected
+		}
+	}
+}
                                                                  

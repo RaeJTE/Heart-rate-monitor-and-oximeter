@@ -48,50 +48,54 @@ int main(void)
 	//Initialises RGB LED strip
 	init_GPIO_RGB_Bar();
 	//Initialises segment LED display
-	GPIO_Init();
+	//GPIO_Init();
 	
 	int n = 0;
-	int test = 0;
+	int test[] = {1, 2, 3};
 	char* num;	//Creates a pointer to be used to store a string conversion of a number - pointer necessary because of pointer decay when moving between .c files
 	int numLen;	//Variable to store length of string conversion of number
-	/*while(1)
+
+	for(n = 0; n<10; n++)
 	{
 		stringLCD("Begin", 5, 0, n);
 		lcd_delayus(100000);
 		LCD_CLR();
-		test = read_adc();
-		decIntToDecStr(test, &num, &numLen);
+		//test[n] = read_adc();
+		decIntToDecStr(test[n], &num, &numLen);
 		stringLCD(num, numLen, 0, n);
-		lcd_delayus(10000);
-		n++;
-		test = read_adc();
-		decIntToDecStr(test, &num, &numLen);
-		stringLCD(num, numLen, 1, n);
 		lcd_delayus(100000);
+		/*test[n] = read_adc();
+		decIntToDecStr(test[n], &num, &numLen);
+		stringLCD(num, numLen, 1, n);
+		lcd_delayus(100000);*/
 		LCD_CLR();
-	}*/
+	}
+	
+	stringLCD("End", 3, 0, n);
+	lcd_delayus(100000);
 	
 	for(int i = 0; i<5; i++)
 	{
 		LCD_CLR();
-		test = read_adc();
-		decIntToDecStr(test, &num, &numLen);
+		test[i] = read_adc();
+		decIntToDecStr(test[i], &num, &numLen);
 		stringLCD(num, numLen, 0, i);
 		lcd_delayus(100000);
 	}
 	
 	char* num2;	//Creates a pointer to be used to store a string conversion of a number - pointer necessary because of pointer decay when moving between .c files
 	int numLen2;	//Variable to store length of string conversion of number
-	int test2 = 0;
+	int test2[] = {};
 	
 	for(int i = 0; i<5; i++)
 	{
 		LCD_CLR();
-		test2 = read_adc();
-		decIntToDecStr(test2, &num2, &numLen2);
+		test2[i] = read_adc();
+		decIntToDecStr(test2[i], &num2, &numLen2);
 		stringLCD(num2, numLen2, 0, i);
 		lcd_delayus(100000);
 	}
+	
 	
 	
 	stringLCD("Code complete", 13, 0,0);
