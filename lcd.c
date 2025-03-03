@@ -87,16 +87,16 @@ void stringLCD(char text[], int length, int line, int pos) //To print strings on
 	
 }
 
-void decIntToDecStr(int num, char* a[], int* b) //Converts a decimal integer into a string that can be printed
+void decIntToDecStr(int numIn, char* a[], int* b) //Converts a decimal integer into a string that can be printed
 {
-	sprintf(*a, "%d", num);
-	*b = floor(log10(num))+1;
+	sprintf(*a, "%d", numIn);
+	*b = floor(log10(numIn))+1;
 }
 
-void decIntToHexStr(int num, char* a[], int* b) //Converts a decimal integer into a string of the hexadecimal value of that integer
+void decIntToHexStr(int numIn, char* a[], int* b) //Converts a decimal integer into a string of the hexadecimal value of that integer
 {
-	sprintf(*a, "%x", num);
-	*b = floor((log(num))/log(16))+1;
+	sprintf(*a, "%x", numIn);
+	*b = floor((log(numIn))/log(16))+1;
 }
 
 void scrollLCD(int places)	//Causes LCD screen to scroll a given number of positions, currently a blocking function pending timers and interrupts work

@@ -31,7 +31,7 @@ int main(void)
 	BLU_BTN_INIT(BLU_PORT, BLU_BTN);
 	FOUR_BTN_INIT(FOUR_BTN_PORT, BTN0, BTN1, BTN2, BTN3);
 	//Initialisation of LEDs
-	//LED_INIT();
+	LED_INIT();
 	//Initialisation of LCD in 8-bit mode
 	initLCD8();
 	cmdLCD(LCD_LINE1);
@@ -48,14 +48,14 @@ int main(void)
 	//Initialises RGB LED strip
 	init_GPIO_RGB_Bar();
 	//Initialises segment LED display
-	//GPIO_Init();
+	GPIO_Init();
 	
 	int n = 0;
-	int test[] = {1, 2, 3};
+	int test[20] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20};
 	char* num;	//Creates a pointer to be used to store a string conversion of a number - pointer necessary because of pointer decay when moving between .c files
 	int numLen;	//Variable to store length of string conversion of number
 
-	for(n = 0; n<10; n++)
+	for(n = 0; n<19; n++)
 	{
 		stringLCD("Begin", 5, 0, n);
 		lcd_delayus(100000);
@@ -70,33 +70,6 @@ int main(void)
 		lcd_delayus(100000);*/
 		LCD_CLR();
 	}
-	
-	stringLCD("End", 3, 0, n);
-	lcd_delayus(100000);
-	
-	for(int i = 0; i<5; i++)
-	{
-		LCD_CLR();
-		test[i] = read_adc();
-		decIntToDecStr(test[i], &num, &numLen);
-		stringLCD(num, numLen, 0, i);
-		lcd_delayus(100000);
-	}
-	
-	char* num2;	//Creates a pointer to be used to store a string conversion of a number - pointer necessary because of pointer decay when moving between .c files
-	int numLen2;	//Variable to store length of string conversion of number
-	int test2[] = {};
-	
-	for(int i = 0; i<5; i++)
-	{
-		LCD_CLR();
-		test2[i] = read_adc();
-		decIntToDecStr(test2[i], &num2, &numLen2);
-		stringLCD(num2, numLen2, 0, i);
-		lcd_delayus(100000);
-	}
-	
-	
 	
 	stringLCD("Code complete", 13, 0,0);
 	output_dac1(0);
