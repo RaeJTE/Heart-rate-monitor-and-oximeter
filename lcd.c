@@ -64,7 +64,7 @@ void putLCD(unsigned char put)	//sends a char to the LCD display
 	LCD_strobe();					//apply command
 }
 
-void stringLCD(char text[], int length, int line, int pos) //To print strings on LCD, length must be calculated before as array decays into pointer to array when passed into function
+void stringLCD(char text[], int length, int line, int pos) //To print strings on LCD, length must be calculated before as array decays into pointers to array when passed into function
 	//for length use -1 with length of character array to remove end signifying character, not needed for intToStr length as floor(log10(abs()))) method does not look at end signifying characters
 {
 	WaitLCDBusy();				//wait for LCD to be not busy
@@ -169,7 +169,7 @@ void initLCD4(void)	//Initialises the LCD in 4-bit mode
 	cmdLCD(0b0110);
 }
 
-void initLCD8(void)	//Initialises the LCD in 4-bit mode
+void initLCD8(void)	//Initialises the LCD in 8-bit mode
 {
 		SystemCoreClockUpdate();
 		RCC->AHB1ENR|=RCC_AHB1ENR_GPIODEN;	//enable LCD port clock

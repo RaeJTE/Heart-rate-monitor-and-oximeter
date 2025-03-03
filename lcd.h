@@ -10,8 +10,6 @@
 
 #define LCD_D0_pin	0
 
-
-
 #define LCD_LINE1		0x80	//Defines location of top line of LCD
 #define LCD_LINE2		0xc0	//Defines location of bottom line of LCD
 
@@ -36,6 +34,7 @@ void cmdLCD(unsigned char cmd); //sends a byte to the LCD control register
 void putLCD(unsigned char put); //Prints character to LCD
 void stringLCD(char text[], int length,int line, int pos); //Prints string to LCD in a given position
 void decIntToDecStr(int numIn, char* a[], int* b);
+char *tochar(int numIn, char *p);
 void decIntToHexStr(int numIn, char* a[], int* b);
 void scrollLCD(int places);	//Causes LCD screen to scroll a given number of positions, currently a blocking function pending timers and interrupts work
 void endlessScrollLCD(void);	//Causes LCD screen to scroll endlessly, currently a blocking function pending timers and interrupts work

@@ -13,7 +13,6 @@
 #include "RGB_Bar.h"
 #include "segments.h"
 #include "i2c.h"
-//#include "MPU_stuff.h"	//MPU init breaking LCD for some reason?
 //Definitions
 #define names "Edward Drover - Taylor and Jacob Rae"
 #define pi 3.14159
@@ -41,8 +40,6 @@ int main(void)
 	init_DAC();
 	//Initialisation of Buzzer
 	initBuzz();
-	//Initialisation of MPU
-	//MPU6050_Init();
 	//Initialises Usart
 	init_USART();
 	//Initialises RGB LED strip
@@ -50,19 +47,24 @@ int main(void)
 	//Initialises segment LED display
 	GPIO_Init();
 	
-	int n = 0;
-	int test[20] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20};
+	int dataPoints = 360;
+	int test[dataPoints];
 	char* num;	//Creates a pointer to be used to store a string conversion of a number - pointer necessary because of pointer decay when moving between .c files
 	int numLen;	//Variable to store length of string conversion of number
+	char* num2;
 
-	for(n = 0; n<19; n++)
+	for(int n = 0; n<dataPoints; n++)
 	{
 		stringLCD("Begin", 5, 0, n);
 		lcd_delayus(100000);
 		LCD_CLR();
 		//test[n] = read_adc();
-		decIntToDecStr(test[n], &num, &numLen);
-		stringLCD(num, numLen, 0, n);
+		int test_current = test[n];
+		decIntToDecStr(56795, &num, &numLen);
+		int i = 123456;
+		char* s;
+		sprintf(s,"%d", i);
+		stringLCD(s, 6, 1, 0);	//Command to display decimal number on LCD
 		lcd_delayus(100000);
 		/*test[n] = read_adc();
 		decIntToDecStr(test[n], &num, &numLen);

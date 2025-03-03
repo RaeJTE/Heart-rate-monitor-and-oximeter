@@ -8,12 +8,12 @@
 ".\objects\adc.o"
 ".\objects\i2c.o"
 ".\objects\led.o"
-".\objects\mpu_stuff.o"
 ".\objects\pll_config.o"
 ".\objects\rgb_bar.o"
 ".\objects\segments.o"
 ".\objects\timer.o"
 ".\objects\usart.o"
+".\objects\mpu_stuff.o"
 ".\objects\startup_stm32f429xx.o"
 ".\objects\system_stm32f4xx.o"
 --ro-base 0x08000000 --entry 0x08000000 --rw-base 0x20000000 --entry Reset_Handler --first __Vectors --strict --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
