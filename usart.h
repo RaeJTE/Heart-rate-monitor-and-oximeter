@@ -1,15 +1,10 @@
 #ifndef _USART_H_
 #define _USART_H_
 #include <stm32f4xx.h>
-#include "usart.h"
-#include "PLL_Config.h"
-#include "LED.h"
-#include "timer.h"
-#include "RGB_bar.h"
 #include "ADC.h"
 #include "DAC.h"
-#include "segments.h"
 #include "RGB_Bar.h"
+#include "segments.h"
 #include "i2c.h"
 #include "MPU_stuff.h"// INCLUDES
 
@@ -52,6 +47,11 @@ void send_float(float value);
 //void USART_reset(void); // doesnt work
 
 void clear_terminal (void); // clears terminal
+
+//Moved from RGB_Bar
+void USART_Vout(unsigned short ADC_DATA, unsigned int int_part, unsigned int frac_part);
+void bar_graph(unsigned int int_part, unsigned int frac_part);
+void send_Vout (unsigned int int_part, unsigned int frac_part);
 
 // Global Variables
 extern int16_t Accel_X_RAW, Accel_Y_RAW, Accel_Z_RAW;

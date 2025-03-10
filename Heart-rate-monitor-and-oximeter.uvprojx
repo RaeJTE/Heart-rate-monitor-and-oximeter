@@ -405,6 +405,11 @@
               <FilePath>.\DAC.c</FilePath>
             </File>
             <File>
+              <FileName>ADC.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\ADC.c</FilePath>
+            </File>
+            <File>
               <FileName>Buzz.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Buzz.c</FilePath>
@@ -415,29 +420,9 @@
               <FilePath>.\SPI.c</FilePath>
             </File>
             <File>
-              <FileName>ADC.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\ADC.c</FilePath>
-            </File>
-            <File>
-              <FileName>i2c.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\i2c.c</FilePath>
-            </File>
-            <File>
               <FileName>LED.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\LED.c</FilePath>
-            </File>
-            <File>
-              <FileName>MPU_stuff.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\MPU_stuff.c</FilePath>
-            </File>
-            <File>
-              <FileName>PLL_Config.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\PLL_Config.c</FilePath>
             </File>
             <File>
               <FileName>RGB_Bar.c</FileName>
@@ -450,14 +435,24 @@
               <FilePath>.\segments.c</FilePath>
             </File>
             <File>
-              <FileName>timer.c</FileName>
+              <FileName>i2c.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\timer.c</FilePath>
+              <FilePath>.\i2c.c</FilePath>
+            </File>
+            <File>
+              <FileName>MPU_stuff.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\MPU_stuff.c</FilePath>
             </File>
             <File>
               <FileName>usart.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\usart.c</FilePath>
+            </File>
+            <File>
+              <FileName>timer.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\timer.c</FilePath>
             </File>
           </Files>
         </Group>

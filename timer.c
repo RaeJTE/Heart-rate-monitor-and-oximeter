@@ -1,6 +1,4 @@
 #include "timer.h"
-#include "LED.h"
-
 
 extern unsigned int int_part;
 extern unsigned int frac_part;
@@ -26,12 +24,8 @@ void init_Timer1(void)// ADC
     TIM1->PSC = 179999;             // Prescaler = 15 (16 MHz / 16 = 1 MHz timer frequency)
     TIM1->ARR = 179999;            // Auto-reload value for 1 kHz frequency (1ms period)
 
-	
-
-		
     // Enable Timer 1 trigger output (TRGO) to generate a signal on the CC4 pin
     TIM1->CR2 |= TIM_CR2_MMS_1; // TRGO = update event every 1 ms
-	
 
     // Enable Timer 1
     TIM1->CR1 |= TIM_CR1_CEN;
@@ -172,9 +166,6 @@ void interrupt_priority(void){
     NVIC_SetPriority(TIM5_IRQn, 1);  // Timer 5 ISR: Priority 1
     NVIC_SetPriority(TIM2_IRQn, 2);  // Timer 2 ISR: Priority 2
     NVIC_SetPriority(TIM3_IRQn, 0);  // Timer 3 ISR: Priority 0
-	
-	
-	
 	
 	
 }

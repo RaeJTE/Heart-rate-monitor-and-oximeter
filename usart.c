@@ -159,14 +159,14 @@ void process_USART_Input(void) {
 				else if (comparestrings((const char*)rxBuffer, "heart rate")){
 						clear_terminal();//clear the terminal
 						USART_SendString ("\r\n\033[31m\033[4mheart rate");
-						Init_Timer5();
+						//Init_Timer5();	----- Commented out to remove circular dependency with timers.h
 						//USART_reset();// exit check
 					}
         
 				else if (comparestrings((const char*)rxBuffer, "rgb bar")){
 							clear_terminal();//clear the terminal
 							USART_SendString ("RGB BAR");
-							Init_Timer2();
+							//Init_Timer2();	----- Commented out to remove circular dependency with timers.h
 							while(1){
 							RGB_main();} // RGB BAR stuff
 						  //USART_reset();// exit check
@@ -254,5 +254,91 @@ void USART_reset(void) {
 }
 void clear_terminal() { // function to clear terminal
     USART_SendString("\033[2J\033[H");  // Clear the screen and move cursor to top-left
+}
+
+
+// convert adc value to voltage
+void USART_Vout(unsigned short ADC_DATA, unsigned int int_part, unsigned int frac_part) {
+		// Convert ADC value to voltage (0-3.3V)
+		float voltage = ((float)ADC_DATA / 4095.0) * 3.3;
+
+		// Extract the integer and fractional parts of the voltage
+		int_part = (unsigned int)voltage;
+		frac_part = (unsigned int)((voltage - int_part) * 100);  // Get the first 2 decimal places
+
+		bar_graph(int_part, frac_part);
+
+}
+
+
+// Function to display a single bar graph using extended ASCII block characters
+void bar_graph(unsigned int int_part, unsigned int frac_part) {
+    clear_terminal();
+	  float value = int_part + (frac_part / 100.0);  // Combine the int and fractional parts
+
+    // Calculate the number of blocks (each block represents 0.1)
+    int bar_length = (int)(value / 0.1);  // Each block represents 0.1, so we divide by 0.1
+
+    // Ensure the bar length does not exceed the maximum number of blocks (33 for max value 3.3)
+    if (bar_length > 33) {
+        bar_length = 33;  // Maximum length of the bar (for 3.3)
+    }
+
+    // Print the label (start of the bar)
+    USART_SendData('[');  // Start of the bar
+
+    // Print the corresponding number of `¦` for the data value
+    for (int i = 0; i < bar_length; i++) {
+        USART_SendData('#');  // Extended block character
+    }
+
+    // Fill the remaining space with empty characters if the bar is not full
+    for (int i = bar_length; i < 33; i++) {  // 33 blocks for the maximum (3.3 value)
+        USART_SendData(' ');  // Empty space for the remaining portion of the bar
+    }
+
+    // Print the closing bracket
+    USART_SendData(']');
+
+    // Print the actual voltage value
+    USART_SendData(' ');
+
+    // Print the integer part
+    USART_SendData('0' + int_part);  // Send integer part
+    USART_SendData('.');  // Decimal point
+    USART_SendData('0' + (frac_part / 10));  // Tens place of the fractional part
+    USART_SendData('0' + (frac_part % 10));  // Ones place of the fractional part
+
+    // New line at the end
+    USART_SendData('\r');
+    USART_SendData('\n');
+}
+
+void send_Vout (unsigned int int_part, unsigned int frac_part){
+	// Send the "POT VOLTAGE = " string
+		USART_SendString("POT VOLTAGE = ");
+
+		// Send integer part as characters
+		char c;
+		c = (int_part / 10) + '0';  // Tens place
+		USART_SendData(c);          // Send tens place
+		c = (int_part % 10) + '0';  // Ones place
+		USART_SendData(c);          // Send ones place
+
+		// Send decimal point
+		USART_SendData('.');
+
+		// Send fractional part as characters
+		c = (frac_part / 10) + '0';  // Tens place of fraction
+		USART_SendData(c);           // Send tens place of fraction
+		c = (frac_part % 10) + '0';  // Ones place of fraction
+		USART_SendData(c);           // Send ones place of fraction
+
+		// Send "V" and newline
+		USART_SendData('V');
+		USART_SendData('\r');
+		USART_SendData('\n');
+		bar_graph(int_part, frac_part);
+
 }
 

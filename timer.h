@@ -2,9 +2,7 @@
 #define timer
 #include <stm32f429xx.h>
 #include "usart.h"
-#include "PLL_Config.h"
 #include "LED.h"
-#include "timer.h"
 #include "RGB_bar.h"
 #include "ADC.h"
 #include "DAC.h"
