@@ -7,6 +7,10 @@
 #include "ADC.h"
 #include "DAC.h"
 
+//Variables that will be altered by 
+extern int readADC[];
+extern int i;
+
 
 extern unsigned short ADC_DATA;
 

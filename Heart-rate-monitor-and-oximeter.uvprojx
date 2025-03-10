@@ -454,6 +454,11 @@
               <FileType>1</FileType>
               <FilePath>.\timer.c</FilePath>
             </File>
+            <File>
+              <FileName>PeakDetection.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\PeakDetection.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

@@ -5,7 +5,7 @@ extern unsigned int frac_part;
 
 // Timer 1 used for ADC
 // Timer 2 used for rgb bar
-// Timer 3 used for blue pwm
+// Timer 3 used for reading ADC
 // Timer 5 used for red LED
 
 // check rm0090 (13.13.3) for adc clock 1
@@ -19,7 +19,6 @@ void init_Timer1(void)// ADC
     // Enable Timer 1 clock
     RCC->APB2ENR |= RCC_APB2ENR_TIM1EN;
 
-	
 		// Set Timer 1 to 1 khz trigger for ADC
     TIM1->PSC = 179999;             // Prescaler = 15 (16 MHz / 16 = 1 MHz timer frequency)
     TIM1->ARR = 179999;            // Auto-reload value for 1 kHz frequency (1ms period)
@@ -46,7 +45,7 @@ void Hold_Blue_LED(void)
 
 
 
-void Init_Timer3(uint32_t frequency) // BLUE LED
+void Init_Timer3(uint32_t frequency) // Reads ADC
 {
     // Enable Timer 3 clock
     RCC->APB1ENR |= RCC_APB1ENR_TIM3EN;
@@ -73,16 +72,26 @@ void Init_Timer3(uint32_t frequency) // BLUE LED
 
     // Start Timer 3
     TIM3->CR1 |= TIM_CR1_CEN;
+		
+		//Initialises variables that will be used by the interrupt handler
 }
-// Timer 3 (BLUE LED) ISR
+// Timer 3 reads ADC
 void TIM3_IRQHandler(void)
 {
-    if (TIM3->SR & TIM_SR_UIF)  // Check if update interrupt flag is set
-    {
-        TIM3->SR &= ~TIM_SR_UIF;  // Clear the update interrupt flag
-        Toggle_LED('B');          // Toggle blue LED
-			// using the toggle, will easilt create a 50% duty cycle
-    }
+	if (TIM3->SR & TIM_SR_UIF)  // Check if update interrupt flag is set
+	{
+		TIM3->SR &= ~TIM_SR_UIF;  // Clear the update interrupt flag
+		readADC[i] = read_adc();
+		if (i >= 15*1000)	//15*frequency, so that it resets every 15 seconds so peak detection gives peaks in 15s for 15s average
+		{
+			i = 0;
+		}
+		else
+		{
+		i++;
+		}
+		
+	}
 }
 
 // DONE WITH BLUE PWM
@@ -129,14 +138,6 @@ void Init_Timer2(void) // 10hz (rgb bar terminal out)
 }
 
 
-
-
-
-
-
-
-
-
 //TIMNER 5 = RED LED
 // Timer 5 Initialisation for LED3
 void Init_Timer5(void)
@@ -158,7 +159,6 @@ void TIM5_IRQHandler(void)
 			Toggle_LED('R');                // toggles red led
     }
 }
-
 
 
 void interrupt_priority(void){

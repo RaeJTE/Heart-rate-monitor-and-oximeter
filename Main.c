@@ -24,6 +24,8 @@
 int16_t Accel_X_RAW = 0, Accel_Y_RAW = 0, Accel_Z_RAW = 0;
 float Ax, Ay, Az;
 uint8_t check;
+int readADC[] = {};
+int i = 0;
 
 int main(void)
 {
@@ -42,64 +44,49 @@ int main(void)
 	//Initialisation of LEDs
 	LED_INIT();
 	//Initialisation of RGB_Bar
-	init_GPIO_RGB_Bar();
+	//init_GPIO_RGB_Bar();
 	//Initialisation of Segments
-	GPIO_Init();
+	//GPIO_Init();
 	//Initialisation of I2C
 	I2C2_Config();
 	//Initialisation of MPU
 	MPU6050_Init();
 	//Initialisation of USART
 	init_USART();
-	//Initialisation of timer 1
-	init_Timer1();
-	
-	int n = 0;
-	int test = 0;
+	//Initialisation of timers
+	Init_Timer3(1000);
+
+	int test[] = {};
 	char* num;	//Creates a pointer to be used to store a string conversion of a number - pointer necessary because of pointer decay when moving between .c files
 	int numLen;	//Variable to store length of string conversion of number
+	
+	output_dac1(0); //Max output at 65535	-	IR LED
+	output_dac2(0);	//Max output at 65535	- RED LED
+		
 	while(1)
 	{
-		stringLCD("Begin", 5, 0, n);
-		lcd_delayus(100000);
-		LCD_CLR();
-		test = read_adc();
-		decIntToDecStr(test, &num, &numLen);
-		stringLCD(num, numLen, 0, n);
+		decIntToDecStr(test[0], &num, &numLen);
+		stringLCD(num, numLen, 0, 0);
 		lcd_delayus(10000);
-		n++;
-		test = read_adc();
-		decIntToDecStr(test, &num, &numLen);
-		stringLCD(num, numLen, 1, n);
+		LCD_CLR();
+	};
+	
+	/*for(int i = 0; i < 10; i++)
+	{
+		stringLCD("Begin", 5, 0, i);
 		lcd_delayus(100000);
 		LCD_CLR();
-	}
-	
-	for(int i = 0; i<5; i++)
-	{
-		LCD_CLR();
-		test = read_adc();
-		decIntToDecStr(test, &num, &numLen);
+		test[i] = read_adc();
+		decIntToDecStr(test[i], &num, &numLen);
 		stringLCD(num, numLen, 0, i);
 		lcd_delayus(100000);
-	}
-	
-	char* num2;	//Creates a pointer to be used to store a string conversion of a number - pointer necessary because of pointer decay when moving between .c files
-	int numLen2;	//Variable to store length of string conversion of number
-	int test2 = 0;
-	
-	for(int i = 0; i<5; i++)
-	{
 		LCD_CLR();
-		test2 = read_adc();
-		decIntToDecStr(test2, &num2, &numLen2);
-		stringLCD(num2, numLen2, 0, i);
-		lcd_delayus(100000);
-	}
+	}*/
 	
 	
 	stringLCD("Code complete", 13, 0,0);
 	output_dac1(0);
+	output_dac2(0);
 	lcd_delayus(500000);
 	LCD_CLR();
 	
