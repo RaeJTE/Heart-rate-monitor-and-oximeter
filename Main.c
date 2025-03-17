@@ -1,5 +1,6 @@
 //Includes
 #include <stdio.h>
+#include <string.h>	//used for memcpy so readADC array can run continuously and analysis can be performed on it at a fixed point in time
 #include <stdlib.h>
 #include <math.h>
 #include "switch.h"
@@ -61,26 +62,35 @@ int main(void)
 	
 	output_dac1(0); //Max output at 65535	-	IR LED
 	output_dac2(0);	//Max output at 65535	- RED LED
+	
+	int n = sizeof(readADC)/sizeof(readADC[0]);
+	int test[n];
+	
+	memcpy(test, readADC, n * sizeof(readADC[0]));
 		
-	while(1)
+	/*while(1)
 	{
-		decIntToDecStr(readADC[1], &num, &numLen);
+		decIntToDecStr(readADC[0], &num, &numLen);
 		stringLCD(num, numLen, 0, 0);
+		lcd_delayus(40000);
+		LCD_CLR();
+	};*/
+	
+	stringLCD("Begin", 5, 0, i);
+	lcd_delayus(100000);
+	LCD_CLR();
+		
+	//for(int i = 0; i < 10; i++)
+	int i = 0; while(i<10)
+	{
+		decIntToDecStr(readADC[i], &num, &numLen);
+		stringLCD(num, numLen, 0, i);
 		lcd_delayus(10000);
 		LCD_CLR();
-	};
-	
-	/*for(int i = 0; i < 10; i++)
-	{
-		stringLCD("Begin", 5, 0, i);
-		lcd_delayus(100000);
-		LCD_CLR();
-		test[i] = read_adc();
-		decIntToDecStr(test[i], &num, &numLen);
-		stringLCD(num, numLen, 0, i);
-		lcd_delayus(100000);
-		LCD_CLR();
-	}*/
+		i++;
+		//stringLCD("Cont", 4, 1, 0);
+		//lcd_delayus(50000);
+	}
 	
 	
 	stringLCD("Code complete", 13, 0,0);
