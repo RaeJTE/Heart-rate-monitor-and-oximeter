@@ -1,7 +1,11 @@
 #include "timer.h"
 
+//Global variables
 extern unsigned int int_part;
 extern unsigned int frac_part;
+
+//Variables
+unsigned int msTime;
 
 // Timer 1 used for ADC
 // Timer 2 used for rgb bar
@@ -31,8 +35,6 @@ void init_Timer1(void)// ADC
 }
 
 
-//BLUE PWM STUFF
-
 // Function to hold the Blue LED at 50% power
 void Hold_Blue_LED(void)
 {
@@ -51,7 +53,7 @@ void Init_Timer3(uint32_t frequency) // Reads ADC
     RCC->APB1ENR |= RCC_APB1ENR_TIM3EN;
 
     // Timer clock
-    uint32_t timerClock = 90000000;
+    uint32_t timerClock = 16000000;
 
     // Prescaler selection (assuming ARR = 1000 for fine granularity)
     uint32_t prescaler = (timerClock / (frequency * 1000)) - 1;
@@ -78,38 +80,29 @@ void Init_Timer3(uint32_t frequency) // Reads ADC
 // Timer 3 reads ADC
 void TIM3_IRQHandler(void)
 {
-	if (TIM3->SR & TIM_SR_UIF)  // Check if update interrupt flag is set
+	TIM3->SR &= ~TIM_SR_UIF;  // Clear the update interrupt flag
+	readADC[i] = read_adc();
+	if (i >= 15*1000)	//15*frequency, so that it resets every 15 seconds so peak detection gives peaks in 15s for 15s average
 	{
-		TIM3->SR &= ~TIM_SR_UIF;  // Clear the update interrupt flag
-		readADC[i] = read_adc();
-		if (i >= 15*100)	//15*frequency, so that it resets every 15 seconds so peak detection gives peaks in 15s for 15s average
-		{
-			i = 0;
-		}
-		else
-		{
-		i++;
-		}
-		
+		i = 0;
 	}
+	else
+	{
+		i++;
+	}
+		
 }
 
-// DONE WITH BLUE PWM
 
 
 
-// Vout at 10hz timer stuff
+// Used for timer delay
 void TIM2_IRQHandler(void)
 {
-    // Check if the update interrupt flag is set
-    if (TIM2->SR & TIM_SR_UIF) {
-        // Clear the interrupt flag
-        TIM2->SR &= ~TIM_SR_UIF;
-			  //Vout to terminal
-				USART_Vout( ADC_DATA, int_part, frac_part);
-			// select either bar chart or numerical voltage
-			
-    }
+	// Clear the interrupt flag
+	TIM2->SR &= ~TIM_SR_UIF;
+	//Increment time tracker
+	msTime++;
 }
 
 
@@ -120,12 +113,20 @@ void Init_Timer2(void) // 10hz (rgb bar terminal out)
 
     // Enable the update interrupt for Timer 2
     TIM2->DIER |= TIM_DIER_UIE; 
+	
+		// Timer clock
+    uint32_t timerClock = 16000000;
+		uint32_t frequency = 1000;
+	
+		// Prescaler selection (assuming ARR = 1000 for fine granularity)
+    uint32_t prescaler = (timerClock / (frequency * 1000)) - 1;
+    uint32_t arr = (timerClock / ((prescaler + 1) * frequency));
 
     // Prescaler value (90 MHz / 256 = 351 kHz)
-    TIM2->PSC = 256 - 1;  // Divide by 256 -> Timer clock = 351 kHz
+    TIM2->PSC = prescaler;  // Divide by 256 -> Timer clock = 351 kHz
 
-    // Set the auto-reload register (ARR) for 100 ms period
-    TIM2->ARR = 35099; // 351 kHz * 0.1s = 35099
+    // Set the autso-reload register (ARR) for 100 ms period
+    TIM2->ARR = arr;
 
     // Initialize the counter to 0
     TIM2->CNT = 0;
@@ -135,6 +136,14 @@ void Init_Timer2(void) // 10hz (rgb bar terminal out)
 
     // Start the timer
     TIM2->CR1 |= TIM_CR1_CEN;    // Start the timer
+}
+
+void TIM2Delay (int msDelay)
+{
+	msTime = 0;
+	while(msTime <= msDelay)
+	{
+	}
 }
 
 
@@ -163,10 +172,9 @@ void TIM5_IRQHandler(void)
 
 void interrupt_priority(void){
 	    // Set priority for each timer interrupt
+		NVIC_SetPriority(TIM3_IRQn, 0);  // Timer 3 ISR: Priority 0
     NVIC_SetPriority(TIM5_IRQn, 1);  // Timer 5 ISR: Priority 1
     NVIC_SetPriority(TIM2_IRQn, 2);  // Timer 2 ISR: Priority 2
-    NVIC_SetPriority(TIM3_IRQn, 0);  // Timer 3 ISR: Priority 0
-	
 	
 }
 

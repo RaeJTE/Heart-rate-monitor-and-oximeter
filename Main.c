@@ -18,7 +18,7 @@
 //Definitions
 #define name "Jacob Rae"
 #define pi 3.14159
-#define freq 100	//remember to also update value in timer.c Timer3 IRQ handler || If 1000 loop freezes after ~1s, if 200 breaks out of loop early, if 100 loop freezes after ~20s
+#define freq 10	//remember to also update value in timer.c Timer3 IRQ handler || If 1000 loop freezes after ~1s, if 200 breaks out of loop early or freezes after ~10s, if 100 loop freezes after ~20s
 
 //4-bit mode not working
 
@@ -56,7 +56,8 @@ int main(void)
 	//Initialisation of USART
 	init_USART();
 	//Initialisation of timers
-	Init_Timer3(freq);
+	Init_Timer2();	//Used for delays
+	Init_Timer3(freq);	//Used for reading ADC
 
 	char* num;	//Creates a pointer to be used to store a string conversion of a number - pointer necessary because of pointer decay when moving between .c files
 	int numLen;	//Variable to store length of string conversion of number
@@ -77,27 +78,42 @@ int main(void)
 		LCD_CLR();
 	};*/
 	
-	stringLCD("Begin", 5, 0, i);
-	lcd_delayus(100000);
+	stringLCD("Begin", 5, 0, 0);
+	decIntToDecStr(i, &num, &numLen);
+	stringLCD(num, numLen, 1, 0);
+	TIM2Delay(600);
+	LCD_CLR();
+	decIntToDecStr(i, &num, &numLen);
+	stringLCD(num, numLen, 1, 0);
+	TIM2Delay(1000);
+	LCD_CLR();
+	
+	decIntToDecStr(1352523, &num, &numLen);
+	stringLCD(num, numLen, 0, 0);
+	TIM2Delay(1000);
+	decIntToDecStr(234634634, &num, &numLen);
+	stringLCD(num, numLen, 0, 0);
+	TIM2Delay(1000);
 	LCD_CLR();
 		
-	//for(int i = 0; i < 10; i++)
-	int j = 0; while(j<15*freq)
+	for(int j = 0; j < (15*freq)-1; j++)
+	//int j = 0; while(j<(15*freq)-1)
 	{
 		decIntToDecStr(readADC[j], &num, &numLen);
 		stringLCD(num, numLen, 0, 0);
-		lcd_delayus(30000);
+		TIM2Delay(20);
+		//LCD_CLR();
+		//j++;
+		stringLCD("Cont", 4, 1, 0);
+		TIM2Delay(1000);
 		LCD_CLR();
-		j++;
-		//stringLCD("Cont", 4, 1, 0);
-		//lcd_delayus(50000);
 	}
 	
 	
 	stringLCD("Code complete", 13, 0,0);
 	output_dac1(0);
 	output_dac2(0);
-	lcd_delayus(500000);
+	TIM2Delay(50);
 	LCD_CLR();
 	
 	

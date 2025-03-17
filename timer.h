@@ -24,6 +24,7 @@ void init_Timer1(void);
 void Timer2_IRQHandler(void);
 
 void Init_Timer2(void);
+void TIM2Delay (int timeInDeciSec);
 
 void Init_Timer5(void);
 void TIM5_IRQHandler(void);
