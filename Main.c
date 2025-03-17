@@ -56,7 +56,6 @@ int main(void)
 	//Initialisation of timers
 	Init_Timer3(1000);
 
-	int test[] = {};
 	char* num;	//Creates a pointer to be used to store a string conversion of a number - pointer necessary because of pointer decay when moving between .c files
 	int numLen;	//Variable to store length of string conversion of number
 	
@@ -65,7 +64,7 @@ int main(void)
 		
 	while(1)
 	{
-		decIntToDecStr(test[0], &num, &numLen);
+		decIntToDecStr(readADC[1], &num, &numLen);
 		stringLCD(num, numLen, 0, 0);
 		lcd_delayus(10000);
 		LCD_CLR();
