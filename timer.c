@@ -82,7 +82,7 @@ void TIM3_IRQHandler(void)
 	{
 		TIM3->SR &= ~TIM_SR_UIF;  // Clear the update interrupt flag
 		readADC[i] = read_adc();
-		if (i >= 15*1000)	//15*frequency, so that it resets every 15 seconds so peak detection gives peaks in 15s for 15s average
+		if (i >= 15*100)	//15*frequency, so that it resets every 15 seconds so peak detection gives peaks in 15s for 15s average
 		{
 			i = 0;
 		}

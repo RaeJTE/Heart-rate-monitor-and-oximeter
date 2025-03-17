@@ -1324,11 +1324,11 @@ Image Symbol Table
     .L.str.24                                0x08004601   Data          15  usart.o(.rodata.str1.1)
     __lcctype_c_end                          0x08004644   Data           0  lc_ctype_c.o(locale$$data)
     .bss                                     0x20000008   Section       96  libspace.o(.bss)
-    Heap_Mem                                 0x200000e8   Data         512  startup_stm32f429xx.o(HEAP)
-    HEAP                                     0x200000e8   Section      512  startup_stm32f429xx.o(HEAP)
-    Stack_Mem                                0x200002e8   Data        1024  startup_stm32f429xx.o(STACK)
-    STACK                                    0x200002e8   Section     1024  startup_stm32f429xx.o(STACK)
-    __initial_sp                             0x200006e8   Data           0  startup_stm32f429xx.o(STACK)
+    Heap_Mem                                 0x20001858   Data         512  startup_stm32f429xx.o(HEAP)
+    HEAP                                     0x20001858   Section      512  startup_stm32f429xx.o(HEAP)
+    Stack_Mem                                0x20001a58   Data        1024  startup_stm32f429xx.o(STACK)
+    STACK                                    0x20001a58   Section     1024  startup_stm32f429xx.o(STACK)
+    __initial_sp                             0x20001e58   Data           0  startup_stm32f429xx.o(STACK)
 
     Global Symbols
 
@@ -1722,9 +1722,9 @@ Image Symbol Table
     i                                        0x20000070   Data           4  main.o(.bss.i)
     int_part                                 0x20000074   Data           4  rgb_bar.o(.bss.int_part)
     messageReady                             0x20000078   Data           1  usart.o(.bss.messageReady)
-    readADC                                  0x2000007c   Data           0  main.o(.bss.readADC)
-    rxBuffer                                 0x2000007c   Data         100  usart.o(.bss.rxBuffer)
-    rxIndex                                  0x200000e0   Data           1  usart.o(.bss.rxIndex)
+    readADC                                  0x2000007c   Data        6000  main.o(.bss.readADC)
+    rxBuffer                                 0x200017ec   Data         100  usart.o(.bss.rxBuffer)
+    rxIndex                                  0x20001850   Data           1  usart.o(.bss.rxIndex)
 
 
 
@@ -1997,7 +1997,7 @@ Memory Map of the image
     0x20000000   0x08004644   0x00000004   Data   RW          299    .data.SystemCoreClock  system_stm32f4xx.o
 
 
-    Execution Region ER_ZI (Exec base: 0x20000008, Load base: 0x08004648, Size: 0x000006e0, Max: 0xffffffff, ABSOLUTE)
+    Execution Region ER_ZI (Exec base: 0x20000008, Load base: 0x08004648, Size: 0x00001e50, Max: 0xffffffff, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
@@ -2006,16 +2006,16 @@ Memory Map of the image
     0x2000006a        -       0x00000001   Zero   RW           13    .bss.check          main.o
     0x2000006b   0x08004648   0x00000001   PAD
     0x2000006c        -       0x00000004   Zero   RW          152    .bss.frac_part      rgb_bar.o
-    0x20000070        -       0x00000004   Zero   RW            8    .bss.i              main.o
+    0x20000070        -       0x00000004   Zero   RW            7    .bss.i              main.o
     0x20000074        -       0x00000004   Zero   RW          151    .bss.int_part       rgb_bar.o
     0x20000078        -       0x00000001   Zero   RW          238    .bss.messageReady   usart.o
     0x20000079   0x08004648   0x00000003   PAD
-    0x2000007c        -       0x00000000   Zero   RW            7    .bss.readADC        main.o
-    0x2000007c        -       0x00000064   Zero   RW          240    .bss.rxBuffer       usart.o
-    0x200000e0        -       0x00000001   Zero   RW          237    .bss.rxIndex        usart.o
-    0x200000e1   0x08004648   0x00000007   PAD
-    0x200000e8        -       0x00000200   Zero   RW          286    HEAP                startup_stm32f429xx.o
-    0x200002e8        -       0x00000400   Zero   RW          285    STACK               startup_stm32f429xx.o
+    0x2000007c        -       0x00001770   Zero   RW            8    .bss.readADC        main.o
+    0x200017ec        -       0x00000064   Zero   RW          240    .bss.rxBuffer       usart.o
+    0x20001850        -       0x00000001   Zero   RW          237    .bss.rxIndex        usart.o
+    0x20001851   0x08004648   0x00000007   PAD
+    0x20001858        -       0x00000200   Zero   RW          286    HEAP                startup_stm32f429xx.o
+    0x20001a58        -       0x00000400   Zero   RW          285    STACK               startup_stm32f429xx.o
 
 
 ==============================================================================
@@ -2031,7 +2031,7 @@ Image component sizes
        736          0          0          0          0       3063   i2c.o
        744          8          3          0          0       3742   lcd.o
        318          0          0          0          0       2352   led.o
-       404          0         20          0          5       1554   main.o
+       404          0         20          0       6005       1563   main.o
        116          0          0          0          0        876   mpu_stuff.o
          0          0          0          0         10       3298   rgb_bar.o
         64         26        428          0       1536        884   startup_stm32f429xx.o
@@ -2041,7 +2041,7 @@ Image component sizes
       1158         36         84          0        102       8080   usart.o
 
     ----------------------------------------------------------------------
-      4976         70        584          4       1664      42162   Object Totals
+      4976         70        584          4       7664      42171   Object Totals
          0          0         32          0          0          0   (incl. Generated)
         40          0          1          0         11          0   (incl. Padding)
 
@@ -2175,14 +2175,14 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-     16780        732       1208          4       1760      45518   Grand Totals
-     16780        732       1208          4       1760      45518   ELF Image Totals
+     16780        732       1208          4       7760      45527   Grand Totals
+     16780        732       1208          4       7760      45527   ELF Image Totals
      16780        732       1208          4          0          0   ROM Totals
 
 ==============================================================================
 
     Total RO  Size (Code + RO Data)                17988 (  17.57kB)
-    Total RW  Size (RW Data + ZI Data)              1764 (   1.72kB)
+    Total RW  Size (RW Data + ZI Data)              7764 (   7.58kB)
     Total ROM Size (Code + RO Data + RW Data)      17992 (  17.57kB)
 
 ==============================================================================

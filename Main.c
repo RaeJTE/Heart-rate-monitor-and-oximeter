@@ -18,6 +18,7 @@
 //Definitions
 #define name "Jacob Rae"
 #define pi 3.14159
+#define freq 100	//remember to also update value in timer.c Timer3 IRQ handler || If 1000 loop freezes after ~1s, if 200 breaks out of loop early, if 100 loop freezes after ~20s
 
 //4-bit mode not working
 
@@ -25,7 +26,7 @@
 int16_t Accel_X_RAW = 0, Accel_Y_RAW = 0, Accel_Z_RAW = 0;
 float Ax, Ay, Az;
 uint8_t check;
-int readADC[] = {};
+int readADC[15*freq];
 int i = 0;
 
 int main(void)
@@ -55,7 +56,7 @@ int main(void)
 	//Initialisation of USART
 	init_USART();
 	//Initialisation of timers
-	Init_Timer3(1000);
+	Init_Timer3(freq);
 
 	char* num;	//Creates a pointer to be used to store a string conversion of a number - pointer necessary because of pointer decay when moving between .c files
 	int numLen;	//Variable to store length of string conversion of number
@@ -81,13 +82,13 @@ int main(void)
 	LCD_CLR();
 		
 	//for(int i = 0; i < 10; i++)
-	int i = 0; while(i<10)
+	int j = 0; while(j<15*freq)
 	{
-		decIntToDecStr(readADC[i], &num, &numLen);
-		stringLCD(num, numLen, 0, i);
-		lcd_delayus(10000);
+		decIntToDecStr(readADC[j], &num, &numLen);
+		stringLCD(num, numLen, 0, 0);
+		lcd_delayus(30000);
 		LCD_CLR();
-		i++;
+		j++;
 		//stringLCD("Cont", 4, 1, 0);
 		//lcd_delayus(50000);
 	}
