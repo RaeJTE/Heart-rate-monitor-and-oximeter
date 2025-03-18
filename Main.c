@@ -18,7 +18,7 @@
 //Definitions
 #define name "Jacob Rae"
 #define pi 3.14159
-#define freq 10	//remember to also update value in timer.c Timer3 IRQ handler || If 1000 loop freezes after ~1s, if 200 breaks out of loop early or freezes after ~10s, if 100 loop freezes after ~20s
+#define samplingRate 10	//remember to also update value in timer.c Timer3 IRQ handler || If 1000 loop freezes after ~1s, if 200 breaks out of loop early or freezes after ~10s, if 100 loop freezes after ~20s
 
 //4-bit mode not working
 
@@ -26,7 +26,7 @@
 int16_t Accel_X_RAW = 0, Accel_Y_RAW = 0, Accel_Z_RAW = 0;
 float Ax, Ay, Az;
 uint8_t check;
-int readADC[15*freq];
+int readADC[15*samplingRate];
 int i = 0;
 
 int main(void)
@@ -56,65 +56,23 @@ int main(void)
 	//Initialisation of USART
 	init_USART();
 	//Initialisation of timers
-	Init_Timer2();	//Used for delays
-	Init_Timer3(freq);	//Used for reading ADC
+	Init_Timer2(samplingRate);	//Used for reading DAC
 
 	char* num;	//Creates a pointer to be used to store a string conversion of a number - pointer necessary because of pointer decay when moving between .c files
 	int numLen;	//Variable to store length of string conversion of number
 	
-	output_dac1(0); //Max output at 65535	-	IR LED
-	output_dac2(0);	//Max output at 65535	- RED LED
+	int dataPoints = 360000;	//Defines how many data points we want to take
+	//For some reason previous code kept breaking when I used for loops here - possible from use of i specificly?
 	
-	int n = sizeof(readADC)/sizeof(readADC[0]);
-	int test[n];
-	
-	memcpy(test, readADC, n * sizeof(readADC[0]));
-		
-	/*while(1)
+	for (int i = 0; i < dataPoints; i++)
 	{
-		decIntToDecStr(readADC[0], &num, &numLen);
+		float radians = i*(pi/180);
+		int y1_value = 400 + 100*sin(radians);
+		decIntToDecStr(y1_value, &num, &numLen);
 		stringLCD(num, numLen, 0, 0);
-		lcd_delayus(40000);
-		LCD_CLR();
-	};*/
-	
-	stringLCD("Begin", 5, 0, 0);
-	decIntToDecStr(i, &num, &numLen);
-	stringLCD(num, numLen, 1, 0);
-	TIM2Delay(600);
-	LCD_CLR();
-	decIntToDecStr(i, &num, &numLen);
-	stringLCD(num, numLen, 1, 0);
-	TIM2Delay(1000);
-	LCD_CLR();
-	
-	decIntToDecStr(1352523, &num, &numLen);
-	stringLCD(num, numLen, 0, 0);
-	TIM2Delay(1000);
-	decIntToDecStr(234634634, &num, &numLen);
-	stringLCD(num, numLen, 0, 0);
-	TIM2Delay(1000);
-	LCD_CLR();
-		
-	for(int j = 0; j < (15*freq)-1; j++)
-	//int j = 0; while(j<(15*freq)-1)
-	{
-		decIntToDecStr(readADC[j], &num, &numLen);
-		stringLCD(num, numLen, 0, 0);
-		TIM2Delay(20);
-		//LCD_CLR();
-		//j++;
-		stringLCD("Cont", 4, 1, 0);
-		TIM2Delay(1000);
-		LCD_CLR();
+		output_dac2(y1_value);
+		lcd_delayus(500);	//Defines the time interval between data points
 	}
-	
-	
-	stringLCD("Code complete", 13, 0,0);
-	output_dac1(0);
-	output_dac2(0);
-	TIM2Delay(50);
-	LCD_CLR();
 	
 	
 }
