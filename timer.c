@@ -1,6 +1,5 @@
 #include "timer.h"
 
-
 unsigned short ADC_DATA;
 float voltage;
 unsigned char str[20];  // Buffer to store voltage string
@@ -30,12 +29,8 @@ void float_to_string(float num, char *str)
             *p++ = temp[--i];  // Reverse the order
         }
     }
-
     *p++ = '.';  // Add decimal point
 
-		
-		
-		
     // Extract digits of decimal part
     if (decimal_part == 0) {
         *p++ = '0';
@@ -56,11 +51,6 @@ void float_to_string(float num, char *str)
 
     *p = '\0'; 
 }
-
-
-
-
-void float_to_string(float num, char *str);
 
 
 void Init_Timer2(uint32_t frequency) // frequency in Hz
@@ -101,7 +91,7 @@ void TIM2_IRQHandler(void)
         
         // Calculate voltage: ADC_DATA * (3.3 / 4095)
         voltage = (ADC_DATA * 3.3f) / 4095.0f;
-        
+			
         // Convert voltage to string
         float_to_string(voltage, (char *)str);
         
@@ -117,7 +107,7 @@ void TIM2_IRQHandler(void)
         TIM2->SR &= ~TIM_SR_UIF;
 			  //Vout to terminal
 				//USART_Vout( ADC_DATA, int_part, frac_part);
-			// select either bar chart or numerical voltage
+				// select either bar chart or numerical voltage
 			
     }
 }
@@ -153,6 +143,16 @@ void Init_Timer3(uint32_t frequency)
 
     // Start Timer 3
     TIM3->CR1 |= TIM_CR1_CEN;   // Start Timer 3
+}
+
+void TIM3_IRQHandler(void)
+{
+	// Check if the update interrupt flag is set
+	if (TIM3->SR & TIM_SR_UIF)
+	{
+		//Clear the interrupt flag
+		TIM2->SR &= ~TIM_SR_UIF;
+	}
 }
 
 

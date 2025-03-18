@@ -7,6 +7,8 @@
 #include "ADC.h"
 #include "DAC.h"
 
+#define samplingRate 1000
+
 // function prototypes
 void Set_Timer3_Frequency(uint32_t frequency);
 void Init_Timer3(uint32_t frequency);

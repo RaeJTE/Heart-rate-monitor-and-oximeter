@@ -4,6 +4,7 @@
 void init_ADC(void)
 {
 	//Nucleo board photodiode is C0
+	//PCB input is pin A7
 	
 	// Enable GPIOA clock
     RCC->AHB1ENR |= RCC_AHB1ENR_GPIOAEN;

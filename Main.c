@@ -18,16 +18,14 @@
 //Definitions
 #define name "Jacob Rae"
 #define pi 3.14159
-#define samplingRate 10	//remember to also update value in timer.c Timer3 IRQ handler || If 1000 loop freezes after ~1s, if 200 breaks out of loop early or freezes after ~10s, if 100 loop freezes after ~20s
-
-//4-bit mode not working
+//SamplingRate defined in timer.h
 
 // Global Variables
 int16_t Accel_X_RAW = 0, Accel_Y_RAW = 0, Accel_Z_RAW = 0;
 float Ax, Ay, Az;
 uint8_t check;
-int readADC[15*samplingRate];
-int i = 0;
+int j = 0;
+
 
 int main(void)
 {
@@ -45,10 +43,6 @@ int main(void)
 	initBuzz();
 	//Initialisation of LEDs
 	LED_INIT();
-	//Initialisation of RGB_Bar
-	//init_GPIO_RGB_Bar();
-	//Initialisation of Segments
-	//GPIO_Init();
 	//Initialisation of I2C
 	I2C2_Config();
 	//Initialisation of MPU
@@ -56,12 +50,45 @@ int main(void)
 	//Initialisation of USART
 	init_USART();
 	//Initialisation of timers
-	Init_Timer2(samplingRate);	//Used for reading DAC
-
+	Init_Timer2(samplingRate);	//Used for reading ADC
+	
+	//Initialisation of variables
 	char* num;	//Creates a pointer to be used to store a string conversion of a number - pointer necessary because of pointer decay when moving between .c files
 	int numLen;	//Variable to store length of string conversion of number
 	
-	int dataPoints = 360000;	//Defines how many data points we want to take
+	stringLCD("Begin in", 8, 0, 0);
+	lcd_delayus(20000);
+	LCD_CLR();
+	stringLCD("5", 1, 0, 0);
+	lcd_delayus(20000);
+	LCD_CLR();
+	stringLCD("4", 1, 0, 0);
+	lcd_delayus(20000);
+	LCD_CLR();
+	stringLCD("3", 1, 0, 0);
+	lcd_delayus(20000);
+	LCD_CLR();
+	stringLCD("2", 1, 0, 0);
+	lcd_delayus(20000);
+	LCD_CLR();
+	stringLCD("1", 1, 0, 0);
+	lcd_delayus(20000);
+	LCD_CLR();
+	
+	while(1)
+	{
+
+		/*ADCoutCopy[j] = ADCout;
+		decIntToDecStr(ADCoutCopy[j], &num, &numLen);
+		stringLCD(num, numLen, 0, 0);*/
+		decIntToDecStr(j, &num, &numLen);
+		stringLCD(num, numLen, 1, 0);
+		lcd_delayus(20000);
+		LCD_CLR();
+		j++;
+	}
+	
+	/*int dataPoints = 360000;	//Defines how many data points we want to take
 	//For some reason previous code kept breaking when I used for loops here - possible from use of i specificly?
 	
 	for (int i = 0; i < dataPoints; i++)
@@ -72,7 +99,8 @@ int main(void)
 		stringLCD(num, numLen, 0, 0);
 		output_dac2(y1_value);
 		lcd_delayus(500);	//Defines the time interval between data points
-	}
+	}*/
+	
 	
 	
 }
