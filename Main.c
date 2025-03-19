@@ -52,28 +52,29 @@ int main(void)
 	init_USART();
 	//Initialisation of timers
 	Init_Timer2(samplingRate);	//Used for reading ADC
+	Init_Timer3();	//Used for timer based delays
 	
 	//Initialisation of variables
 	char* num;	//Creates a pointer to be used to store a string conversion of a number - pointer necessary because of pointer decay when moving between .c files
 	int numLen;	//Variable to store length of string conversion of number
 	
 	stringLCD("Begin in", 8, 0, 0);
-	lcd_delayus(20000);
+	TIM3Delay(1000);
 	LCD_CLR();
 	stringLCD("5", 1, 0, 0);
-	lcd_delayus(20000);
+	TIM3Delay(1000);
 	LCD_CLR();
 	stringLCD("4", 1, 0, 0);
-	lcd_delayus(20000);
+	TIM3Delay(1000);
 	LCD_CLR();
 	stringLCD("3", 1, 0, 0);
-	lcd_delayus(20000);
+	TIM3Delay(1000);
 	LCD_CLR();
 	stringLCD("2", 1, 0, 0);
-	lcd_delayus(20000);
+	TIM3Delay(1000);
 	LCD_CLR();
 	stringLCD("1", 1, 0, 0);
-	lcd_delayus(20000);
+	TIM3Delay(1000);
 	LCD_CLR();
 	
 	/*for(j = 0; j< 15 * samplingRate; j++)
@@ -95,7 +96,7 @@ int main(void)
 		lcd_delayus(100);*/
 		decIntToDecStr(j, &num, &numLen);
 		stringLCD(num, numLen, 1, 0);
-		lcd_delayus(10);
+		TIM3Delay(10);
 		LCD_CLR();
 		if(j < 15 * samplingRate)
 		{
@@ -109,7 +110,7 @@ int main(void)
 	
 	
 	stringLCD("Code complete", 13, 0, 3);
-	lcd_delayus(100000);
+	TIM3Delay(10000);
 	LCD_CLR();
 	
 	

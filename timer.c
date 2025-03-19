@@ -5,6 +5,7 @@ float voltage;
 unsigned char str[20];  // Buffer to store voltage string
 volatile int ADCcounter = 0;
 volatile uint8_t ADCout[15*samplingRate];
+volatile unsigned int msTime;
 
 void float_to_string(float num, char *str)
 {
@@ -57,7 +58,7 @@ void float_to_string(float num, char *str)
 
 void Init_Timer2(uint32_t frequency) // frequency in Hz
 {
-    uint32_t timer_clock = 90000000 / 256; // 90 MHz / Prescaler
+    uint32_t timer_clock = 16000000 / 256; // 16 MHz / Prescaler
     uint32_t arr_value = (timer_clock / frequency) - 1;
 
     // Enable timer 2 clock
@@ -126,24 +127,27 @@ void TIM2_IRQHandler(void)
 }
 
 
-void Init_Timer3(uint32_t frequency)
+void Init_Timer3(void)
 {
     // Enable Timer 3 clock
     RCC->APB1ENR |= RCC_APB1ENR_TIM3EN;
 
-    // Calculate the prescaler and ARR values for the desired frequency
-    uint32_t timerClock = 90000000; // Timer clock is 90 MHz (system clock)
-    
-    // Calculate the period required to achieve the target frequency
-    uint32_t period = timerClock / frequency;
-    
-    // Find the appropriate prescaler and ARR values
-    uint32_t prescaler = period / 2000;  // Default ARR value (2000  for 0.5 Hz)
-    uint32_t arr = period / (prescaler + 1);
+    // Timer clock
+    uint32_t timerClock = 16000000;
+		uint32_t frequency = 1000;
+	
+		// Prescaler selection (assuming ARR = 1000 for fine granularity)
+    uint32_t prescaler = (timerClock / (frequency * 1000)) - 1;
+    uint32_t arr = (timerClock / ((prescaler + 1) * frequency));
 
-    // Apply the prescaler and ARR values to Timer 3
-    TIM3->PSC = prescaler - 1;   // Subtract 1 since PSC is zero-based
-    TIM3->ARR = arr;             // Set the new auto-reload value
+    // Prescaler value (90 MHz / 256 = 351 kHz)
+    TIM3->PSC = prescaler;  // Divide by 256 -> Timer clock = 351 kHz
+
+    // Set the autso-reload register (ARR) for 100 ms period
+    TIM3->ARR = arr;
+
+    // Initialize the counter to 0
+    TIM3->CNT = 0;
 
     // Enable update interrupt
     TIM3->DIER |= TIM_DIER_UIE;
@@ -164,7 +168,17 @@ void TIM3_IRQHandler(void)
 	if (TIM3->SR & TIM_SR_UIF)
 	{
 		//Clear the interrupt flag
-		TIM2->SR &= ~TIM_SR_UIF;
+		TIM3->SR &= ~TIM_SR_UIF;
+		//Increment time tracker
+		msTime++;
+	}
+}
+
+void TIM3Delay (int msDelay)
+{
+	msTime = 0;
+	while(msTime <= msDelay/10)
+	{
 	}
 }
 

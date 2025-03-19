@@ -11,7 +11,7 @@
 
 // function prototypes
 void Set_Timer3_Frequency(uint32_t frequency);
-void Init_Timer3(uint32_t frequency);
+void Init_Timer3(void);
 void Init_Timer5(void);
 void float_to_string(float num, char *str);
 
@@ -22,6 +22,7 @@ void Init_Timer2(uint32_t frequency);
 void Set_Timer2_Frequency(uint32_t frequency);  // Function to set the frequency of Timer 2
 void TIM2_IRQHandler(void);            // Timer 2 interrupt handler (ISR)
 void TIM3_IRQHandler(void);
+void TIM3Delay (int msDelay);
 void TIM5_IRQHandler(void);
 void Hold_Blue_LED(void);
 void Init_Timer5_PWM(void);
