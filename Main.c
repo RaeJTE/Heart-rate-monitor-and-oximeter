@@ -76,24 +76,42 @@ int main(void)
 	lcd_delayus(20000);
 	LCD_CLR();
 	
+	/*for(j = 0; j< 15 * samplingRate; j++)
+	{
+		copyADCout[j] = ADCout[j];
+		lcd_delayus(10);
+	}
+	
+	j = 0;*/
+	
 	while(1)
 	{
 		copyADCout[j] = ADCout[j];
-		decIntToDecStr(copyADCout[j], &num, &numLen);
+		output_dac1(copyADCout[j]);
+		/*decIntToDecStr(copyADCout[j], &num, &numLen);
 		stringLCD(num, numLen, 0, 0);
 		decIntToDecStr(j, &num, &numLen);
 		stringLCD(num, numLen, 1, 0);
-		lcd_delayus(20000);
+		lcd_delayus(100);*/
+		decIntToDecStr(j, &num, &numLen);
+		stringLCD(num, numLen, 1, 0);
+		lcd_delayus(10);
 		LCD_CLR();
-		if(j < 15* samplingRate)
+		if(j < 15 * samplingRate)
 		{
-			j++;
+			j+=1;
 		}
 		else
 		{
 			j = 0;
 		}
 	}
+	
+	
+	stringLCD("Code complete", 13, 0, 3);
+	lcd_delayus(100000);
+	LCD_CLR();
+	
 	
 	/*int dataPoints = 360000;	//Defines how many data points we want to take
 	//For some reason previous code kept breaking when I used for loops here - possible from use of i specificly?
