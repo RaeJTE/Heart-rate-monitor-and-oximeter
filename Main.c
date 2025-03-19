@@ -25,7 +25,8 @@ int16_t Accel_X_RAW = 0, Accel_Y_RAW = 0, Accel_Z_RAW = 0;
 float Ax, Ay, Az;
 uint8_t check;
 int j = 0;
-
+extern volatile uint8_t ADCout;
+float copyADCout[15*samplingRate];
 
 int main(void)
 {
@@ -77,10 +78,9 @@ int main(void)
 	
 	while(1)
 	{
-
-		/*ADCoutCopy[j] = ADCout;
-		decIntToDecStr(ADCoutCopy[j], &num, &numLen);
-		stringLCD(num, numLen, 0, 0);*/
+		copyADCout[j] = ADCout;
+		decIntToDecStr(copyADCout[j], &num, &numLen);
+		stringLCD(num, numLen, 0, 0);
 		decIntToDecStr(j, &num, &numLen);
 		stringLCD(num, numLen, 1, 0);
 		lcd_delayus(20000);
