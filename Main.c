@@ -25,7 +25,7 @@ int16_t Accel_X_RAW = 0, Accel_Y_RAW = 0, Accel_Z_RAW = 0;
 float Ax, Ay, Az;
 uint8_t check;
 int j = 0;
-extern volatile uint8_t ADCout;
+extern volatile uint8_t ADCout[15];
 float copyADCout[15*samplingRate];
 
 int main(void)
@@ -78,14 +78,21 @@ int main(void)
 	
 	while(1)
 	{
-		copyADCout[j] = ADCout;
+		copyADCout[j] = ADCout[j];
 		decIntToDecStr(copyADCout[j], &num, &numLen);
 		stringLCD(num, numLen, 0, 0);
 		decIntToDecStr(j, &num, &numLen);
 		stringLCD(num, numLen, 1, 0);
 		lcd_delayus(20000);
 		LCD_CLR();
-		j++;
+		if(j < 15* samplingRate)
+		{
+			j++;
+		}
+		else
+		{
+			j = 0;
+		}
 	}
 	
 	/*int dataPoints = 360000;	//Defines how many data points we want to take

@@ -4,7 +4,7 @@ unsigned short ADC_DATA;
 float voltage;
 unsigned char str[20];  // Buffer to store voltage string
 volatile int ADCcounter = 0;
-volatile uint8_t ADCout;
+volatile uint8_t ADCout[15*samplingRate];
 
 void float_to_string(float num, char *str)
 {
@@ -94,8 +94,16 @@ void TIM2_IRQHandler(void)
         // Calculate voltage: ADC_DATA * (3.3 / 4095)
         voltage = (ADC_DATA * 3.3f) / 4095.0f;
 			
-				ADCout = 135;
-				ADCcounter++;
+				ADCout[ADCcounter] = ADC_DATA;
+			
+				if(ADCcounter < 15* samplingRate)
+				{
+					ADCcounter++;
+				}
+				else
+				{
+					ADCcounter = 0;
+				}
 			
         // Convert voltage to string
         float_to_string(voltage, (char *)str);
