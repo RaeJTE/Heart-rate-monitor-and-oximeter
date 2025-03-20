@@ -7,6 +7,7 @@ volatile int ADCcounter = 0;
 volatile uint8_t ADCout[15*samplingRate];
 volatile unsigned int msTime;
 
+//Utility for timers code
 void float_to_string(float num, char *str)
 {
     // Convert float to intager representation
@@ -56,6 +57,10 @@ void float_to_string(float num, char *str)
 }
 
 
+
+
+//Timers code
+
 void Init_Timer2(uint32_t frequency) // frequency in Hz
 {
     uint32_t timer_clock = 16000000 / 256; // 16 MHz / Prescaler
@@ -84,7 +89,7 @@ void Init_Timer2(uint32_t frequency) // frequency in Hz
 }
 
 
-// Vout at 10hz timer stuff
+// Timer 2 interrupt handler for ADC reading
 void TIM2_IRQHandler(void)
 {
     // Check if the update interrupt flag is set
@@ -97,7 +102,7 @@ void TIM2_IRQHandler(void)
 			
 				ADCout[ADCcounter] = ADC_DATA;
 			
-				if(ADCcounter < 15* samplingRate)
+				if(ADCcounter < (15* samplingRate)-1)
 				{
 					ADCcounter++;
 				}
@@ -127,7 +132,7 @@ void TIM2_IRQHandler(void)
 }
 
 
-void Init_Timer3(void)
+void Init_Timer3(void)	//Timer 3 used for delays in ms
 {
     // Enable Timer 3 clock
     RCC->APB1ENR |= RCC_APB1ENR_TIM3EN;
@@ -174,7 +179,7 @@ void TIM3_IRQHandler(void)
 	}
 }
 
-void TIM3Delay (int msDelay)
+void TIM3Delay (float msDelay)	//Function to use Timer 3 for a delay measured in ms
 {
 	msTime = 0;
 	while(msTime <= msDelay/10)

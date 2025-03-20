@@ -25,7 +25,7 @@ int16_t Accel_X_RAW = 0, Accel_Y_RAW = 0, Accel_Z_RAW = 0;
 float Ax, Ay, Az;
 uint8_t check;
 int j = 0;
-extern volatile uint8_t ADCout[15];
+extern volatile uint8_t ADCout[15*samplingRate];
 float copyADCout[15*samplingRate];
 
 int main(void)
@@ -58,26 +58,32 @@ int main(void)
 	char* num;	//Creates a pointer to be used to store a string conversion of a number - pointer necessary because of pointer decay when moving between .c files
 	int numLen;	//Variable to store length of string conversion of number
 	
-	stringLCD("Begin in", 8, 0, 0);
-	TIM3Delay(1000);
+	while(1)
+	{
+		output_dac1(0);
+		output_dac2(0);
+	}
+	
+	/*stringLCD("Begin in", 8, 0, 0);
+	TIM3Delay(2500);
 	LCD_CLR();
 	stringLCD("5", 1, 0, 0);
-	TIM3Delay(1000);
+	TIM3Delay(2500);
 	LCD_CLR();
 	stringLCD("4", 1, 0, 0);
-	TIM3Delay(1000);
+	TIM3Delay(2500);
 	LCD_CLR();
 	stringLCD("3", 1, 0, 0);
-	TIM3Delay(1000);
+	TIM3Delay(2500);
 	LCD_CLR();
 	stringLCD("2", 1, 0, 0);
-	TIM3Delay(1000);
+	TIM3Delay(2500);
 	LCD_CLR();
 	stringLCD("1", 1, 0, 0);
-	TIM3Delay(1000);
+	TIM3Delay(2500);
 	LCD_CLR();
 	
-	/*for(j = 0; j< 15 * samplingRate; j++)
+	for(j = 0; j< 15 * samplingRate; j++)
 	{
 		copyADCout[j] = ADCout[j];
 		lcd_delayus(10);
@@ -85,33 +91,41 @@ int main(void)
 	
 	j = 0;*/
 	
-	while(1)
+	for(j = 0; j < (15* samplingRate)-1; j++)
 	{
 		copyADCout[j] = ADCout[j];
-		output_dac1(copyADCout[j]);
-		/*decIntToDecStr(copyADCout[j], &num, &numLen);
-		stringLCD(num, numLen, 0, 0);
-		decIntToDecStr(j, &num, &numLen);
-		stringLCD(num, numLen, 1, 0);
-		lcd_delayus(100);*/
-		decIntToDecStr(j, &num, &numLen);
-		stringLCD(num, numLen, 1, 0);
-		TIM3Delay(10);
-		LCD_CLR();
-		if(j < 15 * samplingRate)
+	}
+	
+	while(1)
+	{
+		output_dac2(copyADCout[j]*10);
+		if(j < (15* samplingRate)-1)
 		{
-			j+=1;
+			j++;
 		}
 		else
 		{
 			j = 0;
 		}
+		TIM3Delay(1);
 	}
 	
 	
 	stringLCD("Code complete", 13, 0, 3);
 	TIM3Delay(10000);
 	LCD_CLR();
+	
+	
+	
+	
+	
+	
+	/*
+	*********************************************
+	********SIMULATED TEST SIGNALS***************
+	*********************************************
+	*/
+	
 	
 	
 	/*int dataPoints = 360000;	//Defines how many data points we want to take
