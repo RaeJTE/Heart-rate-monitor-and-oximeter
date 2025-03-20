@@ -58,6 +58,8 @@ int main(void)
 	//Initialisation of variables
 	char* num;	//Creates a pointer to be used to store a string conversion of a number - pointer necessary because of pointer decay when moving between .c files
 	int numLen;	//Variable to store length of string conversion of number
+	int numPeaks;
+	int* peakPositions;
 	
 	stringLCD("Begin in", 8, 0, 0);
 	TIM3Delay(2500);
@@ -84,7 +86,7 @@ int main(void)
 		copyADCout[j] = ADCout[j];
 	}
 	
-	peakDetection(copyADCout);
+	peakDetection(copyADCout, &numPeaks, &peakPositions);
 	
 	stringLCD("Code complete", 13, 0, 3);
 	TIM3Delay(10000);

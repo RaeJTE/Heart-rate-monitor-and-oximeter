@@ -70,7 +70,20 @@ buffer.c(131): error: expected identifier
       |                           ^
 1 warning and 10 errors generated.
 compiling buffer.c...
-".\Objects\LCD.axf" - 10 Error(s), 1 Warning(s).
+PeakDetection.c(33): warning: expression result unused [-Wunused-value]
+   33 |                                 *numPeaks++;
+      |                                 ^~~~~~~~~~~
+1 warning generated.
+compiling PeakDetection.c...
+main.c(87): error: too few arguments to function call, expected 3, have 1
+   87 |         peakDetection(copyADCout);
+      |         ~~~~~~~~~~~~~           ^
+.\PeakDetection.h(9): note: 'peakDetection' declared here
+    9 | void peakDetection(float heartRate[], int* numPeaks, int* peakPositions[15*5]);
+      |      ^             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+compiling main.c...
+".\Objects\LCD.axf" - 11 Error(s), 2 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -107,7 +120,7 @@ Package Vendor: Keil
       Source file:   Drivers/CMSIS/Device/ST/STM32F4xx/Source/Templates/arm/startup_stm32f429xx.s
       Source file:   Drivers/CMSIS/Device/ST/STM32F4xx/Source/Templates/system_stm32f4xx.c
 Target not created.
-Build Time Elapsed:  00:00:01
+Build Time Elapsed:  00:00:00
 </pre>
 </body>
 </html>
