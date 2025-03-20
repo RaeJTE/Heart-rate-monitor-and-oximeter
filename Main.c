@@ -15,6 +15,7 @@
 #include "MPU_stuff.h"
 #include "usart.h"
 #include "timer.h"
+#include "PeakDetection.h"
 //Definitions
 #define name "Jacob Rae"
 #define pi 3.14159
@@ -26,7 +27,7 @@ float Ax, Ay, Az;
 uint8_t check;
 int j = 0;
 extern volatile uint8_t ADCout[15*samplingRate];
-float copyADCout[15*samplingRate];
+float copyADCout[15*samplingRate];	//Equivalent arry to above but that does not rapidly update
 
 int main(void)
 {
@@ -58,13 +59,7 @@ int main(void)
 	char* num;	//Creates a pointer to be used to store a string conversion of a number - pointer necessary because of pointer decay when moving between .c files
 	int numLen;	//Variable to store length of string conversion of number
 	
-	while(1)
-	{
-		output_dac1(0);
-		output_dac2(0);
-	}
-	
-	/*stringLCD("Begin in", 8, 0, 0);
+	stringLCD("Begin in", 8, 0, 0);
 	TIM3Delay(2500);
 	LCD_CLR();
 	stringLCD("5", 1, 0, 0);
@@ -83,32 +78,13 @@ int main(void)
 	TIM3Delay(2500);
 	LCD_CLR();
 	
-	for(j = 0; j< 15 * samplingRate; j++)
-	{
-		copyADCout[j] = ADCout[j];
-		lcd_delayus(10);
-	}
-	
-	j = 0;*/
-	
+	//Reads in the rapidly updating array to a non updating array
 	for(j = 0; j < (15* samplingRate)-1; j++)
 	{
 		copyADCout[j] = ADCout[j];
 	}
 	
-	while(1)
-	{
-		output_dac2(copyADCout[j]*10);
-		if(j < (15* samplingRate)-1)
-		{
-			j++;
-		}
-		else
-		{
-			j = 0;
-		}
-		TIM3Delay(1);
-	}
+	peakDetection(copyADCout);
 	
 	
 	stringLCD("Code complete", 13, 0, 3);
