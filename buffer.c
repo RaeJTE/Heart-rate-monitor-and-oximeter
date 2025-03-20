@@ -1,5 +1,7 @@
 #include "buffer.h"
 
+/*
+
 // The hidden definition of our circular buffer structure
 struct circular_buf_t {
 	uint8_t * buffer;
@@ -134,4 +136,7 @@ int circular_buf_get(cbuf_handle_t me, uint8_t * data)
     }
     return r;
 }
+
+*/
+
 

@@ -88,8 +88,14 @@ int main(void)
 	
 	peakDetection(copyADCout, &numPeaks, &peakPositions);
 	
-	stringLCD("Code complete", 13, 0, 3);
-	TIM3Delay(10000);
+	LCD_CLR();
+	
+	float BPM = (60 * numPeaks) / 15;	//Translates peaks detected in 15s to average number of peaks in a minute and thus bpm
+	decIntToDecStr(BPM, &num, &numLen);
+	
+	stringLCD("Avg hrtrate /bpm", 16, 0, 0);
+	stringLCD(num, numLen, 1, 0);
+	TIM3Delay(50000);
 	LCD_CLR();	
 	
 	

@@ -27,63 +27,16 @@ Project File Date:  03/20/2025
 <h2>Output:</h2>
 *** Using Compiler 'V6.22', folder: 'C:\Users\jacob\AppData\Local\Keil_v5\ARM\ARMCLANG\Bin'
 Build target 'Target 1'
-buffer.c(5): error: expected member name or ';' after declaration specifiers
-    5 |         uint8_t * buffer;
-      |         ~~~~~~~         ^
-buffer.c(13): warning: omitting the parameter name in a function definition is a C23 extension [-Wc23-extensions]
-   13 | cbuf_handle_t circular_buf_init(uint8_t* buffer, size_t size)
-      |                                                ^
-buffer.c(20): error: expected identifier
-   20 |         cbuf->buffer = buffer;
-      |                      ^
-buffer.c(20): error: expected expression
-   20 |         cbuf->buffer = buffer;
-      |                              ^
-buffer.c(15): error: use of undeclared label 'size'
-   15 |         assert(buffer && size);
-      |                          ^
-buffer.c(119): error: expected identifier
-  119 |         assert(me && me->buffer);
-      |         ^
-C:\Users\jacob\AppData\Local\Keil_v5\ARM\ARMCLANG\bin\..\include\assert.h(85): note: expanded from macro 'assert'
-   85 | #          define assert(e) ((e) ? (void)0 : __CLIBNS __aeabi_assert(#e, __FILE__, __LINE__), __CLANG_IGNORE_ASSUME (__ARM_PROMISE)((e)?1:0) __CLANG_UNIGNORE_ASSUME)
-      |                                ^
-buffer.c(119): error: expected identifier
-C:\Users\jacob\AppData\Local\Keil_v5\ARM\ARMCLANG\bin\..\include\assert.h(85): note: expanded from macro 'assert'
-   85 | #          define assert(e) ((e) ? (void)0 : __CLIBNS __aeabi_assert(#e, __FILE__, __LINE__), __CLANG_IGNORE_ASSUME (__ARM_PROMISE)((e)?1:0) __CLANG_UNIGNORE_ASSUME)
-      |                                                                                                                                       ^
-buffer.c(120): error: expected identifier
-  120 |    me->buffer[me->head] = data;
-      |              ^
-buffer.c(127): error: expected identifier
-  127 |     assert(me && data && me->buffer);
-      |     ^
-C:\Users\jacob\AppData\Local\Keil_v5\ARM\ARMCLANG\bin\..\include\assert.h(85): note: expanded from macro 'assert'
-   85 | #          define assert(e) ((e) ? (void)0 : __CLIBNS __aeabi_assert(#e, __FILE__, __LINE__), __CLANG_IGNORE_ASSUME (__ARM_PROMISE)((e)?1:0) __CLANG_UNIGNORE_ASSUME)
-      |                                ^
-buffer.c(127): error: expected identifier
-C:\Users\jacob\AppData\Local\Keil_v5\ARM\ARMCLANG\bin\..\include\assert.h(85): note: expanded from macro 'assert'
-   85 | #          define assert(e) ((e) ? (void)0 : __CLIBNS __aeabi_assert(#e, __FILE__, __LINE__), __CLANG_IGNORE_ASSUME (__ARM_PROMISE)((e)?1:0) __CLANG_UNIGNORE_ASSUME)
-      |                                                                                                                                       ^
-buffer.c(131): error: expected identifier
-  131 |         *data = me->buffer[me->tail];
-      |                           ^
-1 warning and 10 errors generated.
-compiling buffer.c...
 PeakDetection.c(33): warning: expression result unused [-Wunused-value]
    33 |                                 *numPeaks++;
       |                                 ^~~~~~~~~~~
 1 warning generated.
 compiling PeakDetection.c...
-main.c(87): error: too few arguments to function call, expected 3, have 1
-   87 |         peakDetection(copyADCout);
-      |         ~~~~~~~~~~~~~           ^
-.\PeakDetection.h(9): note: 'peakDetection' declared here
-    9 | void peakDetection(float heartRate[], int* numPeaks, int* peakPositions[15*5]);
-      |      ^             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-1 error generated.
 compiling main.c...
-".\Objects\LCD.axf" - 11 Error(s), 2 Warning(s).
+linking...
+Program Size: Code=16612 RO-data=1144 RW-data=4 ZI-data=76680  
+FromELF: creating hex file...
+".\Objects\LCD.axf" - 0 Error(s), 1 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -119,8 +72,7 @@ Package Vendor: Keil
       Include file:  Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h
       Source file:   Drivers/CMSIS/Device/ST/STM32F4xx/Source/Templates/arm/startup_stm32f429xx.s
       Source file:   Drivers/CMSIS/Device/ST/STM32F4xx/Source/Templates/system_stm32f4xx.c
-Target not created.
-Build Time Elapsed:  00:00:00
+Build Time Elapsed:  00:00:01
 </pre>
 </body>
 </html>
