@@ -86,13 +86,9 @@ int main(void)
 	
 	peakDetection(copyADCout);
 	
-	
 	stringLCD("Code complete", 13, 0, 3);
 	TIM3Delay(10000);
-	LCD_CLR();
-	
-	
-	
+	LCD_CLR();	
 	
 	
 	
