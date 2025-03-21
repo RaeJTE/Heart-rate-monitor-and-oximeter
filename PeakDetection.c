@@ -9,7 +9,6 @@ void peakDetection(float heartRate[], int* numPeaks, int* peakPositions[15*5])	/
 	int gradientUp = 0;
 	int holding = 0;
 	*numPeaks = 0;
-	const int tolerance = 2;	//currently only working as >= 4 for some reason
 		
 	for(int index = 0; index <= 15*samplingRate; index++)
 		{
@@ -18,15 +17,15 @@ void peakDetection(float heartRate[], int* numPeaks, int* peakPositions[15*5])	/
 			output_dac2(heartRate[index]*1);      //Outputs the array values on the DAC - multiplied by 10 for easier viewing and to reduce effects of DAC noise (distinct from the noise in the raw data from the ADC)
 			//output_dac2(100);	//100 = 8.5mV - test output for calibrating tolerance value
           
-			if(heartRate[index] >= (prevVal-tolerance))
+			if(heartRate[index] >= (prevVal))
 			{
 				gradientUp = 1;
 			}
-			if(heartRate[index] >= (prevVal+tolerance) && heartRate[index] <= (prevVal-tolerance))
+			else if(heartRate[index] >= (prevVal) && heartRate[index] <= (prevVal))
 			{
 				holding++;	//100 points = 100ms
 			}
-			if(heartRate[index] <= (prevVal+tolerance) && gradientUp == 1 && holding >= 10)
+			else if(heartRate[index] <= (prevVal) && gradientUp == 1 && holding >= 10)
 			{
 				tempBuzz(100, 1000);
 				*peakPositions[*numPeaks] = index;
