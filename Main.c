@@ -105,10 +105,11 @@ int main(void)
 	{
 		totalBTWN += (peakPositions[i] - peakPositions[i-1]);
 	}
-	int averagePointsBTWNpeaks = totalBTWN/numOfPeaks;	//Equals ms between peaks - seems to be out by a factor of 5 consistently - find why
+	int averageTimeBTWNpeaks_ms = 5* totalBTWN/numOfPeaks;	//Equals ms between peaks - seems to be out by a factor of 5 consistently (added in here as correction factor) - find why
+	BPM = 1000 * 60 * 1/averageTimeBTWNpeaks_ms;
 	
-	decIntToDecStr(averagePointsBTWNpeaks, &num, &numLen);
-	stringLCD("Avg time btwn peaks", 19, 0, 0);
+	decIntToDecStr(BPM, &num, &numLen);
+	stringLCD("BPM from btwn pks", 16, 0, 0);
 	stringLCD(num, numLen, 1, 0);
 	TIM3Delay(50000);
 	LCD_CLR();	
