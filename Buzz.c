@@ -72,12 +72,12 @@ void endlessBuzz(void)
 
 void tempBuzz(int time_ms, int freq_Hz)	//Actual timings very approximate for now until incorporation of proper timers
 {
-	int i =0;
+	int i = 0;
 	int period_us = 1000000/freq_Hz;
 	while(i<(1000*time_ms/period_us))
 	{
 		BUZZ_PORT->ODR^=(0b00000001<<BUZZ_PIN);	//Toggles buzzer
-		lcd_delayus(1/period_us);
+		lcd_delayus(period_us/2);
 		i++;
 	}
 }

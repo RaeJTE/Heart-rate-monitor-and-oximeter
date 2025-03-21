@@ -39,13 +39,16 @@ int peakDetection(float heartRate[])	//15*5 is enough for the peaks of a 5Hz sig
 				
 			if(threshOver == 10 && blockRepeat == 0)
 			{
-				tempBuzz(100, 1000);
 				threshOver = 0;
 				numOfPeaks++;
 				blockRepeat = 1;
 			}
+			if(threshOver == 10)
+			{
+				tempBuzz(10, 1000);
+			}
 			TIM3Delay(1);
 		}
-	return numOfPeaks-4;
+	return numOfPeaks;
 }
 
