@@ -40,7 +40,7 @@ int peakDetection(float heartRate[], int* peakLocations[(15*5)-1])	//15*5 is eno
 			if(threshOver == 10 && blockRepeat == 0)
 			{
 				threshOver = 0;
-				peakLocations[numOfPeaks] = index;	//Ignore warning here
+				*peakLocations[numOfPeaks] = index;
 				numOfPeaks++;
 				blockRepeat = 1;
 			}
