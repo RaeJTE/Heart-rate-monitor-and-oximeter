@@ -8,8 +8,10 @@ int peakDetection(float heartRate[])	//15*5 is enough for the peaks of a 5Hz sig
 	char* number;	//Creates a pointer to be used to store a string conversion of a number
 	int numberLen;	//Variable to store length of string conversion of number
 	int threshOver = 0;
+	int threshUnder = 0;
 	int total = 0;
 	int numOfPeaks = 0;
+	int blockRepeat = 0;
 	
 	for(int index = 0; index <= 15*samplingRate; index++)
 	{
@@ -25,23 +27,25 @@ int peakDetection(float heartRate[])	//15*5 is enough for the peaks of a 5Hz sig
 			output_dac2(heartRate[index]*1);      //Outputs the array values on the DAC - multiplied by 10 for easier viewing and to reduce effects of DAC noise (distinct from the noise in the raw data from the ADC)
 			//output_dac2(100);	//100 = 8.5mV - test output for calibrating tolerance value
           
-			if(heartRate[index] >= mean)
+			if (heartRate[index] >= mean)
 			{
 				threshOver++;
 			}
 			else if (heartRate[index] < mean && heartRate[index-1] < mean)
 			{
 				threshOver = 0;
+				blockRepeat = 0;
 			}
 				
-			if(threshOver == 10)
+			if(threshOver == 10 && blockRepeat == 0)
 			{
 				tempBuzz(100, 1000);
 				threshOver = 0;
 				numOfPeaks++;
+				blockRepeat = 1;
 			}
 			TIM3Delay(1);
 		}
-	return numOfPeaks;
+	return numOfPeaks-4;
 }
 
