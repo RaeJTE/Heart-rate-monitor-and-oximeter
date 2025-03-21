@@ -1,7 +1,7 @@
 #include "PeakDetection.h"
 
 //Peak detection with buzzing
-int peakDetection(float heartRate[], int* peakLocations[(15*4)-1])	//15*5 is enough for the peaks of a 5Hz signal over 15s, we are not expecting signals with higher frequency than 4Hz.
+int peakDetection(float heartRate[], int* peakLocations[(15*5)-1])	//15*5 is enough for the peaks of a 5Hz signal over 15s, we are not expecting signals with higher frequency than 4Hz.
 {	
 	stringLCD("Measuring", 9, 0, 0);
 	
@@ -40,7 +40,7 @@ int peakDetection(float heartRate[], int* peakLocations[(15*4)-1])	//15*5 is eno
 			if(threshOver == 10 && blockRepeat == 0)
 			{
 				threshOver = 0;
-				peakLocations[numOfPeaks] = index;
+				peakLocations[numOfPeaks] = index;	//Ignore warning here
 				numOfPeaks++;
 				blockRepeat = 1;
 			}

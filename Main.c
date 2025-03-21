@@ -58,9 +58,11 @@ int main(void)
 	//Initialisation of variables
 	char* num;	//Creates a pointer to be used to store a string conversion of a number - pointer necessary because of pointer decay when moving between .c files
 	int numLen;	//Variable to store length of string conversion of number
-	int* peakPositions [(15*4)-1];
+	int* peakPositions [(15*5)-1];
 	int numOfPeaks;
 	
+	
+	//Long delays needed to give ADC array time to fill.
 	stringLCD("Begin in", 8, 0, 0);
 	TIM3Delay(2500);
 	LCD_CLR();
@@ -86,6 +88,7 @@ int main(void)
 		copyADCout[j] = ADCout[j];
 	}
 	
+	//Number of peaks is returned by the peakDetection function, for positions must pass in an array of size (15*5)-1
 	numOfPeaks = peakDetection(copyADCout, peakPositions);
 	
 	LCD_CLR();
@@ -99,14 +102,16 @@ int main(void)
 	LCD_CLR();
 	
 	
+	
+	
 
 	int totalBTWN = 0;
 	for(int i = 1; i < numOfPeaks-1; i++)
 	{
 		totalBTWN += (peakPositions[i] - peakPositions[i-1]);
 	}
-	int averageTimeBTWNpeaks_ms = 5* totalBTWN/numOfPeaks;	//Equals ms between peaks - seems to be out by a factor of 5 consistently (added in here as correction factor) - find why
-	BPM = 1000 * 60 * 1/averageTimeBTWNpeaks_ms;
+	float averageTimeBTWNpeaks_ms = (90/16) * totalBTWN/numOfPeaks;	//Equals ms between peaks - seems to be out by a factor of 5 consistently (added in here as correction factor) - find why
+	BPM = 1000 * 60  * 1/averageTimeBTWNpeaks_ms;
 	
 	decIntToDecStr(BPM, &num, &numLen);
 	stringLCD("BPM from btwn pks", 16, 0, 0);
