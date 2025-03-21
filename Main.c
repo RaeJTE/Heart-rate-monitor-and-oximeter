@@ -27,7 +27,7 @@ float Ax, Ay, Az;
 uint8_t check;
 int j = 0;
 extern volatile uint8_t ADCout[15*samplingRate];
-float copyADCout[15*samplingRate];	//Equivalent arry to above but that does not rapidly update
+float copyADCout[15*samplingRate];	//Equivalent arry to above but that is not updated by interrupts
 
 int main(void)
 {
@@ -90,13 +90,16 @@ int main(void)
 	
 	LCD_CLR();
 	
-	float BPM = (60 * numPeaks) / 15;	//Translates peaks detected in 15s to average number of peaks in a minute and thus bpm
+	float BPM = 1.00; //(60 * numPeaks) / 15;	//Translates peaks detected in 15s to average number of peaks in a minute and thus bpm
 	decIntToDecStr(BPM, &num, &numLen);
 	
 	stringLCD("Avg hrtrate /bpm", 16, 0, 0);
 	stringLCD(num, numLen, 1, 0);
 	TIM3Delay(50000);
 	LCD_CLR();	
+	
+	stringLCD("Code complete", 16, 0, 0);
+	while(1);
 	
 	
 	
@@ -115,6 +118,7 @@ int main(void)
 	{
 		float radians = i*(pi/180);
 		int y1_value = 400 + 100*sin(radians);
+		int y2_value = 400 + 100*sin(radians) - 80*cos(2*radians);
 		decIntToDecStr(y1_value, &num, &numLen);
 		stringLCD(num, numLen, 0, 0);
 		output_dac2(y1_value);

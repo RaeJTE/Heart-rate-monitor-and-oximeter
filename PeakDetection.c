@@ -9,24 +9,24 @@ void peakDetection(float heartRate[], int* numPeaks, int* peakPositions[15*5])	/
 	int gradientUp = 0;
 	int holding = 0;
 	*numPeaks = 0;
-	int tolerance = 10;	//100 = 8.5mV before artifical amplification
+	const int tolerance = 2;	//currently only working as >= 4 for some reason
 		
-	for(int index = 0; index <= (15*samplingRate)-1; index++)
+	for(int index = 0; index <= 15*samplingRate; index++)
 		{
 			decIntToDecStr(heartRate[index], &number, &numberLen);
-			stringLCD(number, numberLen, 1, 0); //Prints array values to LCD
-			output_dac2(heartRate[index]*10);      //Outputs the array values on the DAC - multiplied by 10 for easier viewing and to reduce effects of DAC noise (distinct from the noise in the raw data from the ADC)
-			//output_dac2(100);	//100 = 8.5mV
+			//stringLCD("123", numberLen, 1, 0); //Prints array values to LCD - using LCD adds in considerable delay that throws off output frequency
+			output_dac2(heartRate[index]*1);      //Outputs the array values on the DAC - multiplied by 10 for easier viewing and to reduce effects of DAC noise (distinct from the noise in the raw data from the ADC)
+			//output_dac2(100);	//100 = 8.5mV - test output for calibrating tolerance value
           
-			if(heartRate[index] >= (prevVal+tolerance))
+			if(heartRate[index] >= (prevVal-tolerance))
 			{
 				gradientUp = 1;
 			}
-			if(heartRate[index] >= (prevVal-tolerance) && heartRate[index] <= (prevVal+tolerance))
+			if(heartRate[index] >= (prevVal+tolerance) && heartRate[index] <= (prevVal-tolerance))
 			{
 				holding++;	//100 points = 100ms
 			}
-			if(heartRate[index] <= (prevVal-tolerance) && gradientUp == 1 && holding >= tolerance)
+			if(heartRate[index] <= (prevVal+tolerance) && gradientUp == 1 && holding >= 10)
 			{
 				tempBuzz(100, 1000);
 				*peakPositions[*numPeaks] = index;
@@ -35,7 +35,7 @@ void peakDetection(float heartRate[], int* numPeaks, int* peakPositions[15*5])	/
 				holding = 0;
 			}
 			prevVal = heartRate[index];
-			TIM3Delay(1);
+			TIM3Delay(0);
 		}
 }
 

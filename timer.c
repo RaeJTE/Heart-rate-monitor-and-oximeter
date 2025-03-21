@@ -95,10 +95,7 @@ void TIM2_IRQHandler(void)
     // Check if the update interrupt flag is set
     if (TIM2->SR & TIM_SR_UIF) {
 			  ADC_DATA = read_adc();  // Read ADC value from LDR (PC0)
-        //output_dac1(ADC_DATA);   // Send the ADC value to DAC
-        
-        // Calculate voltage: ADC_DATA * (3.3 / 4095)
-        voltage = (ADC_DATA * 3.3f) / 4095.0f;
+        output_dac1(ADC_DATA);   // Send the ADC value to DAC
 			
 				ADCout[ADCcounter] = ADC_DATA;
 			
@@ -111,23 +108,8 @@ void TIM2_IRQHandler(void)
 					ADCcounter = 0;
 				}
 			
-        // Convert voltage to string
-        float_to_string(voltage, (char *)str);
-        
-        // Send voltage string via UART
-        for (char *p = (char *)str; *p; p++)
-        {
-            send_usart(*p);  // Send character via UART
-        }
-        send_usart('\n');   // Newline for terminal asthetics
-				send_usart('\r');   // Newline for terminal asthetics
-			
         // Clear the interrupt flag
         TIM2->SR &= ~TIM_SR_UIF;
-			  //Vout to terminal
-				//USART_Vout( ADC_DATA, int_part, frac_part);
-				// select either bar chart or numerical voltage
-			
     }
 }
 
@@ -182,7 +164,7 @@ void TIM3_IRQHandler(void)
 void TIM3Delay (float msDelay)	//Function to use Timer 3 for a delay measured in ms
 {
 	msTime = 0;
-	while(msTime <= msDelay/10)
+	while(msTime <= msDelay)
 	{
 	}
 }
