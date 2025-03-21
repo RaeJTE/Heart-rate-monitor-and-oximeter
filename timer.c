@@ -164,7 +164,7 @@ void TIM3_IRQHandler(void)
 void TIM3Delay (float msDelay)	//Function to use Timer 3 for a delay measured in ms
 {
 	msTime = 0;
-	while(msTime <= msDelay)
+	while(msTime < msDelay)
 	{
 	}
 }
