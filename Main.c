@@ -58,7 +58,7 @@ int main(void)
 	//Initialisation of variables
 	char* num;	//Creates a pointer to be used to store a string conversion of a number - pointer necessary because of pointer decay when moving between .c files
 	int numLen;	//Variable to store length of string conversion of number
-	//int* peakLocations [15*samplingRate];
+	int* peakPositions [(15*4)-1];
 	int numOfPeaks;
 	
 	stringLCD("Begin in", 8, 0, 0);
@@ -86,7 +86,7 @@ int main(void)
 		copyADCout[j] = ADCout[j];
 	}
 	
-	numOfPeaks = peakDetection(copyADCout);
+	numOfPeaks = peakDetection(copyADCout, peakPositions);
 	
 	LCD_CLR();
 	
@@ -95,10 +95,25 @@ int main(void)
 	
 	stringLCD("Avg hrtrate /bpm", 16, 0, 0);
 	stringLCD(num, numLen, 1, 0);
+	TIM3Delay(5000);
+	LCD_CLR();
+	
+	
+
+	int totalBTWN = 0;
+	for(int i = 1; i < numOfPeaks-1; i++)
+	{
+		totalBTWN += (peakPositions[i] - peakPositions[i-1]);
+	}
+	int averagePointsBTWNpeaks = totalBTWN/numOfPeaks;	//Equals ms between peaks - seems to be out by a factor of 5 consistently - find why
+	
+	decIntToDecStr(averagePointsBTWNpeaks, &num, &numLen);
+	stringLCD("Avg time btwn peaks", 19, 0, 0);
+	stringLCD(num, numLen, 1, 0);
 	TIM3Delay(50000);
 	LCD_CLR();	
 	
-	stringLCD("Code complete", 16, 0, 0);
+	stringLCD("Code complete", 13, 0, 0);
 	while(1);
 	
 	

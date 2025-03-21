@@ -1,7 +1,7 @@
 #include "PeakDetection.h"
 
 //Peak detection with buzzing
-int peakDetection(float heartRate[])	//15*5 is enough for the peaks of a 5Hz signal over 15s, we are not expecting signals with higher frequency than 4Hz.
+int peakDetection(float heartRate[], int* peakLocations[(15*4)-1])	//15*5 is enough for the peaks of a 5Hz signal over 15s, we are not expecting signals with higher frequency than 4Hz.
 {	
 	stringLCD("Measuring", 9, 0, 0);
 	
@@ -13,14 +13,14 @@ int peakDetection(float heartRate[])	//15*5 is enough for the peaks of a 5Hz sig
 	int numOfPeaks = 0;
 	int blockRepeat = 0;
 	
-	for(int index = 0; index <= 15*samplingRate; index++)
+	for(int index = 0; index <= (15*samplingRate)-1; index++)
 	{
 		total += heartRate[index];
 	}
 	
 	int mean = total/(15*samplingRate);
 		
-	for(int index = 0; index <= 15*samplingRate; index++)
+	for(int index = 0; index <= (15*samplingRate)-1; index++)
 		{
 			decIntToDecStr(heartRate[index], &number, &numberLen);
 			//stringLCD("123", numberLen, 1, 0); //Prints array values to LCD - using LCD adds in considerable delay that throws off output frequency
@@ -40,6 +40,7 @@ int peakDetection(float heartRate[])	//15*5 is enough for the peaks of a 5Hz sig
 			if(threshOver == 10 && blockRepeat == 0)
 			{
 				threshOver = 0;
+				peakLocations[numOfPeaks] = index;
 				numOfPeaks++;
 				blockRepeat = 1;
 			}
@@ -49,6 +50,6 @@ int peakDetection(float heartRate[])	//15*5 is enough for the peaks of a 5Hz sig
 			}
 			TIM3Delay(1);
 		}
-	return numOfPeaks;
+	return numOfPeaks-1;
 }
 

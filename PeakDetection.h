@@ -6,7 +6,7 @@
 #include "lcd.h"
 
 
-int peakDetection(float heartRate[]);
+int peakDetection(float heartRate[], int* peakLocations[(15*4)-1]);
 
 
 #endif
