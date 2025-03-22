@@ -11,7 +11,7 @@
 
 // function prototypes
 void float_to_string(float num, char *str);
-
+void Hold_Blue_LED(void);
 
 // Timer interrupt service routines
 void TIM2_IRQHandler(void);

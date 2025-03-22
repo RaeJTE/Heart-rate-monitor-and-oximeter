@@ -1,7 +1,6 @@
 #ifndef _USART_H_
 #define _USART_H_
 #include <stm32f4xx.h>
-#include "usart.h"
 #include "LED.h"
 #include "timer.h"
 #include "RGB_bar.h"

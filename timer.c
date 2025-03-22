@@ -57,6 +57,15 @@ void float_to_string(float num, char *str)
 }
 
 
+void Hold_Blue_LED(void)
+{
+
+    // setting PWM duty cycle to 50% for the Blue LED
+
+//    TIM5->CCR1 = TIM5->ARR / 2;  // Set CCR1 to 50% of the ARR value (for 50% duty cycle)
+    TIM5->CCER |= TIM_CCER_CC1E; // Enable the output on channel 1 (for the Blue LED)
+}
+
 
 
 //Timers code
