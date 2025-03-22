@@ -50,6 +50,6 @@ int peakDetection(float heartRate[], int* peakLocations[(15*5)-1])	//15*5 is eno
 			}
 			TIM3Delay(1);
 		}
-	return numOfPeaks-1;
+	return numOfPeaks;
 }
 

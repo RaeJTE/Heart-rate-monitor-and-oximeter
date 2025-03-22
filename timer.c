@@ -61,7 +61,7 @@ void float_to_string(float num, char *str)
 
 //Timers code
 
-void Init_Timer2(uint32_t frequency) // frequency in Hz
+void Init_Timer2(uint32_t frequency)
 {
     uint32_t timer_clock = 16000000 / 256; // 16 MHz / Prescaler
     uint32_t arr_value = (timer_clock / frequency) - 1;
@@ -169,6 +169,48 @@ void TIM3Delay (float msDelay)	//Function to use Timer 3 for a delay measured in
 	}
 }
 
+
+void Init_Timer4(uint32_t frequency) // gyroscope timer
+{
+    // Enable Timer 4 clock
+    RCC->APB1ENR |= RCC_APB1ENR_TIM4EN;
+
+    // Timer clock
+    uint32_t timerClock = 16000000;	//Jacob changed to 16MHz
+
+    // Prescaler selection (assuming ARR = 1000 for fine granularity)
+    uint32_t prescaler = (timerClock / (frequency * 1000)) - 1;
+    uint32_t arr = (timerClock / ((prescaler + 1) * frequency));
+
+    // Apply prescaler and ARR
+    TIM4->PSC = prescaler;  // PSC is zero-based
+    TIM4->ARR = arr;        // Auto-reload value
+
+    // Enable update interrupt
+    TIM4->DIER |= TIM_DIER_UIE;
+    
+    // Enable Timer 4 interrupt in NVIC
+    NVIC_EnableIRQ(TIM3_IRQn);
+    
+    // Enable global interrupts
+    __enable_irq();
+
+    // Start Timer 4
+    TIM4->CR1 |= TIM_CR1_CEN;
+}
+// Timer 4 - gyroscope interrupts handler
+void TIM4_IRQHandler(void)
+{
+    if (TIM4->SR & TIM_SR_UIF)  // Check if update interrupt flag is set
+    {
+				USART_SendString ("\033[2J\033[H ACCELERATION");
+				MPU6050_Read_Accel(); // read acceleration values         // Toggle RED & BLUE MONITOR LED
+			// using the toggle, will easily create a 50% duty cycle
+			
+			
+			TIM4->SR &= ~TIM_SR_UIF;  // Clear the update interrupt flag
+    }
+}
 
 
 void interrupt_priority(void){

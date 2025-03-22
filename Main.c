@@ -70,7 +70,7 @@ int main(void)
 	TIM3Delay(2500);
 	LCD_CLR();
 	stringLCD("4", 1, 0, 0);
-	TIM3Delay(2500);
+	TIM3Delay(2500);	
 	LCD_CLR();
 	stringLCD("3", 1, 0, 0);
 	TIM3Delay(2500);
@@ -117,7 +117,7 @@ int main(void)
 	stringLCD("BPM from btwn pks", 16, 0, 0);
 	stringLCD(num, numLen, 1, 0);
 	TIM3Delay(50000);
-	LCD_CLR();	
+	LCD_CLR();
 	
 	stringLCD("Code complete", 13, 0, 0);
 	while(1);
@@ -126,7 +126,7 @@ int main(void)
 	
 	/*
 	*********************************************
-	********SIMULATED TEST SIGNALS***************
+	**********SIMULATED TEST SIGNALS*************
 	*********************************************
 	*/
 	
